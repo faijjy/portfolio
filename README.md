@@ -2,6 +2,8 @@
 
 Static portfolio site for Shopify & WordPress development work.
 
+**Live:** https://faizanidrishi.vercel.app
+
 ## Local preview
 
 Open `index.html` in your browser, or run a simple server:
@@ -43,4 +45,4 @@ Vercel settings:
 
 ## Share a case study
 
-Link directly to a project: `https://yoursite.vercel.app/?project=denaroclub`
+Link directly to a project: `https://faizanidrishi.vercel.app/?project=denaroclub`
