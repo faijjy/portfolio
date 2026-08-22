@@ -4,588 +4,502 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Faizan Idrishi — Shopify & WordPress Developer</title>
-<meta name="description" content="Moh Faizan Y. Idrishi — Shopify & WordPress developer in Mumbai. 20+ Shopify stores, 10+ WordPress sites. Liquid, WooCommerce, CRO, Core Web Vitals. Available for remote work.">
+<meta name="description" content="Moh Faizan Y. Idrishi — Shopify & WordPress developer in Mumbai. 20+ Shopify stores, 10+ WordPress sites. Available for remote work.">
 <meta property="og:title" content="Faizan Idrishi — Shopify & WordPress Developer">
-<meta property="og:description" content="Shopify and WordPress developer with 20+ stores shipped. Liquid, Elementor, WooCommerce, checkout flows, and conversion-focused builds.">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Faizan Idrishi — Shopify & WordPress Developer">
-<meta name="twitter:description" content="Shopify & WordPress developer — 20+ stores built, checkout flows, CRO, Core Web Vitals. Mumbai, remote.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2309090B'/><circle cx='16' cy='16' r='6' fill='%238B5CF6'/></svg>">
+<meta property="og:description" content="Shopify and WordPress developer shipping stores that convert. 25+ sites live.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2309090B'/><circle cx='16' cy='16' r='7' fill='%238B5CF6'/></svg>">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
   :root{
-    --bg: #09090B;
-    --bg-raised: #111113;
-    --surface: #18181B;
-    --border: #27272A;
-    --border-strong: #3F3F46;
-    --text: #F4F4F5;
-    --text-dim: #A1A1AA;
-    --text-faint: #71717A;
-    --accent: #8B5CF6;
-    --accent-dim: rgba(139,92,246,0.12);
-    --accent-glow: rgba(139,92,246,0.35);
-    --cyan: #22D3EE;
-    --cyan-dim: rgba(34,211,238,0.1);
-    --mint: var(--accent);
-    --mint-dim: var(--accent-dim);
-    --amber: #22D3EE;
-    --amber-dim: var(--cyan-dim);
-    --font-display: 'Inter', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    --bg:#09090B;--bg-2:#111113;--surface:#18181B;--surface-2:#1f1f23;
+    --border:#27272A;--border-2:#3f3f46;
+    --text:#F4F4F5;--text-72:rgba(244,244,245,.72);--text-56:rgba(244,244,245,.56);--text-40:rgba(244,244,245,.4);
+    --accent:#8B5CF6;--accent-dim:rgba(139,92,246,.14);--accent-glow:rgba(139,92,246,.35);
+    --cyan:#22D3EE;--cyan-dim:rgba(34,211,238,.12);
+    --green:#22c55e;
+    --sidebar-nav:72px;--sidebar-profile:280px;
+    --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
   }
 
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--font-body);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    background-image:
-      linear-gradient(rgba(139,92,246,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(139,92,246,0.03) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-  a{color:inherit;text-decoration:none;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
-  section{padding:100px 0;}
-  @media(max-width:720px){ section{padding:64px 0;} .wrap{padding:0 20px;} }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
 
-  /* NAV */
-  nav{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    background:rgba(12,15,19,0.85);backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--border);
+  /* BACKGROUND — Isak bg-item style */
+  .bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .bg-cloud{position:absolute;inset:-20%;background:
+    radial-gradient(ellipse 55% 45% at 15% 25%, rgba(139,92,246,.18), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 15%, rgba(34,211,238,.1), transparent 50%),
+    radial-gradient(ellipse 60% 50% at 50% 90%, rgba(139,92,246,.08), transparent 55%),
+    radial-gradient(ellipse 40% 30% at 70% 60%, rgba(255,255,255,.03), transparent 50%);
+    animation:cloudDrift 25s ease-in-out infinite alternate}
+  @keyframes cloudDrift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-2%,1%) scale(1.03)}}
+  .bg-grid{position:absolute;inset:0;background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size:56px 56px;mask-image:linear-gradient(to bottom, black 30%, transparent 100%)}
+
+  /* APP SHELL */
+  .app{position:relative;z-index:1;display:flex;min-height:100vh}
+  .sidebar-nav{
+    position:fixed;left:0;top:0;bottom:0;width:var(--sidebar-nav);z-index:200;
+    display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+    padding:24px 0;border-right:1px solid var(--border);background:rgba(9,9,11,.8);backdrop-filter:blur(16px);
   }
-  .nav-inner{max-width:1120px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
-  .logo{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-0.02em;}
-  .logo span{color:var(--mint);}
-  .nav-links{display:flex;gap:32px;font-size:14px;color:var(--text-dim);}
-  .nav-links a:hover{color:var(--text);}
-  .nav-right{display:flex;align-items:center;gap:12px;}
-  .nav-cta{
-    font-family:var(--font-mono);font-size:13px;padding:8px 16px;
-    border:1px solid var(--border-strong);border-radius:6px;color:var(--text);
+  .nav-icons{display:flex;flex-direction:column;gap:8px;align-items:center}
+  .nav-icon{
+    width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    color:var(--text-56);font-size:18px;border:1px solid transparent;transition:all .2s;position:relative;
   }
-  .nav-cta:hover{border-color:var(--mint);color:var(--mint);}
-  .nav-toggle{
-    display:none;background:none;border:1px solid var(--border-strong);border-radius:6px;
-    color:var(--text);font-family:var(--font-mono);font-size:18px;width:40px;height:40px;cursor:pointer;
+  .nav-icon:hover,.nav-icon.active{color:var(--text);background:var(--accent-dim);border-color:rgba(139,92,246,.25)}
+  .nav-icon.active::after{content:'';position:absolute;left:-1px;top:50%;transform:translateY(-50%);width:3px;height:20px;background:var(--accent);border-radius:0 3px 3px 0}
+  .nav-tip{
+    position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);
+    font-family:var(--mono);font-size:11px;padding:6px 10px;background:var(--surface);border:1px solid var(--border);
+    border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;
   }
-  .nav-toggle:hover{border-color:var(--mint);color:var(--mint);}
-  .nav-mobile{
-    display:none;position:fixed;top:61px;left:0;right:0;z-index:99;
-    background:rgba(12,15,19,0.97);backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--border);padding:20px 32px;flex-direction:column;gap:16px;
+  .nav-icon:hover .nav-tip{opacity:1}
+
+  .sidebar-profile{
+    position:fixed;left:var(--sidebar-nav);top:0;bottom:0;width:var(--sidebar-profile);z-index:150;
+    padding:40px 28px;border-right:1px solid var(--border);
+    background:rgba(17,17,19,.75);backdrop-filter:blur(20px);
+    display:flex;flex-direction:column;
   }
-  .nav-mobile.open{display:flex;}
-  .nav-mobile a{font-size:15px;color:var(--text-dim);padding:8px 0;}
-  .nav-mobile a:hover{color:var(--mint);}
-  @media(max-width:720px){
-    .nav-links{display:none;}
-    .nav-toggle{display:flex;align-items:center;justify-content:center;}
-    .nav-inner{padding:14px 20px;}
+  .avatar-wrap{position:relative;margin-bottom:24px}
+  .avatar{
+    width:120px;height:120px;border-radius:20px;background:linear-gradient(135deg,var(--accent-dim),var(--cyan-dim));
+    border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;
+    font-size:36px;font-weight:700;color:var(--accent);letter-spacing:-.02em;
   }
+  .avaiable{
+    display:flex;align-items:center;gap:8px;margin-top:16px;
+    font-family:var(--mono);font-size:11px;color:var(--text-56);text-transform:uppercase;letter-spacing:.06em;
+  }
+  .avaiable .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(34,197,94,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+  .profile-name{font-size:22px;font-weight:700;letter-spacing:-.03em;margin-bottom:4px}
+  .profile-role{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px}
+  .profile-intro{font-size:14px;color:var(--text-56);line-height:1.65;margin-bottom:24px}
+  .profile-actions{display:flex;flex-direction:column;gap:10px;margin-bottom:auto}
+  .btn-talk{
+    display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;border-radius:12px;
+    background:var(--accent);color:#fff;font-family:var(--mono);font-size:13px;font-weight:500;
+    transition:all .2s;border:none;cursor:pointer;
+  }
+  .btn-talk:hover{background:#9d72f8;box-shadow:0 8px 32px var(--accent-glow)}
+  .btn-dl{
+    display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;
+    border:1px solid var(--border-2);color:var(--text-72);font-family:var(--mono);font-size:12px;transition:all .2s;
+  }
+  .btn-dl:hover{border-color:var(--accent);color:var(--accent)}
+  .social-row{display:flex;gap:10px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border)}
+  .social-btn{
+    width:40px;height:40px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+    color:var(--text-56);font-size:14px;transition:all .2s;
+  }
+  .social-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+
+  .main{
+    margin-left:calc(var(--sidebar-nav) + var(--sidebar-profile));
+    flex:1;min-width:0;padding:0 48px 80px;
+  }
+  .main-inner{max-width:860px;margin:0 auto}
+  section{padding:80px 0}
+  .sect-tag{
+    display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;
+    color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;
+  }
+  .sect-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  h2.s-title{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:16px;color:var(--text)}
+  .s-desc{font-size:15px;color:var(--text-56);max-width:560px;line-height:1.7}
 
   /* HERO */
-  .hero{padding:160px 0 90px;}
-  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
-  @media(max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
-
-  .eyebrow{
-    font-family:var(--font-mono);font-size:13px;color:var(--mint);
-    display:flex;align-items:center;gap:8px;margin-bottom:20px;
-  }
-  .eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 3px var(--mint-dim);}
-
-  h1{
-    font-family:var(--font-display);font-weight:700;
-    font-size:52px;line-height:1.08;letter-spacing:-0.02em;
-    margin-bottom:22px;
-  }
-  h1 .accent{color:var(--mint);}
-  @media(max-width:720px){ h1{font-size:36px;} }
-
-  .lede{font-size:17px;color:var(--text-dim);max-width:480px;margin-bottom:32px;}
-
-  .btn-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px;}
-  .btn{
-    font-family:var(--font-mono);font-size:14px;padding:13px 22px;border-radius:6px;
-    display:inline-flex;align-items:center;gap:8px;
-  }
-  .btn-primary{background:var(--accent);color:#fff;font-weight:500;}
-  .btn-primary:hover{background:#9d72f8;box-shadow:0 0 24px var(--accent-glow);}
-  .btn-ghost{border:1px solid var(--border-strong);color:var(--text);}
-  .btn-ghost:hover{border-color:var(--text-dim);}
-
-  .stat-row{display:flex;gap:36px;flex-wrap:wrap;}
-  .stat .n{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--text);}
-  .stat .l{font-size:12.5px;color:var(--text-faint);font-family:var(--font-mono);}
-
-  /* TERMINAL SIGNATURE */
-  .terminal{
-    background:var(--bg-raised);border:1px solid var(--border);border-radius:10px;
-    overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
-  }
-  .term-bar{
-    display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--border);
-  }
-  .term-dot{width:9px;height:9px;border-radius:50%;background:var(--border-strong);}
-  .term-title{margin-left:8px;font-family:var(--font-mono);font-size:12px;color:var(--text-faint);}
-  .term-body{padding:20px;font-family:var(--font-mono);font-size:13px;min-height:280px;}
-  .term-line{margin-bottom:10px;opacity:0;animation:fadeIn 0.4s forwards;}
-  .term-line .prompt{color:var(--mint);}
-  .term-line .path{color:var(--text);}
-  .term-line .meta{color:var(--text-faint);padding-left:16px;display:block;}
-  .term-line .ok{color:var(--mint);}
-  @keyframes fadeIn{to{opacity:1;}}
-
-  /* SECTION HEADERS */
-  .sec-head{margin-bottom:40px;}
-  .sec-tag{font-family:var(--font-mono);font-size:12.5px;color:var(--mint);margin-bottom:10px;}
-  .sec-title{font-family:var(--font-display);font-size:30px;font-weight:700;letter-spacing:-0.01em;}
-  .sec-sub{color:var(--text-dim);font-size:15px;margin-top:10px;max-width:560px;}
-
-  /* PORTFOLIO FILTER SYSTEM */
-  .portfolio-section{position:relative;}
-  .portfolio-panel{
-    background:var(--bg-raised);border:1px solid var(--border);border-radius:16px;
-    padding:28px;padding-bottom:36px;position:relative;overflow:hidden;
-  }
-  .portfolio-panel::before{
-    content:'';position:absolute;inset:0;
-    background:radial-gradient(ellipse 60% 40% at 50% 0%, rgba(139,92,246,0.06), transparent);
-    pointer-events:none;
-  }
-  .tab-primary{
-    display:flex;gap:4px;padding:4px;background:var(--surface);
-    border:1px solid var(--border);border-radius:12px;margin-bottom:16px;position:relative;
-  }
-  .tab-p{
-    flex:1;font-family:var(--font-body);font-size:14px;font-weight:500;
-    padding:12px 20px;border:none;border-radius:9px;background:transparent;
-    color:var(--text-dim);cursor:pointer;transition:color .2s, background .2s;position:relative;z-index:1;
-  }
-  .tab-p:hover{color:var(--text);}
-  .tab-p.active{color:var(--text);background:var(--accent-dim);box-shadow:inset 0 0 0 1px rgba(139,92,246,0.25);}
-  .tab-secondary{
-    display:flex;gap:8px;margin-bottom:24px;overflow-x:auto;-webkit-overflow-scrolling:touch;
-    padding-bottom:4px;scrollbar-width:none;
-  }
-  .tab-secondary::-webkit-scrollbar{display:none;}
-  .tab-s{
-    font-family:var(--font-mono);font-size:12px;padding:8px 18px;border-radius:999px;
-    border:1px solid var(--border);background:transparent;color:var(--text-dim);
-    cursor:pointer;white-space:nowrap;transition:all .25s ease;
-  }
-  .tab-s:hover{border-color:var(--border-strong);color:var(--text);}
-  .tab-s.active{
-    border-color:var(--accent);color:var(--accent);background:var(--accent-dim);
-    box-shadow:0 0 20px rgba(139,92,246,0.15);
-  }
-  .portfolio-meta{
-    display:flex;justify-content:space-between;align-items:center;gap:16px;
-    margin-bottom:24px;flex-wrap:wrap;
-  }
-  .portfolio-count{font-family:var(--font-mono);font-size:12px;color:var(--text-faint);}
-  .portfolio-filter-label{
-    font-family:var(--font-mono);font-size:11px;color:var(--cyan);
-    letter-spacing:0.06em;text-transform:uppercase;
-  }
-  .portfolio-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;
-    min-height:200px;
-  }
-  @media(max-width:720px){ .portfolio-grid{grid-template-columns:1fr;} .portfolio-panel{padding:20px 16px;} }
-
-  .proj-card{
-    background:var(--surface);border:1px solid var(--border);border-radius:14px;
-    overflow:hidden;position:relative;transition:border-color .3s, transform .3s, box-shadow .3s;
-    animation:cardIn .4s ease backwards;
-  }
-  @keyframes cardIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-  .proj-card:hover{
-    border-color:rgba(139,92,246,0.4);transform:translateY(-4px);
-    box-shadow:0 20px 40px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.1);
-  }
-  .proj-card::after{
-    content:'';position:absolute;inset:-1px;border-radius:14px;opacity:0;
-    background:linear-gradient(135deg, rgba(139,92,246,0.2), rgba(34,211,238,0.1));
-    pointer-events:none;transition:opacity .3s;z-index:0;
-  }
-  .proj-card:hover::after{opacity:1;}
-  .proj-num{
-    position:absolute;top:14px;left:14px;z-index:3;
-    font-family:var(--font-mono);font-size:10px;color:var(--text);
-    background:rgba(9,9,11,0.75);backdrop-filter:blur(8px);
-    padding:4px 8px;border-radius:4px;border:1px solid var(--border);
-    letter-spacing:0.05em;
-  }
-  .proj-shot{
-    width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--bg);
-    border-bottom:1px solid var(--border);position:relative;
-  }
-  .proj-shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
-  .proj-card:hover .proj-shot img{transform:scale(1.05);}
-  .proj-shot .shot-fallback{font-size:14px;}
-  .proj-status{
-    position:absolute;top:14px;right:14px;z-index:3;
-    width:8px;height:8px;border-radius:50%;background:#22c55e;
-    box-shadow:0 0 8px rgba(34,197,94,0.6);
-  }
-  .proj-body{padding:22px 24px 24px;position:relative;z-index:1;}
-  .proj-meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-  .proj-name{font-family:var(--font-display);font-size:20px;font-weight:600;margin-bottom:6px;letter-spacing:-0.02em;}
-  .proj-type{font-family:var(--font-mono);font-size:10px;color:var(--text-faint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
-  .proj-desc{font-size:14px;color:var(--text-dim);line-height:1.55;margin-bottom:16px;
-    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-  .proj-tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
-  .proj-tech span{
-    font-family:var(--font-mono);font-size:10px;padding:4px 8px;border-radius:4px;
-    background:var(--bg);border:1px solid var(--border);color:var(--text-dim);
-  }
-  .proj-role{font-family:var(--font-mono);font-size:10px;color:var(--cyan);letter-spacing:0.06em;margin-bottom:18px;}
-  .proj-actions{display:flex;gap:10px;flex-wrap:wrap;}
-  .proj-btn{
-    font-family:var(--font-mono);font-size:12px;padding:10px 16px;border-radius:8px;
-    cursor:pointer;transition:all .2s;border:none;display:inline-flex;align-items:center;gap:6px;
-  }
-  .proj-btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-dim);}
-  .proj-btn-ghost:hover{border-color:var(--text-dim);color:var(--text);}
-  .proj-btn-accent{background:var(--accent-dim);border:1px solid rgba(139,92,246,0.3);color:var(--accent);}
-  .proj-btn-accent:hover{background:var(--accent);color:#fff;box-shadow:0 0 20px var(--accent-glow);}
-  .portfolio-empty{
-    grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-faint);
-    font-family:var(--font-mono);font-size:14px;
-  }
-
-  .badge{
-    font-family:var(--font-mono);font-size:10px;padding:4px 10px;border-radius:5px;
-    text-transform:uppercase;letter-spacing:0.04em;
-  }
-  .badge-shopify{background:var(--accent-dim);color:var(--accent);}
-  .badge-wp{background:var(--cyan-dim);color:var(--cyan);}
-  .badge-tier-scratch{background:rgba(139,92,246,0.08);color:var(--text-dim);border:1px solid var(--border);}
-  .badge-tier-assist{background:rgba(34,211,238,0.08);color:var(--text-dim);border:1px solid var(--border);}
-  .shot-fallback{
-    width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-    font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text-faint);
-    background:linear-gradient(135deg, var(--bg-raised) 0%, var(--surface) 50%, var(--bg-raised) 100%);
-    text-align:center;padding:0 16px;
-  }
-  .shot-fallback .shot-domain{font-family:var(--font-mono);font-size:11px;color:var(--text-faint);font-weight:400;opacity:0.7;}
-
-  /* SKILLS */
-  .skills-wrap{display:flex;flex-wrap:wrap;gap:12px;}
-  .skill-pill{
-    font-family:var(--font-mono);font-size:13.5px;padding:10px 16px;
-    border:1px solid var(--border);border-radius:7px;color:var(--text-dim);
-  }
-  .skill-pill.on{color:var(--mint);border-color:var(--mint-dim);background:var(--mint-dim);}
-
-  /* EXPERIENCE */
-  .exp-list{display:flex;flex-direction:column;gap:20px;}
-  .exp-card{
-    background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 28px;
-  }
-  .exp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:8px;}
-  .exp-role{font-family:var(--font-display);font-size:18px;font-weight:600;}
-  .exp-date{font-family:var(--font-mono);font-size:12px;color:var(--text-faint);white-space:nowrap;}
-  .exp-meta{font-size:13.5px;color:var(--text-dim);margin-bottom:14px;font-family:var(--font-mono);}
-  .exp-bullets{list-style:none;}
-  .exp-bullets li{
-    font-size:14.5px;color:var(--text-dim);padding:8px 0 8px 18px;position:relative;
-    border-bottom:1px solid var(--border);
-  }
-  .exp-bullets li:last-child{border-bottom:none;}
-  .exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--mint);font-size:12px;}
+  .hero{padding-top:48px;padding-bottom:60px}
+  .hero-eyebrow{font-family:var(--mono);font-size:12px;color:var(--text-40);margin-bottom:20px}
+  .hero-eyebrow span{color:var(--cyan)}
+  .hero h1{font-size:clamp(36px,5.5vw,56px);font-weight:700;letter-spacing:-.04em;line-height:1.05;margin-bottom:24px}
+  .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hero-lede{font-size:16px;color:var(--text-56);max-width:520px;margin-bottom:40px;line-height:1.7}
+  .counter-row{display:flex;gap:48px;flex-wrap:wrap;margin-bottom:48px}
+  .counter-item{}
+  .counter-num{font-size:clamp(40px,5vw,52px);font-weight:700;letter-spacing:-.03em;display:flex;align-items:baseline;gap:2px}
+  .counter-num .suffix{font-size:.5em;color:var(--text-56)}
+  .counter-label{font-size:13px;color:var(--text-56);margin-top:4px}
 
   /* ABOUT */
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
-  @media(max-width:800px){ .about-grid{grid-template-columns:1fr;} }
-  .about-text p{color:var(--text-dim);font-size:15.5px;margin-bottom:16px;}
-  .about-list{list-style:none;}
-  .about-list li{
-    display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);
-    font-size:14.5px;
-  }
-  .about-list li span:first-child{color:var(--text-faint);font-family:var(--font-mono);font-size:12.5px;}
+  .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;margin-top:32px}
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr}}
+  .about-text p{color:var(--text-56);font-size:15px;margin-bottom:16px;line-height:1.75}
+  .info-list{list-style:none}
+  .info-list li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);font-size:14px}
+  .info-list li span:first-child{font-family:var(--mono);font-size:11px;color:var(--text-40);letter-spacing:.04em}
 
-  /* FOOTER / CONTACT */
-  footer{border-top:1px solid var(--border);padding:70px 0 40px;}
-  .contact-title{font-family:var(--font-display);font-size:34px;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em;}
-  .contact-email{
-    font-family:var(--font-mono);color:var(--mint);font-size:18px;display:inline-block;margin-bottom:40px;
-  }
-  .contact-email:hover{text-decoration:underline;}
-  .contact-links{display:flex;flex-wrap:wrap;gap:20px 32px;margin-bottom:40px;}
-  .contact-phone{font-family:var(--font-mono);color:var(--text-dim);font-size:16px;}
-  .contact-phone:hover{color:var(--mint);}
-  .contact-social{font-family:var(--font-mono);color:var(--text-dim);font-size:16px;}
-  .contact-social:hover{color:var(--mint);}
-  .resume-btn{
-    font-family:var(--font-mono);font-size:14px;padding:12px 20px;border-radius:6px;
-    border:1px solid var(--border-strong);color:var(--text);display:inline-flex;align-items:center;gap:8px;
-  }
-  .resume-btn:hover{border-color:var(--mint);color:var(--mint);}
-  .footer-bottom{display:flex;justify-content:space-between;color:var(--text-faint);font-size:13px;font-family:var(--font-mono);flex-wrap:wrap;gap:12px;}
+  /* TIMELINE — Isak style */
+  .timeline{position:relative;margin-top:40px;padding-left:28px}
+  .timeline::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--accent),var(--border))}
+  .tl-item{position:relative;padding-bottom:36px;padding-left:28px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-dot{position:absolute;left:-28px;top:6px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);box-shadow:0 0 12px var(--accent-glow)}
+  .tl-date{font-family:var(--mono);font-size:11px;color:var(--text-40);margin-bottom:6px}
+  .tl-role{font-size:17px;font-weight:600;margin-bottom:4px;letter-spacing:-.02em}
+  .tl-co{font-size:13px;color:var(--accent);margin-bottom:10px;font-family:var(--mono)}
+  .tl-desc{font-size:14px;color:var(--text-56);line-height:1.65}
 
-  /* CASE STUDY DETAIL */
-  #detail{display:none;min-height:100vh;padding-top:100px;}
-  #detail.show{display:block;}
-  #home{display:block;}
-  #home.hide{display:none;}
-  .back-btn{
-    font-family:var(--font-mono);font-size:13.5px;color:var(--text-dim);
-    display:inline-flex;align-items:center;gap:8px;margin-bottom:36px;cursor:pointer;
-    background:none;border:none;
+  /* SERVICES — ZenG numbered */
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px}
+  @media(max-width:700px){.services-grid{grid-template-columns:1fr}}
+  .svc-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;
+    transition:all .25s;position:relative;overflow:hidden;
   }
-  .back-btn:hover{color:var(--mint);}
-  .detail-band{height:6px;border-radius:6px;margin-bottom:28px;background:var(--mint);}
-  .detail-shot{
-    width:100%;border-radius:10px;overflow:hidden;border:1px solid var(--border);
-    margin-bottom:28px;background:var(--surface);max-height:420px;
+  .svc-card:hover{border-color:rgba(139,92,246,.35);transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.3)}
+  .svc-num{font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:16px}
+  .svc-num span{color:var(--text-40)}
+  .svc-title{font-size:18px;font-weight:600;margin-bottom:10px;letter-spacing:-.02em}
+  .svc-desc{font-size:14px;color:var(--text-56);line-height:1.65}
+
+  /* PORTFOLIO TABS */
+  .portfolio-panel{
+    margin-top:36px;background:var(--surface);border:1px solid var(--border);border-radius:20px;
+    padding:24px;overflow:hidden;
   }
-  .detail-shot img{width:100%;height:auto;max-height:420px;object-fit:cover;display:block;}
-  .detail-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
-  .detail-title{font-family:var(--font-display);font-size:42px;font-weight:700;letter-spacing:-0.02em;margin-bottom:14px;}
-  @media(max-width:720px){ .detail-title{font-size:30px;} }
-  .detail-cat{color:var(--text-dim);font-size:16px;margin-bottom:32px;}
-  .detail-body{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;padding-bottom:100px;}
-  @media(max-width:800px){ .detail-body{grid-template-columns:1fr;} }
-  .detail-blurb{font-size:16.5px;color:var(--text-dim);margin-bottom:32px;}
-  .detail-h{font-family:var(--font-mono);font-size:13px;color:var(--mint);margin-bottom:16px;text-transform:uppercase;letter-spacing:0.04em;}
-  .detail-list{list-style:none;}
-  .detail-list li{padding:12px 0;border-bottom:1px solid var(--border);font-size:14.5px;color:var(--text-dim);padding-left:20px;position:relative;}
-  .detail-list li::before{content:'→';position:absolute;left:0;color:var(--mint);}
-  .detail-side{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;height:fit-content;}
-  .detail-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px;gap:16px;}
-  .detail-row:last-of-type{border-bottom:none;}
-  .detail-row span:first-child{color:var(--text-faint);font-family:var(--font-mono);font-size:12px;flex-shrink:0;}
-  .visit-btn{
-    margin-top:20px;display:flex;justify-content:center;width:100%;
-    background:var(--accent);color:#fff;font-family:var(--font-mono);font-size:14px;
-    padding:13px;border-radius:6px;font-weight:500;
+  .tab-primary{display:flex;gap:4px;padding:4px;background:var(--bg-2);border:1px solid var(--border);border-radius:12px;margin-bottom:14px}
+  .tab-p{flex:1;padding:11px 16px;border:none;border-radius:9px;background:transparent;color:var(--text-56);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font)}
+  .tab-p.active{color:var(--text);background:var(--accent-dim);box-shadow:inset 0 0 0 1px rgba(139,92,246,.2)}
+  .tab-secondary{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  .tab-secondary::-webkit-scrollbar{display:none}
+  .tab-s{font-family:var(--mono);font-size:11px;padding:7px 16px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-56);cursor:pointer;white-space:nowrap;transition:all .2s}
+  .tab-s.active{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+  .portfolio-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+  .portfolio-count{font-family:var(--mono);font-size:11px;color:var(--text-40)}
+  .portfolio-filter-label{font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em}
+  .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;min-height:120px}
+  .portfolio-empty{grid-column:1/-1;text-align:center;padding:48px;color:var(--text-40);font-family:var(--mono);font-size:13px}
+
+  .proj-card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s;animation:cardIn .4s ease backwards}
+  @keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .proj-card:hover{border-color:rgba(139,92,246,.35);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .proj-num{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--mono);font-size:9px;padding:4px 8px;background:rgba(9,9,11,.85);border:1px solid var(--border);border-radius:4px;letter-spacing:.05em}
+  .proj-shot{width:100%;aspect-ratio:16/10;overflow:hidden;position:relative;background:var(--bg)}
+  .proj-shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .proj-card:hover .proj-shot img{transform:scale(1.04)}
+  .shot-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;color:var(--text-40);background:linear-gradient(135deg,var(--bg-2),var(--surface))}
+  .shot-fallback .shot-domain{font-family:var(--mono);font-size:10px;opacity:.7;font-weight:400}
+  .proj-body{padding:18px 20px 20px;position:relative}
+  .proj-meta-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .badge{font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
+  .badge-shopify{background:var(--accent-dim);color:var(--accent)}
+  .badge-wp{background:var(--cyan-dim);color:var(--cyan)}
+  .badge-tier-scratch,.badge-tier-assist{background:rgba(255,255,255,.04);color:var(--text-56);border:1px solid var(--border)}
+  .proj-name{font-size:17px;font-weight:600;margin-bottom:4px;letter-spacing:-.02em}
+  .proj-type{font-family:var(--mono);font-size:9px;color:var(--text-40);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+  .proj-desc{font-size:13px;color:var(--text-56);line-height:1.55;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .proj-tech{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+  .proj-tech span{font-family:var(--mono);font-size:9px;padding:3px 7px;border-radius:3px;background:var(--bg);border:1px solid var(--border);color:var(--text-56)}
+  .proj-role{font-family:var(--mono);font-size:9px;color:var(--cyan);letter-spacing:.05em;margin-bottom:14px}
+  .proj-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .proj-btn{font-family:var(--mono);font-size:11px;padding:8px 14px;border-radius:8px;cursor:pointer;transition:all .2s;border:none}
+  .proj-btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-56)}
+  .proj-btn-ghost:hover{border-color:var(--text-56);color:var(--text)}
+  .proj-btn-accent{background:var(--accent-dim);border:1px solid rgba(139,92,246,.3);color:var(--accent)}
+  .proj-btn-accent:hover{background:var(--accent);color:#fff}
+
+  /* TECH STACK — Isak progress bars */
+  .tech-list{list-style:none;margin-top:36px;display:flex;flex-direction:column;gap:20px}
+  .tech-item{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:8px 16px;align-items:center}
+  .tech-name{font-weight:600;font-size:15px}
+  .tech-duty{font-size:13px;color:var(--text-56);grid-column:1}
+  .tech-pct{font-family:var(--mono);font-size:12px;color:var(--accent);grid-row:1;grid-column:2}
+  .tech-bar{grid-column:1/-1;height:4px;background:var(--border);border-radius:4px;overflow:hidden}
+  .tech-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--cyan));border-radius:4px;width:0;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+
+  /* CONTACT */
+  .contact-wrap{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  @media(max-width:700px){.contact-wrap{grid-template-columns:1fr}}
+  .contact-form{display:flex;flex-direction:column;gap:14px}
+  .field input,.field textarea{
+    width:100%;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    color:var(--text);font-family:var(--font);font-size:14px;outline:none;transition:border-color .2s;
   }
-  .visit-btn:hover{background:#9d72f8;box-shadow:0 0 24px var(--accent-glow);}
+  .field input:focus,.field textarea:focus{border-color:var(--accent)}
+  .field textarea{min-height:100px;resize:vertical}
+  .contact-info{display:flex;flex-direction:column;gap:16px;justify-content:center}
+  .contact-link{font-size:18px;font-weight:500;color:var(--accent);font-family:var(--mono)}
+  .contact-link:hover{text-decoration:underline}
+  .contact-meta{font-size:14px;color:var(--text-56)}
+  .site-footer{margin-top:60px;padding-top:32px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:12px;color:var(--text-40)}
+
+  /* CASE STUDY */
+  #detail{display:none;min-height:100vh;padding:40px 48px 80px;margin-left:calc(var(--sidebar-nav) + var(--sidebar-profile))}
+  #detail.show{display:block}
+  #home{display:block}
+  #home.hide{display:none}
+  .back-btn{font-family:var(--mono);font-size:13px;color:var(--text-56);background:none;border:none;cursor:pointer;margin-bottom:32px;display:flex;align-items:center;gap:8px}
+  .back-btn:hover{color:var(--accent)}
+  .detail-band{height:4px;border-radius:4px;margin-bottom:24px;background:var(--accent)}
+  .detail-shot{border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-bottom:24px;max-height:400px}
+  .detail-shot img{width:100%;max-height:400px;object-fit:cover}
+  .detail-title{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.03em;margin-bottom:12px}
+  .detail-cat{color:var(--text-56);margin-bottom:28px}
+  .detail-body{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;padding-bottom:60px}
+  @media(max-width:800px){.detail-body{grid-template-columns:1fr}}
+  .detail-blurb{color:var(--text-56);font-size:16px;margin-bottom:28px;line-height:1.7}
+  .detail-h{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+  .detail-list{list-style:none}
+  .detail-list li{padding:12px 0 12px 18px;border-bottom:1px solid var(--border);font-size:14px;color:var(--text-56);position:relative}
+  .detail-list li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:12px}
+  .detail-side{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;height:fit-content}
+  .detail-row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);font-size:13px;gap:12px}
+  .detail-row span:first-child{font-family:var(--mono);font-size:10px;color:var(--text-40);flex-shrink:0}
+  .visit-btn{display:flex;justify-content:center;width:100%;margin-top:18px;padding:13px;background:var(--accent);color:#fff;font-family:var(--mono);font-size:13px;border-radius:10px;font-weight:500}
+  .visit-btn:hover{background:#9d72f8}
+
+  /* MOBILE */
+  .mobile-header{display:none;position:fixed;top:0;left:0;right:0;z-index:300;padding:14px 20px;background:rgba(9,9,11,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);align-items:center;justify-content:space-between}
+  .mobile-logo{font-weight:700;font-size:18px}
+  .mobile-logo span{color:var(--accent)}
+  .mobile-menu-btn{background:none;border:1px solid var(--border);color:var(--text);width:40px;height:40px;border-radius:10px;cursor:pointer;font-size:18px}
+  .mobile-drawer{display:none;position:fixed;inset:0;z-index:400;background:rgba(9,9,11,.97);padding:80px 32px 32px;flex-direction:column;gap:8px}
+  .mobile-drawer.open{display:flex}
+  .mobile-drawer a{padding:14px 0;font-size:18px;color:var(--text-56);border-bottom:1px solid var(--border)}
+  .mobile-drawer a:hover{color:var(--accent)}
+  .mobile-bottom-nav{
+    display:none;position:fixed;bottom:0;left:0;right:0;z-index:250;
+    background:rgba(9,9,11,.92);backdrop-filter:blur(16px);border-top:1px solid var(--border);
+    padding:8px 12px calc(8px + env(safe-area-inset-bottom));
+    justify-content:space-around;
+  }
+  .mob-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:18px;color:var(--text-40);padding:6px 12px;border-radius:10px}
+  .mob-nav-item.active,.mob-nav-item:hover{color:var(--accent);background:var(--accent-dim)}
+
+  @media(max-width:1100px){
+    .sidebar-profile{display:none}
+    .main,#detail{margin-left:var(--sidebar-nav)}
+  }
+  @media(max-width:768px){
+    .sidebar-nav{display:none}
+    .mobile-header{display:flex}
+    .mobile-bottom-nav{display:flex}
+    .main,#detail{margin-left:0;padding:72px 20px 90px}
+    section{padding:56px 0}
+    .counter-row{gap:28px}
+  }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <div class="logo">Faizan<span>.</span></div>
-    <div class="nav-links">
-      <a href="#work">Work</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="nav-right">
-      <a class="nav-cta" href="mailto:faijjy@gmail.com">Say hello</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">☰</button>
-    </div>
+<div class="bg-layer"><div class="bg-cloud"></div><div class="bg-grid"></div></div>
+
+<header class="mobile-header">
+  <div class="mobile-logo">Faizan<span>.</span></div>
+  <button class="mobile-menu-btn" id="mobMenuBtn" aria-label="Menu">☰</button>
+</header>
+<div class="mobile-drawer" id="mobDrawer">
+  <a href="#home" class="mob-link">Home</a>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#resume" class="mob-link">Resume</a>
+  <a href="#services" class="mob-link">Services</a>
+  <a href="#work" class="mob-link">Portfolio</a>
+  <a href="#tech" class="mob-link">Tech Stack</a>
+  <a href="#contact" class="mob-link">Contact</a>
+  <a href="mailto:faijjy@gmail.com">faijjy@gmail.com</a>
+</div>
+
+<aside class="sidebar-nav">
+  <div class="nav-icons">
+    <a href="#home" class="nav-icon active" data-section="home" title="Home">⌂<span class="nav-tip">Home</span></a>
+    <a href="#about" class="nav-icon" data-section="about" title="About">◎<span class="nav-tip">About</span></a>
+    <a href="#resume" class="nav-icon" data-section="resume" title="Resume">▤<span class="nav-tip">Resume</span></a>
+    <a href="#services" class="nav-icon" data-section="services" title="Services">◈<span class="nav-tip">Services</span></a>
+    <a href="#work" class="nav-icon" data-section="work" title="Portfolio">◫<span class="nav-tip">Portfolio</span></a>
+    <a href="#tech" class="nav-icon" data-section="tech" title="Tech">⚙<span class="nav-tip">Tech Stack</span></a>
+    <a href="#contact" class="nav-icon" data-section="contact" title="Contact">✉<span class="nav-tip">Contact</span></a>
   </div>
-  <div class="nav-mobile" id="navMobile">
-    <a href="#work" class="nav-mobile-link">Work</a>
-    <a href="#skills" class="nav-mobile-link">Skills</a>
-    <a href="#experience" class="nav-mobile-link">Experience</a>
-    <a href="#about" class="nav-mobile-link">About</a>
-    <a href="#contact" class="nav-mobile-link">Contact</a>
-    <a href="mailto:faijjy@gmail.com">faijjy@gmail.com</a>
-    <a href="https://www.linkedin.com/in/faizan-idrishi-19329121a/" target="_blank" rel="noopener">LinkedIn</a>
+  <a href="#contact" class="nav-icon" title="Hire me" style="color:var(--accent)">+</a>
+</aside>
+
+<aside class="sidebar-profile">
+  <div class="avatar-wrap">
+    <div class="avatar">FI</div>
+    <div class="avaiable"><span class="dot"></span> Available for work</div>
   </div>
-</nav>
+  <div class="profile-name">Faizan Idrishi</div>
+  <div class="profile-role">Shopify · WordPress Developer</div>
+  <p class="profile-intro">I build and ship ecommerce stores and WordPress sites for D2C brands — from checkout flows to Core Web Vitals. Based in Mumbai, working remotely.</p>
+  <div class="profile-actions">
+    <a href="mailto:faijjy@gmail.com" class="btn-talk">Let's talk →</a>
+    <a href="Resume.docx" download class="btn-dl">↓ Download CV</a>
+  </div>
+  <div class="social-row">
+    <a href="mailto:faijjy@gmail.com" class="social-btn" title="Email">@</a>
+    <a href="https://www.linkedin.com/in/faizan-idrishi-19329121a/" target="_blank" rel="noopener" class="social-btn" title="LinkedIn">in</a>
+    <a href="tel:+919834547975" class="social-btn" title="Phone">☎</a>
+  </div>
+</aside>
 
 <div id="home">
+<main class="main">
+<div class="main-inner">
 
-  <header class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="eyebrow">AVAILABLE FOR REMOTE WORK</div>
-        <h1>Shopify & WordPress developer, <span class="accent">shipping stores that convert.</span></h1>
-        <p class="lede">Shopify and WordPress developer with hands-on experience building 20+ Shopify stores and 10+ WordPress/Elementor sites. Skilled in Liquid, custom themes, WooCommerce, checkout flows, and the CRO details that move conversion — plus SEO and Core Web Vitals optimization from a digital marketing background.</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href="#work">View work →</a>
-          <a class="btn btn-ghost" href="mailto:faijjy@gmail.com">faijjy@gmail.com</a>
-          <a class="btn btn-ghost" href="https://www.linkedin.com/in/faizan-idrishi-19329121a/" target="_blank" rel="noopener">LinkedIn ↗</a>
-          <a class="btn btn-ghost" href="Resume.docx" download>Download résumé ↓</a>
-        </div>
-        <div class="stat-row">
-          <div class="stat"><div class="n">25</div><div class="l">SITES SHIPPED</div></div>
-          <div class="stat"><div class="n">11</div><div class="l">BUILT SOLO</div></div>
-          <div class="stat"><div class="n">2</div><div class="l">PLATFORMS MASTERED</div></div>
-        </div>
-      </div>
-      <div class="terminal">
-        <div class="term-bar">
-          <div class="term-dot"></div><div class="term-dot"></div><div class="term-dot"></div>
-          <div class="term-title">deploy.log</div>
-        </div>
-        <div class="term-body" id="termBody"></div>
-      </div>
-    </div>
-  </header>
-
-  <section id="work" class="portfolio-section">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="sec-tag">// 01 · PORTFOLIO</div>
-        <div class="sec-title">Selected work</div>
-        <p class="sec-sub">A filterable view of every site I've shipped — built end-to-end or contributed to — across Shopify and WordPress.</p>
-      </div>
-      <div class="portfolio-panel">
-        <div class="tab-primary" role="tablist" aria-label="Project type">
-          <button class="tab-p active" data-tier="scratch" role="tab" aria-selected="true">Built From Scratch</button>
-          <button class="tab-p" data-tier="assist" role="tab" aria-selected="false">Assisted Projects</button>
-        </div>
-        <div class="tab-secondary" role="tablist" aria-label="Platform">
-          <button class="tab-s active" data-platform="Shopify" role="tab" aria-selected="true">Shopify</button>
-          <button class="tab-s" data-platform="WordPress" role="tab" aria-selected="false">WordPress</button>
-        </div>
-        <div class="portfolio-meta">
-          <span class="portfolio-count" id="projectCount">0 projects</span>
-          <span class="portfolio-filter-label" id="filterLabel">SHOPIFY / BUILT FROM SCRATCH</span>
-        </div>
-        <div class="portfolio-grid" id="portfolioGrid"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="sec-tag">// 03 · TOOLSET</div>
-        <div class="sec-title">Skills &amp; stack</div>
-      </div>
-      <div class="skills-wrap">
-        <div class="skill-pill on">Shopify</div>
-        <div class="skill-pill on">Liquid</div>
-        <div class="skill-pill on">WordPress</div>
-        <div class="skill-pill on">Elementor Pro</div>
-        <div class="skill-pill on">WooCommerce</div>
-        <div class="skill-pill on">PHP</div>
-        <div class="skill-pill on">JavaScript</div>
-        <div class="skill-pill on">HTML / CSS</div>
-        <div class="skill-pill on">CRO</div>
-        <div class="skill-pill on">Core Web Vitals</div>
-        <div class="skill-pill">Custom theme development</div>
-        <div class="skill-pill">Checkout &amp; payments setup</div>
-        <div class="skill-pill">Shopify APIs &amp; app integration</div>
-        <div class="skill-pill">SEO &amp; technical optimization</div>
-        <div class="skill-pill">Performance optimization</div>
-        <div class="skill-pill">Digital marketing</div>
-        <div class="skill-pill">UI/UX basics</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="sec-tag">// 04 · EXPERIENCE</div>
-        <div class="sec-title">Where I've worked</div>
-        <p class="sec-sub">From social and paid media to full-stack Shopify and WordPress builds — a path that shaped how I think about conversion, speed, and search.</p>
-      </div>
-      <div class="exp-list">
-        <div class="exp-card">
-          <div class="exp-top">
-            <div class="exp-role">Shopify &amp; WordPress Developer</div>
-            <div class="exp-date">Oct 2024 – Present</div>
-          </div>
-          <div class="exp-meta">Brilliant Madness · Remote</div>
-          <ul class="exp-bullets">
-            <li>Built and customized 20+ Shopify stores using Liquid, custom sections, and client-branded themes</li>
-            <li>Implemented full checkout flows — payment gateways, cart logic, and order management</li>
-            <li>Developed custom JavaScript features to improve store interactivity, UX, and performance</li>
-            <li>Built 10+ WordPress sites with Elementor Pro, WooCommerce, and custom PHP</li>
-            <li>Improved page speed and Core Web Vitals across client stores</li>
-            <li>Integrated Shopify APIs and third-party apps for marketing, analytics, and automation</li>
-          </ul>
-        </div>
-        <div class="exp-card">
-          <div class="exp-top">
-            <div class="exp-role">Digital Marketing Executive</div>
-            <div class="exp-date">Feb 2023 – Dec 2023</div>
-          </div>
-          <div class="exp-meta">Winchester Technologies · Mumbai (Hybrid)</div>
-          <ul class="exp-bullets">
-            <li>Executed paid and organic campaigns across Google, Meta, and email channels</li>
-            <li>Collaborated with designers and content teams on conversion-focused campaigns</li>
-            <li>Improved client campaign ROI through data-driven performance analysis</li>
-          </ul>
-        </div>
-        <div class="exp-card">
-          <div class="exp-top">
-            <div class="exp-role">Social Media Manager — CoinsCapture</div>
-            <div class="exp-date">Jan 2022 – Dec 2022</div>
-          </div>
-          <div class="exp-meta">Winchester Technologies · Vasai</div>
-          <ul class="exp-bullets">
-            <li>Managed Instagram, YouTube, and Twitter with content calendars and scheduled posting</li>
-            <li>Handled YouTube video production, reels, and creative strategy</li>
-            <li>Grew audience engagement through consistent brand storytelling</li>
-          </ul>
-        </div>
-      </div>
+  <section class="hero" id="home">
+    <p class="hero-eyebrow">Mumbai, India · <span>Remote available</span></p>
+    <h1>Building stores &amp; sites<br>people <em>remember</em></h1>
+    <p class="hero-lede">Shopify and WordPress developer with 20+ stores shipped. I handle theme architecture, checkout, CRO, and the performance details most devs skip.</p>
+    <div class="counter-row">
+      <div class="counter-item"><div class="counter-num"><span class="count" data-to="25">0</span><span class="suffix">+</span></div><div class="counter-label">Sites shipped</div></div>
+      <div class="counter-item"><div class="counter-num"><span class="count" data-to="11">0</span></div><div class="counter-label">Built solo</div></div>
+      <div class="counter-item"><div class="counter-num"><span class="count" data-to="20">0</span><span class="suffix">+</span></div><div class="counter-label">Shopify stores</div></div>
+      <div class="counter-item"><div class="counter-num"><span class="count" data-to="10">0</span><span class="suffix">+</span></div><div class="counter-label">WordPress sites</div></div>
     </div>
   </section>
 
   <section id="about">
-    <div class="wrap about-grid">
+    <div class="sect-tag">About</div>
+    <h2 class="s-title">Designing &amp; developing stores with clarity, speed, and conversion in mind</h2>
+    <div class="about-grid">
       <div class="about-text">
-        <div class="sec-tag">// 05 · ABOUT</div>
-        <p>I'm Moh Faizan Y. Idrishi — a Shopify and WordPress developer currently at Brilliant Madness, a startup-focused digital agency. I've shipped 20+ Shopify stores and 10+ WordPress sites across streetwear, D2C fashion, clinics, nutrition brands, and B2B service businesses.</p>
-        <p>What sets my work apart is the hybrid background: I came up through digital marketing and social media before going deep on development. That means I don't just ship themes — I build stores optimized for conversions, Core Web Vitals, and search visibility.</p>
-        <p>I'm open to remote and freelance engagements alongside agency work.</p>
+        <p>I'm Moh Faizan Y. Idrishi — a Shopify and WordPress developer at Brilliant Madness. I've shipped stores for streetwear, D2C fashion, clinics, nutrition brands, and B2B service businesses.</p>
+        <p>My background in digital marketing means I don't just build themes — I optimize for checkout flow, page speed, Core Web Vitals, and search visibility.</p>
       </div>
-      <ul class="about-list">
-        <li><span>ROLE</span><span>Shopify &amp; WordPress Developer</span></li>
-        <li><span>CURRENTLY</span><span>Brilliant Madness · Remote</span></li>
-        <li><span>FOCUS</span><span>D2C ecommerce, CRO, theme dev</span></li>
-        <li><span>EDUCATION</span><span>BA Communication, Mumbai Univ.</span></li>
-        <li><span>LANGUAGES</span><span>English, Hindi, Marathi</span></li>
+      <ul class="info-list">
+        <li><span>ROLE</span><span>Shopify & WordPress Dev</span></li>
+        <li><span>CURRENTLY</span><span>Brilliant Madness</span></li>
+        <li><span>EDUCATION</span><span>BA Communication, Mumbai</span></li>
+        <li><span>LANGUAGES</span><span>EN · HI · MR</span></li>
         <li><span>LOCATION</span><span>Mumbai, Maharashtra</span></li>
-        <li><span>LINKEDIN</span><span><a href="https://www.linkedin.com/in/faizan-idrishi-19329121a/" target="_blank" rel="noopener" style="color:var(--mint)">faizan-idrishi</a></span></li>
-        <li><span>OPEN TO</span><span>Remote / freelance work</span></li>
       </ul>
     </div>
   </section>
 
-  <footer id="contact">
-    <div class="wrap">
-      <div class="contact-tag sec-tag">// GET IN TOUCH</div>
-      <div class="contact-title">Got a store that needs building?</div>
-      <div class="contact-links">
-        <a class="contact-email" href="mailto:faijjy@gmail.com">faijjy@gmail.com</a>
-        <a class="contact-phone" href="tel:+919834547975">+91 98345 47975</a>
-        <a class="contact-social" href="https://www.linkedin.com/in/faizan-idrishi-19329121a/" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a class="resume-btn" href="Resume.docx" download>Download résumé ↓</a>
+  <section id="resume">
+    <div class="sect-tag">Resume</div>
+    <h2 class="s-title">Education &amp; experience</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Oct 2024 – Present</div>
+        <div class="tl-role">Shopify &amp; WordPress Developer</div>
+        <div class="tl-co">Brilliant Madness · Remote</div>
+        <p class="tl-desc">Built 20+ Shopify stores and 10+ WordPress sites. Full checkout flows, Liquid themes, Elementor builds, Core Web Vitals optimization, and app integrations.</p>
       </div>
-      <div class="footer-bottom">
-        <span>© 2026 Moh Faizan Y. Idrishi</span>
-        <span>Mumbai, Maharashtra, India</span>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Feb 2023 – Dec 2023</div>
+        <div class="tl-role">Digital Marketing Executive</div>
+        <div class="tl-co">Winchester Technologies · Mumbai</div>
+        <p class="tl-desc">Paid and organic campaigns across Google, Meta, and email. Conversion-focused collaboration with design and content teams.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Jan 2022 – Dec 2022</div>
+        <div class="tl-role">Social Media Manager — CoinsCapture</div>
+        <div class="tl-co">Winchester Technologies · Vasai</div>
+        <p class="tl-desc">Managed Instagram, YouTube, and Twitter. Video production, content calendars, and audience growth strategy.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2022 – 2025</div>
+        <div class="tl-role">BA Communication (General)</div>
+        <div class="tl-co">Annasaheb Vartak College, Mumbai University</div>
+        <p class="tl-desc">Undergraduate degree in communication while building practical skills in digital marketing and web development.</p>
       </div>
     </div>
-  </footer>
+  </section>
+
+  <section id="services">
+    <div class="sect-tag">Services</div>
+    <h2 class="s-title">What I build for clients</h2>
+    <p class="s-desc">End-to-end ecommerce and content sites — from architecture to launch and ongoing optimization.</p>
+    <div class="services-grid">
+      <div class="svc-card"><div class="svc-num">01<span>/</span></div><div class="svc-title">Shopify Store Development</div><p class="svc-desc">Custom Liquid themes, checkout flows, app integrations, and launch-ready D2C stores built from design references.</p></div>
+      <div class="svc-card"><div class="svc-num">02<span>/</span></div><div class="svc-title">WordPress &amp; Elementor</div><p class="svc-desc">Service sites, WooCommerce stores, lead-capture flows, and custom PHP functionality on WordPress.</p></div>
+      <div class="svc-card"><div class="svc-num">03<span>/</span></div><div class="svc-title">Theme Customization &amp; CRO</div><p class="svc-desc">Section builds, collection layouts, product page optimization, and conversion-driven adjustments.</p></div>
+      <div class="svc-card"><div class="svc-num">04<span>/</span></div><div class="svc-title">Performance &amp; Launch</div><p class="svc-desc">Core Web Vitals, mobile speed, SEO fundamentals, testing, and smooth client handover.</p></div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="sect-tag">Portfolio</div>
+    <h2 class="s-title">Featured projects</h2>
+    <p class="s-desc">Filter by build type and platform — 25 live sites across Shopify and WordPress.</p>
+    <div class="portfolio-panel">
+      <div class="tab-primary" role="tablist">
+        <button class="tab-p active" data-tier="scratch" role="tab">Built From Scratch</button>
+        <button class="tab-p" data-tier="assist" role="tab">Assisted Projects</button>
+      </div>
+      <div class="tab-secondary" role="tablist">
+        <button class="tab-s active" data-platform="Shopify">Shopify</button>
+        <button class="tab-s" data-platform="WordPress">WordPress</button>
+      </div>
+      <div class="portfolio-meta">
+        <span class="portfolio-count" id="projectCount">0 projects</span>
+        <span class="portfolio-filter-label" id="filterLabel">SHOPIFY / BUILT FROM SCRATCH</span>
+      </div>
+      <div class="portfolio-grid" id="portfolioGrid"></div>
+    </div>
+  </section>
+
+  <section id="tech">
+    <div class="sect-tag">Tech Stack</div>
+    <h2 class="s-title">Tools I ship with daily</h2>
+    <ul class="tech-list" id="techList">
+      <li class="tech-item" data-pct="95"><span class="tech-name">Shopify &amp; Liquid</span><span class="tech-pct">95%</span><span class="tech-duty">Custom themes, sections, checkout</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+      <li class="tech-item" data-pct="90"><span class="tech-name">WordPress &amp; Elementor</span><span class="tech-pct">90%</span><span class="tech-duty">Page builds, WooCommerce, forms</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+      <li class="tech-item" data-pct="85"><span class="tech-name">JavaScript &amp; HTML/CSS</span><span class="tech-pct">85%</span><span class="tech-duty">Interactivity, responsive layouts</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+      <li class="tech-item" data-pct="80"><span class="tech-name">PHP</span><span class="tech-pct">80%</span><span class="tech-duty">Custom functionality, plugins</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+      <li class="tech-item" data-pct="85"><span class="tech-name">CRO &amp; Performance</span><span class="tech-pct">85%</span><span class="tech-duty">Core Web Vitals, conversion tuning</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+      <li class="tech-item" data-pct="75"><span class="tech-name">SEO &amp; Digital Marketing</span><span class="tech-pct">75%</span><span class="tech-duty">Technical SEO, paid/organic campaigns</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <div class="sect-tag">Contact</div>
+    <h2 class="s-title">Let's build something together</h2>
+    <p class="s-desc">Got a store or site that needs building? Drop me a message — available for remote and freelance work.</p>
+    <div class="contact-wrap">
+      <form class="contact-form" action="mailto:faijjy@gmail.com" method="post" enctype="text/plain">
+        <div class="field"><input type="text" name="name" placeholder="Your name *" required></div>
+        <div class="field"><input type="email" name="email" placeholder="Email address *" required></div>
+        <div class="field"><textarea name="message" placeholder="Project description"></textarea></div>
+        <button type="submit" class="btn-talk" style="width:fit-content">Send message →</button>
+      </form>
+      <div class="contact-info">
+        <a href="mailto:faijjy@gmail.com" class="contact-link">faijjy@gmail.com</a>
+        <a href="tel:+919834547975" class="contact-link" style="color:var(--text-72)">+91 98345 47975</a>
+        <a href="https://www.linkedin.com/in/faizan-idrishi-19329121a/" target="_blank" rel="noopener" class="contact-meta">LinkedIn → faizan-idrishi</a>
+        <p class="contact-meta">Based in Mumbai, Maharashtra · Working with clients everywhere</p>
+        <a href="Resume.docx" download class="btn-dl" style="width:fit-content;margin-top:8px">↓ Download résumé</a>
+      </div>
+    </div>
+    <div class="site-footer">
+      <span>© 2026 Moh Faizan Y. Idrishi</span>
+      <span>Shopify & WordPress Developer</span>
+    </div>
+  </section>
 
 </div>
+</main>
+</div>
+
+<nav class="mobile-bottom-nav">
+  <a href="#home" class="mob-nav-item">⌂</a>
+  <a href="#work" class="mob-nav-item">◫</a>
+  <a href="#resume" class="mob-nav-item">▤</a>
+  <a href="#contact" class="mob-nav-item">✉</a>
+</nav>
 
 <div id="detail">
-  <div class="wrap">
-    <button class="back-btn" onclick="closeDetail()">← Back to all work</button>
+  <div class="main-inner">
+    <button class="back-btn" onclick="closeDetail()">← Back to portfolio</button>
     <div class="detail-band" id="dBand"></div>
     <div class="detail-shot" id="dShot"></div>
-    <div class="detail-badges" id="dBadges"></div>
-    <div class="detail-title" id="dTitle"></div>
-    <div class="detail-cat" id="dCat"></div>
+    <div class="detail-badges" id="dBadges" style="display:flex;gap:8px;margin-bottom:16px"></div>
+    <h1 class="detail-title" id="dTitle"></h1>
+    <p class="detail-cat" id="dCat"></p>
     <div class="detail-body">
       <div>
         <div class="detail-h">Overview</div>
@@ -606,277 +520,150 @@
 </div>
 
 <script>
-const scratchBullets = [
-  "Set up store architecture, navigation, and theme from the ground up",
-  "Configured checkout, payments, and shipping rules",
-  "Integrated required apps and third-party tools",
-  "Optimized for mobile performance and page speed",
-  "Handled launch, testing, and client handover"
-];
-const assistBullets = [
-  "Customized theme sections and page layouts",
-  "Built and fixed features requested by the client",
-  "Made CRO-driven adjustments to key pages",
-  "Handled ongoing revisions and QA"
-];
+const scratchBullets=["Set up store architecture, navigation, and theme from the ground up","Configured checkout, payments, and shipping rules","Integrated required apps and third-party tools","Optimized for mobile performance and page speed","Handled launch, testing, and client handover"];
+const assistBullets=["Customized theme sections and page layouts","Built and fixed features requested by the client","Made CRO-driven adjustments to key pages","Handled ongoing revisions and QA"];
 
-const projects = [
-  {slug:"denaroclub", name:"Denaro Club", url:"https://denaroclub.com", category:"Streetwear (polos, tees, jerseys)", platform:"Shopify", tier:"scratch",
-   blurb:"A streetwear label needing a store that could handle drops and limited releases without breaking under traffic. Built the full theme, collection structure, and checkout from zero."},
-  {slug:"wekynd", name:"Wekynd", url:"https://wekynd.in", category:"Premium women's socks", platform:"Shopify", tier:"scratch",
-   blurb:"A niche premium socks brand — the challenge was making a single-category catalog feel substantial. Built out variant-heavy product pages and a bundle-friendly cart."},
-  {slug:"firmwearpro", name:"Firmwear Pro", url:"https://firmwearpro.com", category:"Uniforms / workwear apparel", platform:"Shopify", tier:"scratch",
-   blurb:"B2B-leaning workwear brand with bulk-order customers. Built the store with quantity-based pricing logic and a catalog structured around industries, not just categories."},
-  {slug:"ecojay", name:"Ecojay", url:"https://ecojay.eco", category:"Sustainable / recycled fashion", platform:"Shopify", tier:"scratch",
-   blurb:"Sustainability-first apparel brand where the story matters as much as the product. Built a theme with dedicated storytelling sections alongside the standard catalog."},
-  {slug:"supasac", name:"Supasac", url:"https://supasac.com", category:"Bags — backpacks & laptop bags", platform:"Shopify", tier:"scratch",
-   blurb:"A bags and backpacks brand needing strong product photography display and spec comparison across SKUs. Built the store end-to-end including size/capacity variant logic."},
-  {slug:"serumluxeclinics", name:"Serum Luxe Clinics", url:"https://serumluxeclinics.com", category:"Skin clinic", platform:"WordPress", tier:"scratch",
-   blurb:"A skin clinic needing a site built for booking inquiries, not checkout. Built on WordPress with service pages, treatment galleries, and lead-capture forms."},
-  {slug:"trustcohealth", name:"Trustco Health", url:"https://trustcohealth.com", category:"B2B skin & hair supplements", platform:"WordPress", tier:"scratch",
-   blurb:"B2B supplement supplier needing a credibility-first site for wholesale buyers. Built product/spec pages and an inquiry-based lead flow instead of a storefront."},
-  {slug:"ceramicprohome", name:"Ceramic Pro Home", url:"https://ceramicprohome.in", category:"Home surface protection coatings", platform:"WordPress", tier:"scratch",
-   blurb:"Home coatings service business where before/after visuals do the selling. Built the site around service packages, galleries, and a quote-request flow."},
-  {slug:"primeinvestrade", name:"Prime Investrade", url:"https://primeinvestrade.com", category:"Financial services (NBFC)", platform:"WordPress", tier:"scratch",
-   blurb:"An NBFC needing a site that reads as trustworthy and compliant. Built with clear service breakdowns, disclosures, and a straightforward contact/lead flow."},
-  {slug:"ovolite", name:"Ovolite", url:"https://ovolite.com", category:"Liquid egg whites (food)", platform:"Shopify", tier:"scratch",
-   blurb:"A food brand selling a product most shoppers don't know exists yet — liquid egg whites. Built the store around education-first product pages and subscription-friendly checkout."},
-  {slug:"terrabloomdesigns", name:"Terrabloom Designs", url:"https://terrabloomdesigns.com", category:"Home décor", platform:"Shopify", tier:"scratch",
-   blurb:"A home décor brand with a wide, visually varied catalog. Built collection browsing and filtering to keep a large product range easy to shop."},
-  {slug:"holoman", name:"Holoman", url:"https://holoman.in", category:"Premium streetwear", platform:"Shopify", tier:"assist",
-   blurb:"Premium streetwear label — supported theme customization and feature builds on top of the existing Shopify setup, including collection and drop-page layouts."},
-  {slug:"donatello", name:"Donatello", url:"https://donatello.in", category:"Retro jerseys, polos, shirts", platform:"Shopify", tier:"assist",
-   blurb:"Retro-inspired menswear brand. Contributed to product page layouts, collection sections, and ongoing revisions across the catalog."},
-  {slug:"kalaniofficial", name:"Kalani Official", url:"https://kalaniofficial.com", category:"Women's dresses", platform:"Shopify", tier:"assist",
-   blurb:"Women's fashion label — worked on theme sections and page-level fixes to support seasonal collection launches."},
-  {slug:"amishilondon", name:"Amishi London", url:"https://amishilondon.co.uk", category:"Luxury accessories", platform:"Shopify", tier:"assist",
-   blurb:"Luxury accessories brand (handbags, jewellery, scarves) — supported UI customization to match the brand's premium positioning."},
-  {slug:"liltort", name:"Liltort", url:"https://liltort.com", category:"Kids' fashion", platform:"Shopify", tier:"assist",
-   blurb:"Kids' clothing brand — contributed to catalog structure and page builds to keep browsing simple for parents shopping by age or size."},
-  {slug:"balajihosieryxlu", name:"Balaji Hosiery", url:"https://balajihosieryxlu.com", category:"Women's innerwear & nightwear", platform:"Shopify", tier:"assist",
-   blurb:"Innerwear and nightwear retailer — supported feature builds and layout fixes across a large, size-heavy product catalog."},
-  {slug:"agirlinredscarf", name:"A Girl In Red Scarf", url:"https://agirlinredscarf.com", category:"Boutique travel company", platform:"WordPress", tier:"assist",
-   blurb:"Boutique travel company — assisted with WordPress page builds and content layout for tour and itinerary pages."},
-  {slug:"myneperfumes", name:"Myne Perfumes", url:"https://myneperfumes.com", category:"Perfume brand", platform:"Shopify", tier:"assist",
-   blurb:"Perfume brand — supported product page design and collection layout work to better showcase scent stories and notes."},
-  {slug:"gonutriline", name:"Go Nutriline", url:"https://gonutriline.com", category:"Nutrition / supplements", platform:"Shopify", tier:"assist",
-   blurb:"Supplements brand — contributed to product page builds and CRO-oriented layout adjustments on key landing pages."},
-  {slug:"ambrosenaturals", name:"Ambrose Naturals", url:"https://ambrosenaturals.com", category:"Natural inhalers", platform:"WordPress", tier:"assist",
-   blurb:"Natural wellness product brand — assisted with product page layout and site content on WordPress."},
-  {slug:"robomatic", name:"Robomatic", url:"https://robomatic.in", category:"Construction materials (acoustic walls)", platform:"WordPress", tier:"assist",
-   blurb:"Acoustic wall systems manufacturer — supported product and specification page builds for a B2B/industrial audience."},
-  {slug:"alenkamedia", name:"Alenka Media", url:"https://alenkamedia.com", category:"Digital signage solutions", platform:"WordPress", tier:"assist",
-   blurb:"Digital signage solutions provider — assisted with service page structure and site content on WordPress."},
-  {slug:"mhenterprise", name:"MH Enterprise", url:"https://mhenterprise.co", category:"Lab / scientific equipment supplier", platform:"WordPress", tier:"assist",
-   blurb:"Lab and scientific equipment supplier — supported catalog and inquiry page builds for a technical B2B audience."},
-  {slug:"shahizaika", name:"Shahi Zaika", url:"https://shahizaika.com.au", category:"Indian restaurant", platform:"WordPress", tier:"assist",
-   blurb:"Indian restaurant based in Australia — assisted with menu pages, gallery layout, and reservation/contact flow."}
+const projects=[
+{slug:"denaroclub",name:"Denaro Club",url:"https://denaroclub.com",category:"Streetwear (polos, tees, jerseys)",platform:"Shopify",tier:"scratch",blurb:"A streetwear label needing a store that could handle drops and limited releases without breaking under traffic. Built the full theme, collection structure, and checkout from zero."},
+{slug:"wekynd",name:"Wekynd",url:"https://wekynd.in",category:"Premium women's socks",platform:"Shopify",tier:"scratch",blurb:"A niche premium socks brand — the challenge was making a single-category catalog feel substantial. Built out variant-heavy product pages and a bundle-friendly cart."},
+{slug:"firmwearpro",name:"Firmwear Pro",url:"https://firmwearpro.com",category:"Uniforms / workwear apparel",platform:"Shopify",tier:"scratch",blurb:"B2B-leaning workwear brand with bulk-order customers. Built the store with quantity-based pricing logic and a catalog structured around industries, not just categories."},
+{slug:"ecojay",name:"Ecojay",url:"https://ecojay.eco",category:"Sustainable / recycled fashion",platform:"Shopify",tier:"scratch",blurb:"Sustainability-first apparel brand where the story matters as much as the product. Built a theme with dedicated storytelling sections alongside the standard catalog."},
+{slug:"supasac",name:"Supasac",url:"https://supasac.com",category:"Bags — backpacks & laptop bags",platform:"Shopify",tier:"scratch",blurb:"A bags and backpacks brand needing strong product photography display and spec comparison across SKUs. Built the store end-to-end including size/capacity variant logic."},
+{slug:"serumluxeclinics",name:"Serum Luxe Clinics",url:"https://serumluxeclinics.com",category:"Skin clinic",platform:"WordPress",tier:"scratch",blurb:"A skin clinic needing a site built for booking inquiries, not checkout. Built on WordPress with service pages, treatment galleries, and lead-capture forms."},
+{slug:"trustcohealth",name:"Trustco Health",url:"https://trustcohealth.com",category:"B2B skin & hair supplements",platform:"WordPress",tier:"scratch",blurb:"B2B supplement supplier needing a credibility-first site for wholesale buyers. Built product/spec pages and an inquiry-based lead flow instead of a storefront."},
+{slug:"ceramicprohome",name:"Ceramic Pro Home",url:"https://ceramicprohome.in",category:"Home surface protection coatings",platform:"WordPress",tier:"scratch",blurb:"Home coatings service business where before/after visuals do the selling. Built the site around service packages, galleries, and a quote-request flow."},
+{slug:"primeinvestrade",name:"Prime Investrade",url:"https://primeinvestrade.com",category:"Financial services (NBFC)",platform:"WordPress",tier:"scratch",blurb:"An NBFC needing a site that reads as trustworthy and compliant. Built with clear service breakdowns, disclosures, and a straightforward contact/lead flow."},
+{slug:"ovolite",name:"Ovolite",url:"https://ovolite.com",category:"Liquid egg whites (food)",platform:"Shopify",tier:"scratch",blurb:"A food brand selling a product most shoppers don't know exists yet — liquid egg whites. Built the store around education-first product pages and subscription-friendly checkout."},
+{slug:"terrabloomdesigns",name:"Terrabloom Designs",url:"https://terrabloomdesigns.com",category:"Home décor",platform:"Shopify",tier:"scratch",blurb:"A home décor brand with a wide, visually varied catalog. Built collection browsing and filtering to keep a large product range easy to shop."},
+{slug:"holoman",name:"Holoman",url:"https://holoman.in",category:"Premium streetwear",platform:"Shopify",tier:"assist",blurb:"Premium streetwear label — supported theme customization and feature builds on top of the existing Shopify setup, including collection and drop-page layouts."},
+{slug:"donatello",name:"Donatello",url:"https://donatello.in",category:"Retro jerseys, polos, shirts",platform:"Shopify",tier:"assist",blurb:"Retro-inspired menswear brand. Contributed to product page layouts, collection sections, and ongoing revisions across the catalog."},
+{slug:"kalaniofficial",name:"Kalani Official",url:"https://kalaniofficial.com",category:"Women's dresses",platform:"Shopify",tier:"assist",blurb:"Women's fashion label — worked on theme sections and page-level fixes to support seasonal collection launches."},
+{slug:"amishilondon",name:"Amishi London",url:"https://amishilondon.co.uk",category:"Luxury accessories",platform:"Shopify",tier:"assist",blurb:"Luxury accessories brand — supported UI customization to match the brand's premium positioning."},
+{slug:"liltort",name:"Liltort",url:"https://liltort.com",category:"Kids' fashion",platform:"Shopify",tier:"assist",blurb:"Kids' clothing brand — contributed to catalog structure and page builds to keep browsing simple for parents shopping by age or size."},
+{slug:"balajihosieryxlu",name:"Balaji Hosiery",url:"https://balajihosieryxlu.com",category:"Women's innerwear & nightwear",platform:"Shopify",tier:"assist",blurb:"Innerwear and nightwear retailer — supported feature builds and layout fixes across a large, size-heavy product catalog."},
+{slug:"agirlinredscarf",name:"A Girl In Red Scarf",url:"https://agirlinredscarf.com",category:"Boutique travel company",platform:"WordPress",tier:"assist",blurb:"Boutique travel company — assisted with WordPress page builds and content layout for tour and itinerary pages."},
+{slug:"myneperfumes",name:"Myne Perfumes",url:"https://myneperfumes.com",category:"Perfume brand",platform:"Shopify",tier:"assist",blurb:"Perfume brand — supported product page design and collection layout work to better showcase scent stories and notes."},
+{slug:"gonutriline",name:"Go Nutriline",url:"https://gonutriline.com",category:"Nutrition / supplements",platform:"Shopify",tier:"assist",blurb:"Supplements brand — contributed to product page builds and CRO-oriented layout adjustments on key landing pages."},
+{slug:"ambrosenaturals",name:"Ambrose Naturals",url:"https://ambrosenaturals.com",category:"Natural inhalers",platform:"WordPress",tier:"assist",blurb:"Natural wellness product brand — assisted with product page layout and site content on WordPress."},
+{slug:"robomatic",name:"Robomatic",url:"https://robomatic.in",category:"Construction materials (acoustic walls)",platform:"WordPress",tier:"assist",blurb:"Acoustic wall systems manufacturer — supported product and specification page builds for a B2B/industrial audience."},
+{slug:"alenkamedia",name:"Alenka Media",url:"https://alenkamedia.com",category:"Digital signage solutions",platform:"WordPress",tier:"assist",blurb:"Digital signage solutions provider — assisted with service page structure and site content on WordPress."},
+{slug:"mhenterprise",name:"MH Enterprise",url:"https://mhenterprise.co",category:"Lab / scientific equipment supplier",platform:"WordPress",tier:"assist",blurb:"Lab and scientific equipment supplier — supported catalog and inquiry page builds for a technical B2B audience."},
+{slug:"shahizaika",name:"Shahi Zaika",url:"https://shahizaika.com.au",category:"Indian restaurant",platform:"WordPress",tier:"assist",blurb:"Indian restaurant based in Australia — assisted with menu pages, gallery layout, and reservation/contact flow."}
 ];
 
-const projectBySlug = Object.fromEntries(projects.map((p, i) => [p.slug, i]));
+const projectBySlug=Object.fromEntries(projects.map((p,i)=>[p.slug,i]));
+let filterTier='scratch',filterPlatform='Shopify';
 
-// Mobile nav
-const navToggle = document.getElementById('navToggle');
-const navMobile = document.getElementById('navMobile');
-navToggle.addEventListener('click', () => {
-  const open = navMobile.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', open);
-  navToggle.textContent = open ? '✕' : '☰';
-});
-document.querySelectorAll('.nav-mobile-link').forEach(link => {
-  link.addEventListener('click', () => {
-    navMobile.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-    navToggle.textContent = '☰';
-  });
-});
+function badgeClass(p){return p==='Shopify'?'badge-shopify':'badge-wp'}
+function shotPlaceholder(n,u){const d=u.replace('https://','').replace(/\/$/,'');return '<div class="shot-fallback"><span>'+n+'</span><span class="shot-domain">'+d+'</span></div>'}
+function shotTag(p){const fb=shotPlaceholder(p.name,p.url).replace(/'/g,"\\'");return '<img loading="lazy" src="screenshots/'+p.slug+'.png" alt="'+p.name+'" onerror="this.outerHTML=\''+fb+'\'">'}
+function getProjectTech(p){if(p.platform==='Shopify')return p.tier==='scratch'?['Liquid','JavaScript','Shopify APIs','Checkout']:['Liquid','Theme sections','CRO','Apps'];return p.tier==='scratch'?['WordPress','Elementor','PHP','Forms']:['WordPress','Elementor','PHP','WooCommerce']}
+function getProjectRole(p){return p.tier==='scratch'?'FULL DEVELOPMENT':'DEV & CUSTOMIZATION'}
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
-// Terminal signature
-const term = document.getElementById('termBody');
-projects.slice(0, 7).forEach((p, i) => {
-  const line = document.createElement('div');
-  line.className = 'term-line';
-  line.style.animationDelay = (i * 0.45) + 's';
-  line.innerHTML = '<span class="prompt">$</span> <span class="path">deploy ' + p.url.replace('https://', '') + '</span><span class="meta">platform: ' + p.platform.toLowerCase() + '</span><span class="meta ok">✓ live</span>';
-  term.appendChild(line);
-});
-
-function badgeClass(platform) {
-  if (platform === 'Shopify') return 'badge-shopify';
-  if (platform === 'WordPress') return 'badge-wp';
-  return 'badge-wix';
-}
-
-function shotPlaceholder(name, url) {
-  const domain = url.replace('https://', '').replace(/\/$/, '');
-  return '<div class="shot-fallback"><span>' + name + '</span><span class="shot-domain">' + domain + '</span></div>';
-}
-
-function shotTag(p) {
-  const localSrc = 'screenshots/' + p.slug + '.png';
-  const fallback = shotPlaceholder(p.name, p.url).replace(/'/g, "\\'");
-  return '<img loading="lazy" src="' + localSrc + '" alt="' + p.name + '" onerror="this.outerHTML=\'' + fallback + '\'">';
-}
-
-function getProjectTech(p) {
-  if (p.platform === 'Shopify') {
-    return p.tier === 'scratch'
-      ? ['Liquid', 'JavaScript', 'Shopify APIs', 'Checkout']
-      : ['Liquid', 'Theme sections', 'CRO', 'Apps'];
-  }
-  return p.tier === 'scratch'
-    ? ['WordPress', 'Elementor', 'PHP', 'Forms']
-    : ['WordPress', 'Elementor', 'PHP', 'WooCommerce'];
-}
-
-function getProjectRole(p) {
-  return p.tier === 'scratch' ? 'FULL DEVELOPMENT' : 'DEV & CUSTOMIZATION';
-}
-
-function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-let filterTier = 'scratch';
-let filterPlatform = 'Shopify';
-
-function getFilteredProjects() {
-  return projects.filter(p => p.tier === filterTier && p.platform === filterPlatform);
-}
-
-function renderPortfolio() {
-  const grid = document.getElementById('portfolioGrid');
-  const filtered = getFilteredProjects();
-  const tierLabel = filterTier === 'scratch' ? 'BUILT FROM SCRATCH' : 'ASSISTED';
-  document.getElementById('projectCount').textContent = filtered.length + ' project' + (filtered.length !== 1 ? 's' : '');
-  document.getElementById('filterLabel').textContent = filterPlatform.toUpperCase() + ' / ' + tierLabel;
-
-  if (!filtered.length) {
-    grid.innerHTML = '<div class="portfolio-empty">No projects in this category yet.</div>';
-    return;
-  }
-
-  grid.innerHTML = filtered.map((p, i) => {
-    const idx = projects.indexOf(p);
-    const num = String(i + 1).padStart(2, '0');
-    const tierBadge = filterTier === 'scratch' ? 'Built From Scratch' : 'Assisted';
-    const tierClass = filterTier === 'scratch' ? 'badge-tier-scratch' : 'badge-tier-assist';
-    const tech = getProjectTech(p).map(t => '<span>' + escHtml(t) + '</span>').join('');
-    return '<article class="proj-card" style="animation-delay:' + (i * 0.06) + 's">' +
-      '<div class="proj-num">PROJECT_' + num + '</div>' +
-      '<div class="proj-status" title="Live"></div>' +
-      '<div class="proj-shot">' + shotTag(p) + '</div>' +
-      '<div class="proj-body">' +
-        '<div class="proj-meta-row">' +
-          '<span class="badge ' + badgeClass(p.platform) + '">' + escHtml(p.platform) + '</span>' +
-          '<span class="badge ' + tierClass + '">' + tierBadge + '</span>' +
-        '</div>' +
-        '<h3 class="proj-name">' + escHtml(p.name) + '</h3>' +
-        '<p class="proj-type">' + escHtml(p.category).toUpperCase() + '</p>' +
-        '<p class="proj-desc">' + escHtml(p.blurb) + '</p>' +
-        '<div class="proj-tech">' + tech + '</div>' +
-        '<p class="proj-role">ROLE: ' + getProjectRole(p) + '</p>' +
-        '<div class="proj-actions">' +
-          '<a class="proj-btn proj-btn-ghost" href="' + escHtml(p.url) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Project ↗</a>' +
-          '<button class="proj-btn proj-btn-accent" onclick="openDetail(' + idx + ')">Case Study</button>' +
-        '</div>' +
-      '</div>' +
-    '</article>';
+function renderPortfolio(){
+  const grid=document.getElementById('portfolioGrid');
+  const filtered=projects.filter(p=>p.tier===filterTier&&p.platform===filterPlatform);
+  const tierLabel=filterTier==='scratch'?'BUILT FROM SCRATCH':'ASSISTED';
+  document.getElementById('projectCount').textContent=filtered.length+' project'+(filtered.length!==1?'s':'');
+  document.getElementById('filterLabel').textContent=filterPlatform.toUpperCase()+' / '+tierLabel;
+  if(!filtered.length){grid.innerHTML='<div class="portfolio-empty">No projects in this category.</div>';return}
+  grid.innerHTML=filtered.map((p,i)=>{
+    const idx=projects.indexOf(p),num=String(i+1).padStart(2,'0');
+    const tierBadge=filterTier==='scratch'?'Built From Scratch':'Assisted';
+    const tierClass=filterTier==='scratch'?'badge-tier-scratch':'badge-tier-assist';
+    const tech=getProjectTech(p).map(t=>'<span>'+escHtml(t)+'</span>').join('');
+    return '<article class="proj-card" style="animation-delay:'+(i*.05)+'s;position:relative"><div class="proj-num">PROJECT_'+num+'</div><div class="proj-shot">'+shotTag(p)+'</div><div class="proj-body"><div class="proj-meta-row"><span class="badge '+badgeClass(p.platform)+'">'+escHtml(p.platform)+'</span><span class="badge '+tierClass+'">'+tierBadge+'</span></div><h3 class="proj-name">'+escHtml(p.name)+'</h3><p class="proj-type">'+escHtml(p.category).toUpperCase()+'</p><p class="proj-desc">'+escHtml(p.blurb)+'</p><div class="proj-tech">'+tech+'</div><p class="proj-role">ROLE: '+getProjectRole(p)+'</p><div class="proj-actions"><a class="proj-btn proj-btn-ghost" href="'+escHtml(p.url)+'" target="_blank" rel="noopener">View ↗</a><button class="proj-btn proj-btn-accent" onclick="openDetail('+idx+')">Case Study</button></div></div></article>';
   }).join('');
 }
 
-document.querySelectorAll('.tab-p').forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterTier = btn.dataset.tier;
-    document.querySelectorAll('.tab-p').forEach(b => {
-      b.classList.toggle('active', b === btn);
-      b.setAttribute('aria-selected', b === btn);
-    });
-    renderPortfolio();
-  });
-});
-
-document.querySelectorAll('.tab-s').forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterPlatform = btn.dataset.platform;
-    document.querySelectorAll('.tab-s').forEach(b => {
-      b.classList.toggle('active', b === btn);
-      b.setAttribute('aria-selected', b === btn);
-    });
-    renderPortfolio();
-  });
-});
-
+document.querySelectorAll('.tab-p').forEach(btn=>btn.addEventListener('click',()=>{
+  filterTier=btn.dataset.tier;
+  document.querySelectorAll('.tab-p').forEach(b=>b.classList.toggle('active',b===btn));
+  renderPortfolio();
+}));
+document.querySelectorAll('.tab-s').forEach(btn=>btn.addEventListener('click',()=>{
+  filterPlatform=btn.dataset.platform;
+  document.querySelectorAll('.tab-s').forEach(b=>b.classList.toggle('active',b===btn));
+  renderPortfolio();
+}));
 renderPortfolio();
 
-function openDetail(idx, pushState = true) {
-  const p = projects[idx];
-  document.getElementById('dTitle').textContent = p.name;
-  document.getElementById('dCat').textContent = p.category;
-  document.getElementById('dBlurb').textContent = p.blurb;
-  document.getElementById('dBand').style.background = p.tier === 'scratch' ? 'var(--accent)' : 'var(--cyan)';
-  document.getElementById('dShot').innerHTML = shotTag(p);
-
-  const roleLabel = p.tier === 'scratch' ? 'Built from scratch' : 'Assisted / contributed';
-  document.getElementById('dBadges').innerHTML = '<span class="badge ' + badgeClass(p.platform) + '">' + p.platform + '</span><span class="badge" style="background:' + (p.tier === 'scratch' ? 'var(--accent-dim)' : 'var(--cyan-dim)') + ';color:' + (p.tier === 'scratch' ? 'var(--accent)' : 'var(--cyan)') + '">' + roleLabel + '</span>';
-
-  const list = document.getElementById('dList');
-  list.innerHTML = '';
-  (p.tier === 'scratch' ? scratchBullets : assistBullets).forEach(b => {
-    const li = document.createElement('li');
-    li.textContent = b;
-    list.appendChild(li);
-  });
-
-  document.getElementById('sPlatform').textContent = p.platform;
-  document.getElementById('sCategory').textContent = p.category;
-  document.getElementById('sRole').textContent = getProjectRole(p).replace(/ & /g, ' · ');
-  document.getElementById('sTech').textContent = getProjectTech(p).join(', ');
-  document.getElementById('sUrl').textContent = p.url.replace('https://', '');
-  document.getElementById('visitBtn').href = p.url;
-
+function openDetail(idx,pushState=true){
+  const p=projects[idx];
+  document.getElementById('dTitle').textContent=p.name;
+  document.getElementById('dCat').textContent=p.category;
+  document.getElementById('dBlurb').textContent=p.blurb;
+  document.getElementById('dBand').style.background=p.tier==='scratch'?'var(--accent)':'var(--cyan)';
+  document.getElementById('dShot').innerHTML=shotTag(p);
+  const roleLabel=p.tier==='scratch'?'Built from scratch':'Assisted / contributed';
+  document.getElementById('dBadges').innerHTML='<span class="badge '+badgeClass(p.platform)+'">'+p.platform+'</span><span class="badge" style="background:'+(p.tier==='scratch'?'var(--accent-dim)':'var(--cyan-dim)')+';color:'+(p.tier==='scratch'?'var(--accent)':'var(--cyan)')+'">'+roleLabel+'</span>';
+  document.getElementById('dList').innerHTML=(p.tier==='scratch'?scratchBullets:assistBullets).map(b=>'<li>'+b+'</li>').join('');
+  document.getElementById('sPlatform').textContent=p.platform;
+  document.getElementById('sCategory').textContent=p.category;
+  document.getElementById('sRole').textContent=getProjectRole(p);
+  document.getElementById('sTech').textContent=getProjectTech(p).join(', ');
+  document.getElementById('sUrl').textContent=p.url.replace('https://','');
+  document.getElementById('visitBtn').href=p.url;
   document.getElementById('home').classList.add('hide');
   document.getElementById('detail').classList.add('show');
-  window.scrollTo(0, 0);
-
-  if (pushState) {
-    const url = new URL(window.location);
-    url.searchParams.set('project', p.slug);
-    history.pushState({ project: p.slug }, '', url);
-    document.title = p.name + ' — Faizan Idrishi';
-  }
+  document.querySelector('.sidebar-nav').style.display='none';
+  document.querySelector('.sidebar-profile').style.display='none';
+  document.querySelector('.mobile-bottom-nav').style.display='none';
+  window.scrollTo(0,0);
+  if(pushState){const u=new URL(location);u.searchParams.set('project',p.slug);history.pushState({project:p.slug},'',u);document.title=p.name+' — Faizan Idrishi'}
 }
 
-function closeDetail(pushState = true) {
+function closeDetail(pushState=true){
   document.getElementById('detail').classList.remove('show');
   document.getElementById('home').classList.remove('hide');
-  window.scrollTo(0, 0);
-  document.title = 'Faizan Idrishi — Shopify & WordPress Developer';
-
-  if (pushState) {
-    const url = new URL(window.location);
-    url.searchParams.delete('project');
-    history.pushState({}, '', url.pathname + url.hash);
-  }
+  document.querySelector('.sidebar-nav').style.display='';
+  document.querySelector('.sidebar-profile').style.display='';
+  if(window.innerWidth<=768)document.querySelector('.mobile-bottom-nav').style.display='flex';
+  window.scrollTo(0,0);
+  document.title='Faizan Idrishi — Shopify & WordPress Developer';
+  if(pushState){const u=new URL(location);u.searchParams.delete('project');history.pushState({},'',u.pathname+u.hash)}
 }
 
-window.addEventListener('popstate', (e) => {
-  const slug = new URLSearchParams(window.location.search).get('project');
-  if (slug && projectBySlug[slug] !== undefined) {
-    openDetail(projectBySlug[slug], false);
-  } else {
-    closeDetail(false);
-  }
+window.addEventListener('popstate',()=>{
+  const slug=new URLSearchParams(location.search).get('project');
+  if(slug&&projectBySlug[slug]!==undefined)openDetail(projectBySlug[slug],false);
+  else closeDetail(false);
+});
+(function(){const slug=new URLSearchParams(location.search).get('project');if(slug&&projectBySlug[slug]!==undefined)openDetail(projectBySlug[slug],false)})();
+
+/* Animated counters */
+function animateCount(el,to,dur=1200){
+  const start=performance.now();
+  const update=now=>{const t=Math.min((now-start)/dur,1);el.textContent=Math.floor(t*to);if(t<1)requestAnimationFrame(update);else el.textContent=to};
+  requestAnimationFrame(update);
+}
+const counterObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.count').forEach(c=>animateCount(c,+c.dataset.to));counterObs.unobserve(e.target)}});
+},{threshold:.3});
+document.querySelector('.counter-row')&&counterObs.observe(document.querySelector('.counter-row'));
+
+/* Tech bar animation */
+const techObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.tech-item').forEach(item=>{
+    item.querySelector('.tech-fill').style.width=item.dataset.pct+'%';
+  });techObs.unobserve(e.target)}});
+},{threshold:.2});
+document.getElementById('techList')&&techObs.observe(document.getElementById('techList'));
+
+/* Active nav on scroll */
+const sections=document.querySelectorAll('section[id]');
+const navIcons=document.querySelectorAll('.nav-icon[data-section]');
+window.addEventListener('scroll',()=>{
+  let cur='home';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});
+  navIcons.forEach(n=>n.classList.toggle('active',n.dataset.section===cur));
 });
 
-// Deep link on load
-(function initFromUrl() {
-  const slug = new URLSearchParams(window.location.search).get('project');
-  if (slug && projectBySlug[slug] !== undefined) {
-    openDetail(projectBySlug[slug], false);
-  }
-})();
+/* Mobile menu */
+const mobBtn=document.getElementById('mobMenuBtn'),mobDrawer=document.getElementById('mobDrawer');
+mobBtn.addEventListener('click',()=>{mobDrawer.classList.toggle('open');mobBtn.textContent=mobDrawer.classList.contains('open')?'✕':'☰'});
+document.querySelectorAll('.mob-link').forEach(l=>l.addEventListener('click',()=>{mobDrawer.classList.remove('open');mobBtn.textContent='☰'}));
 </script>
-
 </body>
 </html>
