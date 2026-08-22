@@ -67,7 +67,7 @@
     position:fixed;left:var(--sidebar-nav);top:0;bottom:0;width:var(--sidebar-profile);z-index:150;
     padding:40px 28px;border-right:1px solid var(--border);
     background:rgba(17,17,19,.75);backdrop-filter:blur(20px);
-    display:flex;flex-direction:column;
+    display:flex;flex-direction:column;justify-content:center;
   }
   .avatar-wrap{position:relative;margin-bottom:24px}
   .avatar{
@@ -84,7 +84,7 @@
   .profile-name{font-size:22px;font-weight:700;letter-spacing:-.03em;margin-bottom:4px}
   .profile-role{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px}
   .profile-intro{font-size:14px;color:var(--text-56);line-height:1.65;margin-bottom:24px}
-  .profile-actions{display:flex;flex-direction:column;gap:10px;margin-bottom:auto}
+  .profile-actions{display:flex;flex-direction:column;gap:10px}
   .btn-talk{
     display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;border-radius:12px;
     background:var(--accent);color:#fff;font-family:var(--mono);font-size:13px;font-weight:500;
@@ -107,8 +107,10 @@
     margin-left:calc(var(--sidebar-nav) + var(--sidebar-profile));
     flex:1;min-width:0;padding:0 48px 80px;
   }
-  .main-inner{max-width:860px;margin:0 auto}
+  .main-inner{max-width:860px;margin:0}
   section{padding:80px 0}
+  section.hero{padding:0 0 32px}
+  .hero + section{padding-top:56px}
   .sect-tag{
     display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;
     color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;
@@ -118,13 +120,16 @@
   .s-desc{font-size:15px;color:var(--text-56);max-width:560px;line-height:1.7}
 
   /* HERO */
-  .hero{padding-top:48px;padding-bottom:60px}
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;
+    padding-top:0;padding-bottom:clamp(40px,6vh,72px);
+  }
   .hero-eyebrow{font-family:var(--mono);font-size:12px;color:var(--text-40);margin-bottom:20px}
   .hero-eyebrow span{color:var(--cyan)}
   .hero h1{font-size:clamp(36px,5.5vw,56px);font-weight:700;letter-spacing:-.04em;line-height:1.05;margin-bottom:24px}
   .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
   .hero-lede{font-size:16px;color:var(--text-56);max-width:520px;margin-bottom:40px;line-height:1.7}
-  .counter-row{display:flex;gap:48px;flex-wrap:wrap;margin-bottom:48px}
+  .counter-row{display:flex;gap:48px;flex-wrap:wrap;margin-bottom:0}
   .counter-item{}
   .counter-num{font-size:clamp(40px,5vw,52px);font-weight:700;letter-spacing:-.03em;display:flex;align-items:baseline;gap:2px}
   .counter-num .suffix{font-size:.5em;color:var(--text-56)}
@@ -177,17 +182,34 @@
   .portfolio-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px}
   .portfolio-count{font-family:var(--mono);font-size:11px;color:var(--text-40)}
   .portfolio-filter-label{font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em}
-  .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;min-height:120px}
-  .portfolio-empty{grid-column:1/-1;text-align:center;padding:48px;color:var(--text-40);font-family:var(--mono);font-size:13px}
+  .portfolio-slider{position:relative;overflow:hidden}
+  .portfolio-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);will-change:transform}
+  .portfolio-track .proj-card{flex:0 0 100%;min-width:100%;margin:0}
+  .slider-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:24px}
+  .slider-nav{display:flex;align-items:center;gap:12px}
+  .slider-btn{
+    width:44px;height:44px;border-radius:12px;border:1px solid var(--border);background:var(--bg-2);
+    color:var(--text);cursor:pointer;font-size:18px;line-height:1;transition:all .2s;
+  }
+  .slider-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+  .slider-btn:disabled{opacity:.35;cursor:not-allowed}
+  .slider-dots{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;flex:1}
+  .slider-dot{width:8px;height:8px;border-radius:50%;background:var(--border-2);border:none;cursor:pointer;padding:0;transition:all .2s}
+  .slider-dot.active{background:var(--accent);transform:scale(1.25);box-shadow:0 0 12px var(--accent-glow)}
+  .slider-counter{font-family:var(--mono);font-size:11px;color:var(--text-40);min-width:56px;text-align:right}
+  .portfolio-grid{display:none}
+  .portfolio-empty{padding:48px;text-align:center;color:var(--text-40);font-family:var(--mono);font-size:13px}
 
   .proj-card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s;animation:cardIn .4s ease backwards}
   @keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   .proj-card:hover{border-color:rgba(139,92,246,.35);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
   .proj-num{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--mono);font-size:9px;padding:4px 8px;background:rgba(9,9,11,.85);border:1px solid var(--border);border-radius:4px;letter-spacing:.05em}
-  .proj-shot{width:100%;aspect-ratio:16/10;overflow:hidden;position:relative;background:var(--bg)}
-  .proj-shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .proj-shot{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:var(--bg)}
+  .proj-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s;display:block}
+  .proj-shot img.is-hidden{display:none}
   .proj-card:hover .proj-shot img{transform:scale(1.04)}
-  .shot-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;color:var(--text-40);background:linear-gradient(135deg,var(--bg-2),var(--surface))}
+  .shot-fallback{width:100%;height:100%;display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;color:var(--text-40);background:linear-gradient(135deg,var(--bg-2),var(--surface))}
+  .shot-fallback.is-visible{display:flex}
   .shot-fallback .shot-domain{font-family:var(--mono);font-size:10px;opacity:.7;font-weight:400}
   .proj-body{padding:18px 20px 20px;position:relative}
   .proj-meta-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
@@ -242,7 +264,8 @@
   .back-btn:hover{color:var(--accent)}
   .detail-band{height:4px;border-radius:4px;margin-bottom:24px;background:var(--accent)}
   .detail-shot{border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-bottom:24px;max-height:400px}
-  .detail-shot img{width:100%;max-height:400px;object-fit:cover}
+  .detail-shot img,.detail-shot .proj-shot img{width:100%;max-height:400px;object-fit:cover;object-position:top center}
+  .detail-shot .proj-shot{aspect-ratio:auto;max-height:400px}
   .detail-title{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.03em;margin-bottom:12px}
   .detail-cat{color:var(--text-56);margin-bottom:28px}
   .detail-body{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;padding-bottom:60px}
@@ -286,6 +309,7 @@
     .mobile-bottom-nav{display:flex}
     .main,#detail{margin-left:0;padding:72px 20px 90px}
     section{padding:56px 0}
+    .hero{min-height:auto;justify-content:flex-start;padding-top:clamp(48px,10vh,96px);padding-bottom:32px}
     .counter-row{gap:28px}
   }
 </style>
@@ -439,7 +463,18 @@
         <span class="portfolio-count" id="projectCount">0 projects</span>
         <span class="portfolio-filter-label" id="filterLabel">SHOPIFY / BUILT FROM SCRATCH</span>
       </div>
-      <div class="portfolio-grid" id="portfolioGrid"></div>
+      <div class="portfolio-slider" id="portfolioSlider">
+        <div class="portfolio-track" id="portfolioTrack"></div>
+        <div class="slider-controls">
+          <div class="slider-nav">
+            <button class="slider-btn" id="sliderPrev" type="button" aria-label="Previous project">←</button>
+            <button class="slider-btn" id="sliderNext" type="button" aria-label="Next project">→</button>
+          </div>
+          <div class="slider-dots" id="sliderDots"></div>
+          <div class="slider-counter" id="sliderCounter">1 / 1</div>
+        </div>
+      </div>
+      <div class="portfolio-empty" id="portfolioEmpty" hidden>No projects in this category.</div>
     </div>
   </section>
 
@@ -555,30 +590,87 @@ const projects=[
 ];
 
 const projectBySlug=Object.fromEntries(projects.map((p,i)=>[p.slug,i]));
-let filterTier='scratch',filterPlatform='Shopify';
+let filterTier='scratch',filterPlatform='Shopify',slideIndex=0,filteredProjects=[];
 
 function badgeClass(p){return p==='Shopify'?'badge-shopify':'badge-wp'}
-function shotPlaceholder(n,u){const d=u.replace('https://','').replace(/\/$/,'');return '<div class="shot-fallback"><span>'+n+'</span><span class="shot-domain">'+d+'</span></div>'}
-function shotTag(p){const fb=shotPlaceholder(p.name,p.url).replace(/'/g,"\\'");return '<img loading="lazy" src="screenshots/'+p.slug+'.png" alt="'+p.name+'" onerror="this.outerHTML=\''+fb+'\'">'}
 function getProjectTech(p){if(p.platform==='Shopify')return p.tier==='scratch'?['Liquid','JavaScript','Shopify APIs','Checkout']:['Liquid','Theme sections','CRO','Apps'];return p.tier==='scratch'?['WordPress','Elementor','PHP','Forms']:['WordPress','Elementor','PHP','WooCommerce']}
 function getProjectRole(p){return p.tier==='scratch'?'FULL DEVELOPMENT':'DEV & CUSTOMIZATION'}
 function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
-function renderPortfolio(){
-  const grid=document.getElementById('portfolioGrid');
-  const filtered=projects.filter(p=>p.tier===filterTier&&p.platform===filterPlatform);
-  const tierLabel=filterTier==='scratch'?'BUILT FROM SCRATCH':'ASSISTED';
-  document.getElementById('projectCount').textContent=filtered.length+' project'+(filtered.length!==1?'s':'');
-  document.getElementById('filterLabel').textContent=filterPlatform.toUpperCase()+' / '+tierLabel;
-  if(!filtered.length){grid.innerHTML='<div class="portfolio-empty">No projects in this category.</div>';return}
-  grid.innerHTML=filtered.map((p,i)=>{
-    const idx=projects.indexOf(p),num=String(i+1).padStart(2,'0');
-    const tierBadge=filterTier==='scratch'?'Built From Scratch':'Assisted';
-    const tierClass=filterTier==='scratch'?'badge-tier-scratch':'badge-tier-assist';
-    const tech=getProjectTech(p).map(t=>'<span>'+escHtml(t)+'</span>').join('');
-    return '<article class="proj-card" style="animation-delay:'+(i*.05)+'s;position:relative"><div class="proj-num">PROJECT_'+num+'</div><div class="proj-shot">'+shotTag(p)+'</div><div class="proj-body"><div class="proj-meta-row"><span class="badge '+badgeClass(p.platform)+'">'+escHtml(p.platform)+'</span><span class="badge '+tierClass+'">'+tierBadge+'</span></div><h3 class="proj-name">'+escHtml(p.name)+'</h3><p class="proj-type">'+escHtml(p.category).toUpperCase()+'</p><p class="proj-desc">'+escHtml(p.blurb)+'</p><div class="proj-tech">'+tech+'</div><p class="proj-role">ROLE: '+getProjectRole(p)+'</p><div class="proj-actions"><a class="proj-btn proj-btn-ghost" href="'+escHtml(p.url)+'" target="_blank" rel="noopener">View ↗</a><button class="proj-btn proj-btn-accent" onclick="openDetail('+idx+')">Case Study</button></div></div></article>';
-  }).join('');
+function shotImg(p){
+  const domain=escHtml(p.url.replace('https://','').replace(/\/$/,''));
+  return '<div class="proj-shot"><img loading="lazy" src="screenshots/'+escHtml(p.slug)+'.png?v=2" alt="'+escHtml(p.name)+'" onerror="this.classList.add(\'is-hidden\');this.nextElementSibling.classList.add(\'is-visible\')"><div class="shot-fallback"><span>'+escHtml(p.name)+'</span><span class="shot-domain">'+domain+'</span></div></div>';
 }
+function shotTag(p){return shotImg(p)}
+
+function buildProjCard(p,i){
+  const idx=projects.indexOf(p),num=String(i+1).padStart(2,'0');
+  const tierBadge=filterTier==='scratch'?'Built From Scratch':'Assisted';
+  const tierClass=filterTier==='scratch'?'badge-tier-scratch':'badge-tier-assist';
+  const tech=getProjectTech(p).map(t=>'<span>'+escHtml(t)+'</span>').join('');
+  return '<article class="proj-card" style="animation-delay:'+(i*.05)+'s;position:relative"><div class="proj-num">PROJECT_'+num+'</div>'+shotImg(p)+'<div class="proj-body"><div class="proj-meta-row"><span class="badge '+badgeClass(p.platform)+'">'+escHtml(p.platform)+'</span><span class="badge '+tierClass+'">'+tierBadge+'</span></div><h3 class="proj-name">'+escHtml(p.name)+'</h3><p class="proj-type">'+escHtml(p.category).toUpperCase()+'</p><p class="proj-desc">'+escHtml(p.blurb)+'</p><div class="proj-tech">'+tech+'</div><p class="proj-role">ROLE: '+getProjectRole(p)+'</p><div class="proj-actions"><a class="proj-btn proj-btn-ghost" href="'+escHtml(p.url)+'" target="_blank" rel="noopener">View ↗</a><button class="proj-btn proj-btn-accent" onclick="openDetail('+idx+')">Case Study</button></div></div></article>';
+}
+
+function updateSlider(){
+  const track=document.getElementById('portfolioTrack');
+  const dots=document.getElementById('sliderDots');
+  const counter=document.getElementById('sliderCounter');
+  const prev=document.getElementById('sliderPrev');
+  const next=document.getElementById('sliderNext');
+  const total=filteredProjects.length;
+  if(!total){
+    track.style.transform='translateX(0)';
+    counter.textContent='0 / 0';
+    prev.disabled=true;next.disabled=true;
+    return;
+  }
+  if(slideIndex>=total)slideIndex=total-1;
+  if(slideIndex<0)slideIndex=0;
+  track.style.transform='translateX(-'+(slideIndex*100)+'%)';
+  counter.textContent=(slideIndex+1)+' / '+total;
+  prev.disabled=slideIndex===0;
+  next.disabled=slideIndex===total-1;
+  dots.querySelectorAll('.slider-dot').forEach((dot,i)=>dot.classList.toggle('active',i===slideIndex));
+}
+
+function renderPortfolio(){
+  const track=document.getElementById('portfolioTrack');
+  const slider=document.getElementById('portfolioSlider');
+  const empty=document.getElementById('portfolioEmpty');
+  filteredProjects=projects.filter(p=>p.tier===filterTier&&p.platform===filterPlatform);
+  slideIndex=0;
+  const tierLabel=filterTier==='scratch'?'BUILT FROM SCRATCH':'ASSISTED';
+  document.getElementById('projectCount').textContent=filteredProjects.length+' project'+(filteredProjects.length!==1?'s':'');
+  document.getElementById('filterLabel').textContent=filterPlatform.toUpperCase()+' / '+tierLabel;
+  if(!filteredProjects.length){
+    track.innerHTML='';
+    document.getElementById('sliderDots').innerHTML='';
+    slider.hidden=true;
+    empty.hidden=false;
+    updateSlider();
+    return;
+  }
+  slider.hidden=false;
+  empty.hidden=true;
+  track.innerHTML=filteredProjects.map((p,i)=>buildProjCard(p,i)).join('');
+  document.getElementById('sliderDots').innerHTML=filteredProjects.map((_,i)=>'<button class="slider-dot'+(i===0?' active':'')+'" type="button" aria-label="Go to project '+(i+1)+'" data-index="'+i+'"></button>').join('');
+  document.getElementById('sliderDots').querySelectorAll('.slider-dot').forEach(dot=>{
+    dot.addEventListener('click',()=>{slideIndex=Number(dot.dataset.index);updateSlider();});
+  });
+  updateSlider();
+}
+
+document.getElementById('sliderPrev').addEventListener('click',()=>{if(slideIndex>0){slideIndex--;updateSlider();}});
+document.getElementById('sliderNext').addEventListener('click',()=>{if(slideIndex<filteredProjects.length-1){slideIndex++;updateSlider();}});
+
+let touchStartX=0;
+document.getElementById('portfolioSlider').addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX},{passive:true});
+document.getElementById('portfolioSlider').addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].screenX-touchStartX;
+  if(Math.abs(dx)<40)return;
+  if(dx<0&&slideIndex<filteredProjects.length-1){slideIndex++;updateSlider();}
+  if(dx>0&&slideIndex>0){slideIndex--;updateSlider();}
+},{passive:true});
 
 document.querySelectorAll('.tab-p').forEach(btn=>btn.addEventListener('click',()=>{
   filterTier=btn.dataset.tier;
