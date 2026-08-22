@@ -107,9 +107,9 @@
 
   .main{
     margin-left:calc(var(--sidebar-nav) + var(--sidebar-profile));
-    flex:1;min-width:0;padding:0 48px 80px;
+    flex:1;min-width:0;padding:0 clamp(24px,4vw,64px) 80px;
   }
-  .main-inner{max-width:860px;margin:0}
+  .main-inner{width:100%;max-width:none}
   section{padding:80px 0}
   section.hero{padding:0 0 32px}
   .hero + section{padding-top:56px}
@@ -118,21 +118,76 @@
     color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;
   }
   .sect-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent)}
-  h2.s-title{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:16px;color:var(--text)}
-  .s-desc{font-size:15px;color:var(--text-56);max-width:560px;line-height:1.7}
+  h2.s-title{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:16px;color:var(--text);max-width:900px}
+  .s-desc{font-size:15px;color:var(--text-56);max-width:640px;line-height:1.7}
+
+  /* SCROLL & TEXT ANIMATIONS */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes slideRight{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+  @keyframes slideLeft{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+  @keyframes scaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+  @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  @keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+  .reveal,.reveal-child{opacity:0;transform:translateY(32px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+  .reveal.slide-left,.reveal-child.slide-left{transform:translateX(32px)}
+  .reveal.slide-right,.reveal-child.slide-right{transform:translateX(-32px)}
+  .reveal.scale,.reveal-child.scale{transform:scale(.94)}
+  .reveal.visible,.reveal-child.visible{opacity:1;transform:none}
+  .reveal-stagger.visible .reveal-child{opacity:1;transform:none}
+
+  .hero-load .hero-eyebrow{animation:fadeUp .7s cubic-bezier(.22,1,.36,1) .1s both}
+  .hero-load .hero-line:nth-child(1){animation:slideRight .8s cubic-bezier(.22,1,.36,1) .2s both}
+  .hero-load .hero-line:nth-child(2){animation:slideRight .8s cubic-bezier(.22,1,.36,1) .35s both}
+  .hero-load .hero-lede{animation:fadeUp .8s cubic-bezier(.22,1,.36,1) .5s both}
+  .hero-load .counter-item:nth-child(1){animation:scaleIn .7s cubic-bezier(.22,1,.36,1) .6s both}
+  .hero-load .counter-item:nth-child(2){animation:scaleIn .7s cubic-bezier(.22,1,.36,1) .72s both}
+  .hero-load .counter-item:nth-child(3){animation:scaleIn .7s cubic-bezier(.22,1,.36,1) .84s both}
+  .hero-load .counter-item:nth-child(4){animation:scaleIn .7s cubic-bezier(.22,1,.36,1) .96s both}
+  .hero-load .hero-glow{animation:fadeIn 1.2s ease .3s both}
+
+  .hero h1 em{
+    background-size:200% auto;
+    animation:gradientShift 4s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .reveal,.reveal-child{opacity:1;transform:none;transition:none}
+    .hero-load .hero-eyebrow,.hero-load .hero-line,.hero-load .hero-lede,.hero-load .counter-item,.hero-load .hero-glow{animation:none}
+    .hero h1 em{animation:none}
+  }
 
   /* HERO */
   .hero{
-    min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;
-    padding-top:0;padding-bottom:clamp(40px,6vh,72px);
+    min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;
+    padding-top:0;padding-bottom:clamp(40px,6vh,72px);position:relative;
+  }
+  .hero-inner{
+    display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);
+    gap:clamp(32px,5vw,72px);align-items:end;width:100%;
+  }
+  .hero-glow{
+    position:absolute;top:10%;right:0;width:min(420px,40vw);height:min(420px,40vw);
+    background:radial-gradient(circle,rgba(139,92,246,.16),transparent 70%);
+    pointer-events:none;filter:blur(2px);
   }
   .hero-eyebrow{font-family:var(--mono);font-size:12px;color:var(--text-40);margin-bottom:20px}
   .hero-eyebrow span{color:var(--cyan)}
-  .hero h1{font-size:clamp(36px,5.5vw,56px);font-weight:700;letter-spacing:-.04em;line-height:1.05;margin-bottom:24px}
-  .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-  .hero-lede{font-size:16px;color:var(--text-56);max-width:520px;margin-bottom:40px;line-height:1.7}
-  .counter-row{display:flex;gap:48px;flex-wrap:wrap;margin-bottom:0}
-  .counter-item{}
+  .hero h1{font-size:clamp(38px,5.2vw,68px);font-weight:700;letter-spacing:-.04em;line-height:1.02;margin-bottom:24px;max-width:none}
+  .hero-line{display:block;overflow:hidden}
+  .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--cyan),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hero-lede{font-size:clamp(15px,1.6vw,18px);color:var(--text-56);max-width:560px;margin-bottom:0;line-height:1.7}
+  .counter-row{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:16px;width:100%;
+    padding:24px;background:rgba(17,17,19,.55);border:1px solid var(--border);border-radius:20px;
+    backdrop-filter:blur(12px);
+  }
+  .counter-item{
+    padding:20px 18px;border-radius:14px;background:var(--surface);border:1px solid var(--border);
+    transition:transform .25s,border-color .25s,box-shadow .25s;
+  }
+  .counter-item:hover{transform:translateY(-3px);border-color:rgba(139,92,246,.35);box-shadow:0 12px 32px rgba(0,0,0,.25)}
   .counter-num{font-size:clamp(40px,5vw,52px);font-weight:700;letter-spacing:-.03em;display:flex;align-items:baseline;gap:2px}
   .counter-num .suffix{font-size:.5em;color:var(--text-56)}
   .counter-label{font-size:13px;color:var(--text-56);margin-top:4px}
@@ -161,7 +216,7 @@
   @media(max-width:700px){.services-grid{grid-template-columns:1fr}}
   .svc-card{
     background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;
-    transition:all .25s;position:relative;overflow:hidden;
+    transition:all .25s,opacity .6s ease,transform .6s ease;position:relative;overflow:hidden;
   }
   .svc-card:hover{border-color:rgba(139,92,246,.35);transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.3)}
   .svc-num{font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:16px}
@@ -172,8 +227,10 @@
   /* PORTFOLIO TABS */
   .portfolio-panel{
     margin-top:36px;background:var(--surface);border:1px solid var(--border);border-radius:20px;
-    padding:24px;overflow:hidden;
+    padding:24px;overflow:hidden;opacity:0;transform:translateY(28px);
+    transition:opacity .7s ease,transform .7s ease;
   }
+  .portfolio-panel.visible{opacity:1;transform:none}
   .tab-primary{display:flex;gap:4px;padding:4px;background:var(--bg-2);border:1px solid var(--border);border-radius:12px;margin-bottom:14px}
   .tab-p{flex:1;padding:11px 16px;border:none;border-radius:9px;background:transparent;color:var(--text-56);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font)}
   .tab-p.active{color:var(--text);background:var(--accent-dim);box-shadow:inset 0 0 0 1px rgba(139,92,246,.2)}
@@ -304,6 +361,11 @@
   @media(max-width:1100px){
     .sidebar-profile{display:none}
     .main,#detail{margin-left:var(--sidebar-nav)}
+    .hero-inner{grid-template-columns:1fr}
+    .counter-row{grid-template-columns:repeat(4,1fr)}
+  }
+  @media(max-width:900px){
+    .counter-row{grid-template-columns:repeat(2,1fr)}
   }
   @media(max-width:768px){
     .sidebar-nav{display:none}
@@ -312,7 +374,8 @@
     .main,#detail{margin-left:0;padding:72px 20px 90px}
     section{padding:56px 0}
     .hero{min-height:auto;justify-content:flex-start;padding-top:clamp(48px,10vh,96px);padding-bottom:32px}
-    .counter-row{gap:28px}
+    .counter-row{grid-template-columns:1fr 1fr;gap:12px;padding:16px}
+    .counter-item{padding:16px 14px}
   }
 </style>
 </head>
@@ -371,27 +434,35 @@
 <main class="main">
 <div class="main-inner">
 
-  <section class="hero" id="home">
-    <p class="hero-eyebrow">Mumbai, India · <span>Remote available</span></p>
-    <h1>Building stores &amp; sites<br>people <em>remember</em></h1>
-    <p class="hero-lede">Shopify and WordPress developer with 20+ stores shipped. I handle theme architecture, checkout, CRO, and the performance details most devs skip.</p>
-    <div class="counter-row">
-      <div class="counter-item"><div class="counter-num"><span class="count" data-to="28">0</span><span class="suffix">+</span></div><div class="counter-label">Sites shipped</div></div>
-      <div class="counter-item"><div class="counter-num"><span class="count" data-to="14">0</span></div><div class="counter-label">Built solo</div></div>
-      <div class="counter-item"><div class="counter-num"><span class="count" data-to="20">0</span><span class="suffix">+</span></div><div class="counter-label">Shopify stores</div></div>
-      <div class="counter-item"><div class="counter-num"><span class="count" data-to="13">0</span><span class="suffix">+</span></div><div class="counter-label">WordPress sites</div></div>
+  <section class="hero hero-load">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="hero-eyebrow">Mumbai, India · <span>Remote available</span></p>
+        <h1>
+          <span class="hero-line">Building stores &amp; sites</span>
+          <span class="hero-line">people <em>remember</em></span>
+        </h1>
+        <p class="hero-lede">Shopify and WordPress developer with 20+ stores shipped. I handle theme architecture, checkout, CRO, and the performance details most devs skip.</p>
+      </div>
+      <div class="counter-row">
+        <div class="counter-item"><div class="counter-num"><span class="count" data-to="28">0</span><span class="suffix">+</span></div><div class="counter-label">Sites shipped</div></div>
+        <div class="counter-item"><div class="counter-num"><span class="count" data-to="14">0</span></div><div class="counter-label">Built solo</div></div>
+        <div class="counter-item"><div class="counter-num"><span class="count" data-to="20">0</span><span class="suffix">+</span></div><div class="counter-label">Shopify stores</div></div>
+        <div class="counter-item"><div class="counter-num"><span class="count" data-to="13">0</span><span class="suffix">+</span></div><div class="counter-label">WordPress sites</div></div>
+      </div>
     </div>
   </section>
 
-  <section id="about">
-    <div class="sect-tag">About</div>
-    <h2 class="s-title">Designing &amp; developing stores with clarity, speed, and conversion in mind</h2>
-    <div class="about-grid">
-      <div class="about-text">
+  <section id="about" class="reveal">
+    <div class="sect-tag reveal-child">About</div>
+    <h2 class="s-title reveal-child">Designing &amp; developing stores with clarity, speed, and conversion in mind</h2>
+    <div class="about-grid reveal-stagger">
+      <div class="about-text reveal-child">
         <p>I'm Moh Faizan Y. Idrishi — a Shopify and WordPress developer at Brilliant Madness. I've shipped stores for streetwear, D2C fashion, clinics, nutrition brands, and B2B service businesses.</p>
         <p>My background in digital marketing means I don't just build themes — I optimize for checkout flow, page speed, Core Web Vitals, and search visibility.</p>
       </div>
-      <ul class="info-list">
+      <ul class="info-list reveal-child slide-left">
         <li><span>ROLE</span><span>Shopify & WordPress Dev</span></li>
         <li><span>CURRENTLY</span><span>Brilliant Madness</span></li>
         <li><span>EDUCATION</span><span>BA Communication, Mumbai</span></li>
@@ -401,32 +472,32 @@
     </div>
   </section>
 
-  <section id="resume">
-    <div class="sect-tag">Resume</div>
-    <h2 class="s-title">Education &amp; experience</h2>
-    <div class="timeline">
-      <div class="tl-item">
+  <section id="resume" class="reveal">
+    <div class="sect-tag reveal-child">Resume</div>
+    <h2 class="s-title reveal-child">Education &amp; experience</h2>
+    <div class="timeline reveal-stagger">
+      <div class="tl-item reveal-child">
         <div class="tl-dot"></div>
         <div class="tl-date">Oct 2024 – Present</div>
         <div class="tl-role">Shopify &amp; WordPress Developer</div>
         <div class="tl-co">Brilliant Madness · Remote</div>
         <p class="tl-desc">Built 20+ Shopify stores and 13+ WordPress sites. Full checkout flows, Liquid themes, Elementor builds, Core Web Vitals optimization, and app integrations.</p>
       </div>
-      <div class="tl-item">
+      <div class="tl-item reveal-child">
         <div class="tl-dot"></div>
         <div class="tl-date">Feb 2023 – Dec 2023</div>
         <div class="tl-role">Digital Marketing Executive</div>
         <div class="tl-co">Winchester Technologies · Mumbai</div>
         <p class="tl-desc">Paid and organic campaigns across Google, Meta, and email. Conversion-focused collaboration with design and content teams.</p>
       </div>
-      <div class="tl-item">
+      <div class="tl-item reveal-child">
         <div class="tl-dot"></div>
         <div class="tl-date">Jan 2022 – Dec 2022</div>
         <div class="tl-role">Social Media Manager — CoinsCapture</div>
         <div class="tl-co">Winchester Technologies · Vasai</div>
         <p class="tl-desc">Managed Instagram, YouTube, and Twitter. Video production, content calendars, and audience growth strategy.</p>
       </div>
-      <div class="tl-item">
+      <div class="tl-item reveal-child">
         <div class="tl-dot"></div>
         <div class="tl-date">2022 – 2025</div>
         <div class="tl-role">BA Communication (General)</div>
@@ -436,22 +507,22 @@
     </div>
   </section>
 
-  <section id="services">
-    <div class="sect-tag">Services</div>
-    <h2 class="s-title">What I build for clients</h2>
-    <p class="s-desc">End-to-end ecommerce and content sites — from architecture to launch and ongoing optimization.</p>
-    <div class="services-grid">
-      <div class="svc-card"><div class="svc-num">01<span>/</span></div><div class="svc-title">Shopify Store Development</div><p class="svc-desc">Custom Liquid themes, checkout flows, app integrations, and launch-ready D2C stores built from design references.</p></div>
-      <div class="svc-card"><div class="svc-num">02<span>/</span></div><div class="svc-title">WordPress &amp; Elementor</div><p class="svc-desc">Service sites, WooCommerce stores, lead-capture flows, and custom PHP functionality on WordPress.</p></div>
-      <div class="svc-card"><div class="svc-num">03<span>/</span></div><div class="svc-title">Theme Customization &amp; CRO</div><p class="svc-desc">Section builds, collection layouts, product page optimization, and conversion-driven adjustments.</p></div>
-      <div class="svc-card"><div class="svc-num">04<span>/</span></div><div class="svc-title">Performance &amp; Launch</div><p class="svc-desc">Core Web Vitals, mobile speed, SEO fundamentals, testing, and smooth client handover.</p></div>
+  <section id="services" class="reveal">
+    <div class="sect-tag reveal-child">Services</div>
+    <h2 class="s-title reveal-child">What I build for clients</h2>
+    <p class="s-desc reveal-child">End-to-end ecommerce and content sites — from architecture to launch and ongoing optimization.</p>
+    <div class="services-grid reveal-stagger">
+      <div class="svc-card reveal-child"><div class="svc-num">01<span>/</span></div><div class="svc-title">Shopify Store Development</div><p class="svc-desc">Custom Liquid themes, checkout flows, app integrations, and launch-ready D2C stores built from design references.</p></div>
+      <div class="svc-card reveal-child"><div class="svc-num">02<span>/</span></div><div class="svc-title">WordPress &amp; Elementor</div><p class="svc-desc">Service sites, WooCommerce stores, lead-capture flows, and custom PHP functionality on WordPress.</p></div>
+      <div class="svc-card reveal-child"><div class="svc-num">03<span>/</span></div><div class="svc-title">Theme Customization &amp; CRO</div><p class="svc-desc">Section builds, collection layouts, product page optimization, and conversion-driven adjustments.</p></div>
+      <div class="svc-card reveal-child"><div class="svc-num">04<span>/</span></div><div class="svc-title">Performance &amp; Launch</div><p class="svc-desc">Core Web Vitals, mobile speed, SEO fundamentals, testing, and smooth client handover.</p></div>
     </div>
   </section>
 
-  <section id="work">
-    <div class="sect-tag">Portfolio</div>
-    <h2 class="s-title">Featured projects</h2>
-    <p class="s-desc">Filter by build type and platform — 28 live sites across Shopify and WordPress.</p>
+  <section id="work" class="reveal">
+    <div class="sect-tag reveal-child">Portfolio</div>
+    <h2 class="s-title reveal-child">Featured projects</h2>
+    <p class="s-desc reveal-child">Filter by build type and platform — 28 live sites across Shopify and WordPress.</p>
     <div class="portfolio-panel">
       <div class="tab-primary" role="tablist">
         <button class="tab-p active" data-tier="scratch" role="tab">Built From Scratch</button>
@@ -480,31 +551,31 @@
     </div>
   </section>
 
-  <section id="tech">
-    <div class="sect-tag">Tech Stack</div>
-    <h2 class="s-title">Tools I ship with daily</h2>
-    <ul class="tech-list" id="techList">
-      <li class="tech-item" data-pct="95"><span class="tech-name">Shopify &amp; Liquid</span><span class="tech-pct">95%</span><span class="tech-duty">Custom themes, sections, checkout</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
-      <li class="tech-item" data-pct="90"><span class="tech-name">WordPress &amp; Elementor</span><span class="tech-pct">90%</span><span class="tech-duty">Page builds, WooCommerce, forms</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
-      <li class="tech-item" data-pct="85"><span class="tech-name">JavaScript &amp; HTML/CSS</span><span class="tech-pct">85%</span><span class="tech-duty">Interactivity, responsive layouts</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
-      <li class="tech-item" data-pct="80"><span class="tech-name">PHP</span><span class="tech-pct">80%</span><span class="tech-duty">Custom functionality, plugins</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
-      <li class="tech-item" data-pct="85"><span class="tech-name">CRO &amp; Performance</span><span class="tech-pct">85%</span><span class="tech-duty">Core Web Vitals, conversion tuning</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
-      <li class="tech-item" data-pct="75"><span class="tech-name">SEO &amp; Digital Marketing</span><span class="tech-pct">75%</span><span class="tech-duty">Technical SEO, paid/organic campaigns</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+  <section id="tech" class="reveal">
+    <div class="sect-tag reveal-child">Tech Stack</div>
+    <h2 class="s-title reveal-child">Tools I ship with daily</h2>
+    <ul class="tech-list reveal-stagger" id="techList">
+      <li class="tech-item reveal-child" data-pct="95"><span class="tech-name">Shopify &amp; Liquid</span><span class="tech-pct">95%</span><span class="tech-duty">Custom themes, sections, checkout</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+      <li class="tech-item reveal-child" data-pct="90"><span class="tech-name">WordPress &amp; Elementor</span><span class="tech-pct">90%</span><span class="tech-duty">Page builds, WooCommerce, forms</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+      <li class="tech-item reveal-child" data-pct="85"><span class="tech-name">JavaScript &amp; HTML/CSS</span><span class="tech-pct">85%</span><span class="tech-duty">Interactivity, responsive layouts</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+      <li class="tech-item reveal-child" data-pct="80"><span class="tech-name">PHP</span><span class="tech-pct">80%</span><span class="tech-duty">Custom functionality, plugins</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+      <li class="tech-item reveal-child" data-pct="85"><span class="tech-name">CRO &amp; Performance</span><span class="tech-pct">85%</span><span class="tech-duty">Core Web Vitals, conversion tuning</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
+      <li class="tech-item reveal-child" data-pct="75"><span class="tech-name">SEO &amp; Digital Marketing</span><span class="tech-pct">75%</span><span class="tech-duty">Technical SEO, paid/organic campaigns</span><div class="tech-bar"><div class="tech-fill"></div></div></li>
     </ul>
   </section>
 
-  <section id="contact">
-    <div class="sect-tag">Contact</div>
-    <h2 class="s-title">Let's build something together</h2>
-    <p class="s-desc">Got a store or site that needs building? Drop me a message — available for remote and freelance work.</p>
-    <div class="contact-wrap">
-      <form class="contact-form" action="mailto:faijjy@gmail.com" method="post" enctype="text/plain">
+  <section id="contact" class="reveal">
+    <div class="sect-tag reveal-child">Contact</div>
+    <h2 class="s-title reveal-child">Let's build something together</h2>
+    <p class="s-desc reveal-child">Got a store or site that needs building? Drop me a message — available for remote and freelance work.</p>
+    <div class="contact-wrap reveal-stagger">
+      <form class="contact-form reveal-child slide-right" action="mailto:faijjy@gmail.com" method="post" enctype="text/plain">
         <div class="field"><input type="text" name="name" placeholder="Your name *" required></div>
         <div class="field"><input type="email" name="email" placeholder="Email address *" required></div>
         <div class="field"><textarea name="message" placeholder="Project description"></textarea></div>
         <button type="submit" class="btn-talk" style="width:fit-content">Send message →</button>
       </form>
-      <div class="contact-info">
+      <div class="contact-info reveal-child slide-left">
         <a href="mailto:faijjy@gmail.com" class="contact-link">faijjy@gmail.com</a>
         <a href="tel:+919834547975" class="contact-link" style="color:var(--text-72)">+91 98345 47975</a>
         <a href="https://www.linkedin.com/in/faizan-idrishi-19329121a/" target="_blank" rel="noopener" class="contact-meta">LinkedIn → faizan-idrishi</a>
@@ -512,7 +583,7 @@
         <a href="Resume.docx" download class="btn-dl" style="width:fit-content;margin-top:8px">↓ Download résumé</a>
       </div>
     </div>
-    <div class="site-footer">
+    <div class="site-footer reveal-child">
       <span>© 2026 Moh Faizan Y. Idrishi</span>
       <span>Shopify & WordPress Developer</span>
     </div>
@@ -729,6 +800,39 @@ window.addEventListener('popstate',()=>{
 });
 (function(){const slug=new URLSearchParams(location.search).get('project');if(slug&&projectBySlug[slug]!==undefined)openDetail(projectBySlug[slug],false)})();
 
+/* Scroll reveal animations */
+const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function revealOnScroll(){
+  if(prefersReducedMotion){
+    document.querySelectorAll('.reveal,.reveal-child,.portfolio-panel').forEach(el=>el.classList.add('visible'));
+    return;
+  }
+  const revealObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      const el=e.target;
+      if(el.classList.contains('reveal-stagger')){
+        el.classList.add('visible');
+        el.querySelectorAll('.reveal-child').forEach((child,i)=>{
+          child.style.transitionDelay=(i*0.1)+'s';
+          child.classList.add('visible');
+        });
+      }else if(el.classList.contains('reveal')){
+        el.classList.add('visible');
+        el.querySelectorAll(':scope > .reveal-child').forEach((child,i)=>{
+          child.style.transitionDelay=(i*0.08)+'s';
+          child.classList.add('visible');
+        });
+      }else{
+        el.classList.add('visible');
+      }
+      revealObs.unobserve(el);
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal,.reveal-stagger,.portfolio-panel').forEach(el=>revealObs.observe(el));
+}
+revealOnScroll();
+
 /* Animated counters */
 function animateCount(el,to,dur=1200){
   const start=performance.now();
@@ -738,7 +842,14 @@ function animateCount(el,to,dur=1200){
 const counterObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.count').forEach(c=>animateCount(c,+c.dataset.to));counterObs.unobserve(e.target)}});
 },{threshold:.3});
-document.querySelector('.counter-row')&&counterObs.observe(document.querySelector('.counter-row'));
+const counterRow=document.querySelector('.counter-row');
+if(counterRow){
+  counterObs.observe(counterRow);
+  if(counterRow.getBoundingClientRect().top<window.innerHeight){
+    counterRow.querySelectorAll('.count').forEach(c=>animateCount(c,+c.dataset.to));
+    counterObs.unobserve(counterRow);
+  }
+}
 
 /* Tech bar animation */
 const techObs=new IntersectionObserver(entries=>{
@@ -749,11 +860,13 @@ const techObs=new IntersectionObserver(entries=>{
 document.getElementById('techList')&&techObs.observe(document.getElementById('techList'));
 
 /* Active nav on scroll */
-const sections=document.querySelectorAll('section[id]');
+const sections=document.querySelectorAll('section[id], .hero');
 const navIcons=document.querySelectorAll('.nav-icon[data-section]');
 window.addEventListener('scroll',()=>{
   let cur='home';
-  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});
+  const hero=document.querySelector('.hero');
+  if(hero&&window.scrollY<((document.getElementById('about')?.offsetTop||9999)-140))cur='home';
+  else sections.forEach(s=>{if(s.id&&window.scrollY>=s.offsetTop-140)cur=s.id});
   navIcons.forEach(n=>n.classList.toggle('active',n.dataset.section===cur));
 });
 
