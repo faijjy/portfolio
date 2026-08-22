@@ -235,32 +235,34 @@
   .tab-primary{display:flex;gap:4px;padding:4px;background:var(--bg-2);border:1px solid var(--border);border-radius:12px;margin-bottom:14px}
   .tab-p{flex:1;padding:11px 16px;border:none;border-radius:9px;background:transparent;color:var(--text-56);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font)}
   .tab-p.active{color:var(--text);background:var(--accent-dim);box-shadow:inset 0 0 0 1px rgba(139,92,246,.2)}
-  .tab-secondary{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  .tab-secondary{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;flex:1;min-width:0}
   .tab-secondary::-webkit-scrollbar{display:none}
   .tab-s{font-family:var(--mono);font-size:11px;padding:7px 16px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-56);cursor:pointer;white-space:nowrap;transition:all .2s}
   .tab-s.active{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
-  .portfolio-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px}
-  .portfolio-count{font-family:var(--mono);font-size:11px;color:var(--text-40)}
-  .portfolio-filter-label{font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em}
-  .portfolio-slider{position:relative;overflow:hidden}
+  .portfolio-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+  .portfolio-toolbar-meta{display:flex;align-items:center;gap:14px;flex-shrink:0}
+  .portfolio-count{font-family:var(--mono);font-size:11px;color:var(--text-56);white-space:nowrap}
+  .portfolio-filter-label{font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;margin-bottom:16px;display:block}
+  .slider-nav-inline{display:flex;align-items:center;gap:6px}
+  .portfolio-slider{position:relative;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none}
+  .portfolio-slider.is-dragging{cursor:grabbing}
   .portfolio-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);will-change:transform}
   .portfolio-track .proj-card{flex:0 0 100%;min-width:100%;margin:0}
-  .slider-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:24px}
-  .slider-nav{display:flex;align-items:center;gap:12px}
+  .slider-controls{display:flex;align-items:center;justify-content:center;margin-top:20px}
   .slider-btn{
-    width:44px;height:44px;border-radius:12px;border:1px solid var(--border);background:var(--bg-2);
-    color:var(--text);cursor:pointer;font-size:18px;line-height:1;transition:all .2s;
+    width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--bg-2);
+    color:var(--text);cursor:pointer;font-size:16px;line-height:1;transition:all .2s;flex-shrink:0;
   }
   .slider-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
   .slider-btn:disabled{opacity:.35;cursor:not-allowed}
-  .slider-dots{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;flex:1}
+  .slider-dots{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
   .slider-dot{width:8px;height:8px;border-radius:50%;background:var(--border-2);border:none;cursor:pointer;padding:0;transition:all .2s}
   .slider-dot.active{background:var(--accent);transform:scale(1.25);box-shadow:0 0 12px var(--accent-glow)}
-  .slider-counter{font-family:var(--mono);font-size:11px;color:var(--text-40);min-width:56px;text-align:right}
+  .slider-counter{font-family:var(--mono);font-size:12px;color:var(--text-72);min-width:44px;text-align:center}
   .portfolio-grid{display:none}
   .portfolio-empty{padding:48px;text-align:center;color:var(--text-40);font-family:var(--mono);font-size:13px}
 
-  .proj-card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s;animation:cardIn .4s ease backwards}
+  .proj-card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s;animation:cardIn .4s ease backwards;cursor:pointer}
   @keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   .proj-card:hover{border-color:rgba(139,92,246,.35);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
   .proj-num{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--mono);font-size:9px;padding:4px 8px;background:rgba(9,9,11,.85);border:1px solid var(--border);border-radius:4px;letter-spacing:.05em}
@@ -377,6 +379,8 @@
     .hero{min-height:auto;justify-content:center;padding:clamp(48px,10vh,96px) 0}
     .counter-row{grid-template-columns:1fr 1fr;gap:12px;padding:16px}
     .counter-item{padding:16px 14px}
+    .portfolio-toolbar{flex-direction:column;align-items:stretch}
+    .portfolio-toolbar-meta{justify-content:space-between;width:100%}
   }
 </style>
 </head>
@@ -529,23 +533,25 @@
         <button class="tab-p active" data-tier="scratch" role="tab">Built From Scratch</button>
         <button class="tab-p" data-tier="assist" role="tab">Assisted Projects</button>
       </div>
-      <div class="tab-secondary" role="tablist">
-        <button class="tab-s active" data-platform="Shopify">Shopify</button>
-        <button class="tab-s" data-platform="WordPress">WordPress</button>
+      <div class="portfolio-toolbar">
+        <div class="tab-secondary" role="tablist">
+          <button class="tab-s active" data-platform="Shopify">Shopify</button>
+          <button class="tab-s" data-platform="WordPress">WordPress</button>
+        </div>
+        <div class="portfolio-toolbar-meta">
+          <span class="portfolio-count" id="projectCount">0 projects</span>
+          <div class="slider-nav-inline">
+            <button class="slider-btn" id="sliderPrev" type="button" aria-label="Previous project">←</button>
+            <div class="slider-counter" id="sliderCounter">1 / 1</div>
+            <button class="slider-btn" id="sliderNext" type="button" aria-label="Next project">→</button>
+          </div>
+        </div>
       </div>
-      <div class="portfolio-meta">
-        <span class="portfolio-count" id="projectCount">0 projects</span>
-        <span class="portfolio-filter-label" id="filterLabel">SHOPIFY / BUILT FROM SCRATCH</span>
-      </div>
+      <span class="portfolio-filter-label" id="filterLabel">SHOPIFY / BUILT FROM SCRATCH</span>
       <div class="portfolio-slider" id="portfolioSlider">
         <div class="portfolio-track" id="portfolioTrack"></div>
         <div class="slider-controls">
-          <div class="slider-nav">
-            <button class="slider-btn" id="sliderPrev" type="button" aria-label="Previous project">←</button>
-            <button class="slider-btn" id="sliderNext" type="button" aria-label="Next project">→</button>
-          </div>
           <div class="slider-dots" id="sliderDots"></div>
-          <div class="slider-counter" id="sliderCounter">1 / 1</div>
         </div>
       </div>
       <div class="portfolio-empty" id="portfolioEmpty" hidden>No projects in this category.</div>
@@ -653,7 +659,7 @@ const projects=[
 {slug:"amishilondon",name:"Amishi London",url:"https://amishilondon.co.uk",category:"Luxury accessories",platform:"Shopify",tier:"assist",blurb:"Luxury accessories brand — supported UI customization to match the brand's premium positioning."},
 {slug:"liltort",name:"Liltort",url:"https://liltort.com",category:"Kids' fashion",platform:"Shopify",tier:"assist",blurb:"Kids' clothing brand — contributed to catalog structure and page builds to keep browsing simple for parents shopping by age or size."},
 {slug:"balajihosieryxlu",name:"Balaji Hosiery",url:"https://balajihosieryxlu.com",category:"Women's innerwear & nightwear",platform:"Shopify",tier:"assist",blurb:"Innerwear and nightwear retailer — supported feature builds and layout fixes across a large, size-heavy product catalog."},
-{slug:"agirlinredscarf",name:"A Girl In Red Scarf",url:"https://agirlinredscarf.com",category:"Boutique travel company",platform:"WordPress",tier:"assist",blurb:"Boutique travel company — assisted with WordPress page builds and content layout for tour and itinerary pages."},
+{slug:"themaddash",name:"A Girl in Red Scarf",url:"https://themaddash.in",category:"Boutique luxury travel",platform:"WordPress",tier:"assist",blurb:"Boutique travel consultancy — assisted with WordPress page builds for bespoke itineraries, experiences, journal content, and lead-capture flows on themaddash.in."},
 {slug:"myneperfumes",name:"Myne Perfumes",url:"https://myneperfumes.com",category:"Perfume brand",platform:"Shopify",tier:"assist",blurb:"Perfume brand — supported product page design and collection layout work to better showcase scent stories and notes."},
 {slug:"gonutriline",name:"Go Nutriline",url:"https://gonutriline.com",category:"Nutrition / supplements",platform:"Shopify",tier:"assist",blurb:"Supplements brand — contributed to product page builds and CRO-oriented layout adjustments on key landing pages."},
 {slug:"ambrosenaturals",name:"Ambrose Naturals",url:"https://ambrosenaturals.com",category:"Natural inhalers",platform:"WordPress",tier:"assist",blurb:"Natural wellness product brand — assisted with product page layout and site content on WordPress."},
@@ -682,7 +688,7 @@ function buildProjCard(p,i){
   const tierBadge=filterTier==='scratch'?'Built From Scratch':'Assisted';
   const tierClass=filterTier==='scratch'?'badge-tier-scratch':'badge-tier-assist';
   const tech=getProjectTech(p).map(t=>'<span>'+escHtml(t)+'</span>').join('');
-  return '<article class="proj-card" style="animation-delay:'+(i*.05)+'s;position:relative"><div class="proj-num">PROJECT_'+num+'</div>'+shotImg(p)+'<div class="proj-body"><div class="proj-meta-row"><span class="badge '+badgeClass(p.platform)+'">'+escHtml(p.platform)+'</span><span class="badge '+tierClass+'">'+tierBadge+'</span></div><h3 class="proj-name">'+escHtml(p.name)+'</h3><p class="proj-type">'+escHtml(p.category).toUpperCase()+'</p><p class="proj-desc">'+escHtml(p.blurb)+'</p><div class="proj-tech">'+tech+'</div><p class="proj-role">ROLE: '+getProjectRole(p)+'</p><div class="proj-actions"><a class="proj-btn proj-btn-ghost" href="'+escHtml(p.url)+'" target="_blank" rel="noopener">View ↗</a><button class="proj-btn proj-btn-accent" onclick="openDetail('+idx+')">Case Study</button></div></div></article>';
+  return '<article class="proj-card" data-idx="'+idx+'" tabindex="0" role="button" aria-label="Open case study for '+escHtml(p.name)+'" style="animation-delay:'+(i*.05)+'s;position:relative"><div class="proj-num">PROJECT_'+num+'</div>'+shotImg(p)+'<div class="proj-body"><div class="proj-meta-row"><span class="badge '+badgeClass(p.platform)+'">'+escHtml(p.platform)+'</span><span class="badge '+tierClass+'">'+tierBadge+'</span></div><h3 class="proj-name">'+escHtml(p.name)+'</h3><p class="proj-type">'+escHtml(p.category).toUpperCase()+'</p><p class="proj-desc">'+escHtml(p.blurb)+'</p><div class="proj-tech">'+tech+'</div><p class="proj-role">ROLE: '+getProjectRole(p)+'</p><div class="proj-actions"><a class="proj-btn proj-btn-ghost" href="'+escHtml(p.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">View ↗</a><button class="proj-btn proj-btn-accent" type="button" onclick="event.stopPropagation();openDetail('+idx+')">Case Study</button></div></div></article>';
 }
 
 function updateSlider(){
@@ -737,14 +743,63 @@ function renderPortfolio(){
 document.getElementById('sliderPrev').addEventListener('click',()=>{if(slideIndex>0){slideIndex--;updateSlider();}});
 document.getElementById('sliderNext').addEventListener('click',()=>{if(slideIndex<filteredProjects.length-1){slideIndex++;updateSlider();}});
 
-let touchStartX=0;
-document.getElementById('portfolioSlider').addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX},{passive:true});
-document.getElementById('portfolioSlider').addEventListener('touchend',e=>{
-  const dx=e.changedTouches[0].screenX-touchStartX;
-  if(Math.abs(dx)<40)return;
-  if(dx<0&&slideIndex<filteredProjects.length-1){slideIndex++;updateSlider();}
-  if(dx>0&&slideIndex>0){slideIndex--;updateSlider();}
-},{passive:true});
+const portfolioSlider=document.getElementById('portfolioSlider');
+const portfolioTrack=document.getElementById('portfolioTrack');
+let dragStartX=0,dragCurrentX=0,sliderDragging=false,sliderSuppressClick=false;
+
+function goSlide(dir){
+  if(dir<0&&slideIndex>0){slideIndex--;updateSlider();}
+  if(dir>0&&slideIndex<filteredProjects.length-1){slideIndex++;updateSlider();}
+}
+
+portfolioSlider.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='mouse'&&e.button!==0)return;
+  sliderDragging=true;
+  sliderSuppressClick=false;
+  dragStartX=e.clientX;
+  dragCurrentX=e.clientX;
+  portfolioSlider.classList.add('is-dragging');
+  portfolioTrack.style.transition='none';
+  try{portfolioSlider.setPointerCapture(e.pointerId);}catch(err){}
+});
+
+portfolioSlider.addEventListener('pointermove',e=>{
+  if(!sliderDragging)return;
+  dragCurrentX=e.clientX;
+  const dx=dragCurrentX-dragStartX;
+  if(Math.abs(dx)>6)sliderSuppressClick=true;
+  const offset=-(slideIndex*100)+(dx/portfolioSlider.offsetWidth*100);
+  portfolioTrack.style.transform='translateX('+offset+'%)';
+});
+
+function endSliderDrag(e){
+  if(!sliderDragging)return;
+  sliderDragging=false;
+  portfolioSlider.classList.remove('is-dragging');
+  portfolioTrack.style.transition='';
+  try{portfolioSlider.releasePointerCapture(e.pointerId);}catch(err){}
+  const dx=dragCurrentX-dragStartX;
+  if(Math.abs(dx)>50)goSlide(dx<0?1:-1);
+  else updateSlider();
+}
+
+portfolioSlider.addEventListener('pointerup',endSliderDrag);
+portfolioSlider.addEventListener('pointercancel',endSliderDrag);
+
+portfolioTrack.addEventListener('click',e=>{
+  if(sliderSuppressClick){sliderSuppressClick=false;return;}
+  const card=e.target.closest('.proj-card');
+  if(!card||e.target.closest('a,button'))return;
+  openDetail(Number(card.dataset.idx));
+});
+
+portfolioTrack.addEventListener('keydown',e=>{
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  const card=e.target.closest('.proj-card');
+  if(!card)return;
+  e.preventDefault();
+  openDetail(Number(card.dataset.idx));
+});
 
 document.querySelectorAll('.tab-p').forEach(btn=>btn.addEventListener('click',()=>{
   filterTier=btn.dataset.tier;

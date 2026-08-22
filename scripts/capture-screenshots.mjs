@@ -28,7 +28,7 @@ const projects = [
   { slug: 'amishilondon', url: 'https://amishilondon.co.uk' },
   { slug: 'liltort', url: 'https://liltort.com' },
   { slug: 'balajihosieryxlu', url: 'https://balajihosieryxlu.com' },
-  { slug: 'agirlinredscarf', url: 'https://agirlinredscarf.com' },
+  { slug: 'themaddash', url: 'https://themaddash.in' },
   { slug: 'myneperfumes', url: 'https://myneperfumes.com' },
   { slug: 'gonutriline', url: 'https://gonutriline.com' },
   { slug: 'ambrosenaturals', url: 'https://ambrosenaturals.com' },
