@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Faizan Idrishi — Shopify & WordPress Developer</title>
-<meta name="description" content="Shopify & WordPress developer based in Mumbai. 25+ sites shipped — D2C ecommerce, CRO, theme dev. Available for remote and freelance work.">
+<meta name="description" content="Moh Faizan Y. Idrishi — Shopify & WordPress developer in Mumbai. 20+ Shopify stores, 10+ WordPress sites. Liquid, WooCommerce, CRO, Core Web Vitals. Available for remote work.">
 <meta property="og:title" content="Faizan Idrishi — Shopify & WordPress Developer">
-<meta property="og:description" content="I build and ship ecommerce and content sites end-to-end for D2C brands and service businesses. 25 sites shipped.">
+<meta property="og:description" content="Shopify and WordPress developer with 20+ stores shipped. Liquid, Elementor, WooCommerce, checkout flows, and conversion-focused builds.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Faizan Idrishi — Shopify & WordPress Developer">
-<meta name="twitter:description" content="Shopify & WordPress developer shipping stores that convert. Based in Mumbai, working remotely.">
+<meta name="twitter:description" content="Shopify & WordPress developer — 20+ stores built, checkout flows, CRO, Core Web Vitals. Mumbai, remote.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230C0F13'/><circle cx='16' cy='16' r='6' fill='%2300D9A0'/></svg>">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -193,6 +193,23 @@
   }
   .skill-pill.on{color:var(--mint);border-color:var(--mint-dim);background:var(--mint-dim);}
 
+  /* EXPERIENCE */
+  .exp-list{display:flex;flex-direction:column;gap:20px;}
+  .exp-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 28px;
+  }
+  .exp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:8px;}
+  .exp-role{font-family:var(--font-display);font-size:18px;font-weight:600;}
+  .exp-date{font-family:var(--font-mono);font-size:12px;color:var(--text-faint);white-space:nowrap;}
+  .exp-meta{font-size:13.5px;color:var(--text-dim);margin-bottom:14px;font-family:var(--font-mono);}
+  .exp-bullets{list-style:none;}
+  .exp-bullets li{
+    font-size:14.5px;color:var(--text-dim);padding:8px 0 8px 18px;position:relative;
+    border-bottom:1px solid var(--border);
+  }
+  .exp-bullets li:last-child{border-bottom:none;}
+  .exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--mint);font-size:12px;}
+
   /* ABOUT */
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
   @media(max-width:800px){ .about-grid{grid-template-columns:1fr;} }
@@ -211,6 +228,14 @@
     font-family:var(--font-mono);color:var(--mint);font-size:18px;display:inline-block;margin-bottom:40px;
   }
   .contact-email:hover{text-decoration:underline;}
+  .contact-links{display:flex;flex-wrap:wrap;gap:20px 32px;margin-bottom:40px;}
+  .contact-phone{font-family:var(--font-mono);color:var(--text-dim);font-size:16px;}
+  .contact-phone:hover{color:var(--mint);}
+  .resume-btn{
+    font-family:var(--font-mono);font-size:14px;padding:12px 20px;border-radius:6px;
+    border:1px solid var(--border-strong);color:var(--text);display:inline-flex;align-items:center;gap:8px;
+  }
+  .resume-btn:hover{border-color:var(--mint);color:var(--mint);}
   .footer-bottom{display:flex;justify-content:space-between;color:var(--text-faint);font-size:13px;font-family:var(--font-mono);flex-wrap:wrap;gap:12px;}
 
   /* CASE STUDY DETAIL */
@@ -261,6 +286,7 @@
     <div class="nav-links">
       <a href="#work">Work</a>
       <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
@@ -272,6 +298,7 @@
   <div class="nav-mobile" id="navMobile">
     <a href="#work" class="nav-mobile-link">Work</a>
     <a href="#skills" class="nav-mobile-link">Skills</a>
+    <a href="#experience" class="nav-mobile-link">Experience</a>
     <a href="#about" class="nav-mobile-link">About</a>
     <a href="#contact" class="nav-mobile-link">Contact</a>
     <a href="mailto:faijjy@gmail.com">faijjy@gmail.com</a>
@@ -285,10 +312,11 @@
       <div>
         <div class="eyebrow">AVAILABLE FOR REMOTE WORK</div>
         <h1>Shopify & WordPress developer, <span class="accent">shipping stores that convert.</span></h1>
-        <p class="lede">I build and ship ecommerce and content sites end-to-end — from Shopify theme architecture to WordPress/Elementor builds — for D2C brands and service businesses. Based in Mumbai, working with clients everywhere.</p>
+        <p class="lede">Shopify and WordPress developer with hands-on experience building 20+ Shopify stores and 10+ WordPress/Elementor sites. Skilled in Liquid, custom themes, WooCommerce, checkout flows, and the CRO details that move conversion — plus SEO and Core Web Vitals optimization from a digital marketing background.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href="#work">View work →</a>
           <a class="btn btn-ghost" href="mailto:faijjy@gmail.com">faijjy@gmail.com</a>
+          <a class="btn btn-ghost" href="Resume.docx" download>Download résumé ↓</a>
         </div>
         <div class="stat-row">
           <div class="stat"><div class="n">25</div><div class="l">SITES SHIPPED</div></div>
@@ -338,13 +366,71 @@
         <div class="skill-pill on">Shopify</div>
         <div class="skill-pill on">Liquid</div>
         <div class="skill-pill on">WordPress</div>
-        <div class="skill-pill on">Elementor</div>
+        <div class="skill-pill on">Elementor Pro</div>
+        <div class="skill-pill on">WooCommerce</div>
+        <div class="skill-pill on">PHP</div>
+        <div class="skill-pill on">JavaScript</div>
+        <div class="skill-pill on">HTML / CSS</div>
         <div class="skill-pill on">CRO</div>
-        <div class="skill-pill">Theme customization</div>
-        <div class="skill-pill">App / plugin integration</div>
+        <div class="skill-pill on">Core Web Vitals</div>
+        <div class="skill-pill">Custom theme development</div>
         <div class="skill-pill">Checkout &amp; payments setup</div>
+        <div class="skill-pill">Shopify APIs &amp; app integration</div>
+        <div class="skill-pill">SEO &amp; technical optimization</div>
         <div class="skill-pill">Performance optimization</div>
-        <div class="skill-pill">SEO fundamentals</div>
+        <div class="skill-pill">Digital marketing</div>
+        <div class="skill-pill">UI/UX basics</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">// 04 · EXPERIENCE</div>
+        <div class="sec-title">Where I've worked</div>
+        <p class="sec-sub">From social and paid media to full-stack Shopify and WordPress builds — a path that shaped how I think about conversion, speed, and search.</p>
+      </div>
+      <div class="exp-list">
+        <div class="exp-card">
+          <div class="exp-top">
+            <div class="exp-role">Shopify &amp; WordPress Developer</div>
+            <div class="exp-date">Oct 2024 – Present</div>
+          </div>
+          <div class="exp-meta">Brilliant Madness · Remote</div>
+          <ul class="exp-bullets">
+            <li>Built and customized 20+ Shopify stores using Liquid, custom sections, and client-branded themes</li>
+            <li>Implemented full checkout flows — payment gateways, cart logic, and order management</li>
+            <li>Developed custom JavaScript features to improve store interactivity, UX, and performance</li>
+            <li>Built 10+ WordPress sites with Elementor Pro, WooCommerce, and custom PHP</li>
+            <li>Improved page speed and Core Web Vitals across client stores</li>
+            <li>Integrated Shopify APIs and third-party apps for marketing, analytics, and automation</li>
+          </ul>
+        </div>
+        <div class="exp-card">
+          <div class="exp-top">
+            <div class="exp-role">Digital Marketing Executive</div>
+            <div class="exp-date">Feb 2023 – Dec 2023</div>
+          </div>
+          <div class="exp-meta">Winchester Technologies · Mumbai (Hybrid)</div>
+          <ul class="exp-bullets">
+            <li>Executed paid and organic campaigns across Google, Meta, and email channels</li>
+            <li>Collaborated with designers and content teams on conversion-focused campaigns</li>
+            <li>Improved client campaign ROI through data-driven performance analysis</li>
+          </ul>
+        </div>
+        <div class="exp-card">
+          <div class="exp-top">
+            <div class="exp-role">Social Media Manager — CoinsCapture</div>
+            <div class="exp-date">Jan 2022 – Dec 2022</div>
+          </div>
+          <div class="exp-meta">Winchester Technologies · Vasai</div>
+          <ul class="exp-bullets">
+            <li>Managed Instagram, YouTube, and Twitter with content calendars and scheduled posting</li>
+            <li>Handled YouTube video production, reels, and creative strategy</li>
+            <li>Grew audience engagement through consistent brand storytelling</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -352,15 +438,18 @@
   <section id="about">
     <div class="wrap about-grid">
       <div class="about-text">
-        <div class="sec-tag">// 04 · ABOUT</div>
-        <p>I'm a Shopify and WordPress developer currently working with Brilliant Madness, a startup-focused digital agency near Mumbai. Over the last few years I've shipped 20+ Shopify stores and 10+ WordPress sites — everything from streetwear and D2C fashion brands to clinics, nutrition brands, and B2B service sites.</p>
-        <p>I care about the parts most developers skip: checkout flow, page speed, and the small CRO details that actually move conversion. I'm currently taking on freelance and remote engagements alongside agency work.</p>
+        <div class="sec-tag">// 05 · ABOUT</div>
+        <p>I'm Moh Faizan Y. Idrishi — a Shopify and WordPress developer currently at Brilliant Madness, a startup-focused digital agency. I've shipped 20+ Shopify stores and 10+ WordPress sites across streetwear, D2C fashion, clinics, nutrition brands, and B2B service businesses.</p>
+        <p>What sets my work apart is the hybrid background: I came up through digital marketing and social media before going deep on development. That means I don't just ship themes — I build stores optimized for conversions, Core Web Vitals, and search visibility.</p>
+        <p>I'm open to remote and freelance engagements alongside agency work.</p>
       </div>
       <ul class="about-list">
-        <li><span>ROLE</span><span>Shopify & WordPress Developer</span></li>
-        <li><span>CURRENTLY</span><span>Brilliant Madness, Mumbai</span></li>
+        <li><span>ROLE</span><span>Shopify &amp; WordPress Developer</span></li>
+        <li><span>CURRENTLY</span><span>Brilliant Madness · Remote</span></li>
         <li><span>FOCUS</span><span>D2C ecommerce, CRO, theme dev</span></li>
+        <li><span>EDUCATION</span><span>BA Communication, Mumbai Univ.</span></li>
         <li><span>LANGUAGES</span><span>English, Hindi, Marathi</span></li>
+        <li><span>LOCATION</span><span>Mumbai, Maharashtra</span></li>
         <li><span>OPEN TO</span><span>Remote / freelance work</span></li>
       </ul>
     </div>
@@ -370,10 +459,14 @@
     <div class="wrap">
       <div class="contact-tag sec-tag">// GET IN TOUCH</div>
       <div class="contact-title">Got a store that needs building?</div>
-      <a class="contact-email" href="mailto:faijjy@gmail.com">faijjy@gmail.com</a>
+      <div class="contact-links">
+        <a class="contact-email" href="mailto:faijjy@gmail.com">faijjy@gmail.com</a>
+        <a class="contact-phone" href="tel:+919834547975">+91 98345 47975</a>
+        <a class="resume-btn" href="Resume.docx" download>Download résumé ↓</a>
+      </div>
       <div class="footer-bottom">
-        <span>© 2026 Faizan Idrishi</span>
-        <span>Mumbai, India</span>
+        <span>© 2026 Moh Faizan Y. Idrishi</span>
+        <span>Mumbai, Maharashtra, India</span>
       </div>
     </div>
   </footer>
