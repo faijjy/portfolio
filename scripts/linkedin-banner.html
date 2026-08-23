@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1584px;height:396px;overflow:hidden;font-family:Segoe UI,system-ui,sans-serif}
+  .banner{
+    width:1584px;height:396px;position:relative;overflow:hidden;
+    background:#09090B;color:#FAFAFA;
+  }
+  .grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:48px 48px;opacity:.35;
+  }
+  .glow-left{
+    position:absolute;left:-80px;top:-60px;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(139,92,246,.45) 0%,rgba(139,92,246,.12) 42%,transparent 70%);
+  }
+  .glow-right{
+    position:absolute;right:-40px;bottom:-120px;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle,rgba(34,211,238,.28) 0%,transparent 68%);
+  }
+  .accent-line{
+    position:absolute;left:0;top:0;bottom:0;width:4px;
+    background:linear-gradient(180deg,#8B5CF6,#22D3EE);
+  }
+  .content{
+    position:relative;z-index:2;height:100%;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:0 72px 0 520px;
+  }
+  .eyebrow{
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:#22D3EE;margin-bottom:14px;font-weight:600;
+  }
+  .name{
+    font-size:54px;font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-bottom:10px;
+  }
+  .role{
+    font-size:24px;font-weight:500;color:#E4E4E7;margin-bottom:22px;
+  }
+  .desc{
+    font-size:16px;line-height:1.55;color:#A1A1AA;max-width:920px;margin-bottom:22px;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+  .tag{
+    font-size:12px;letter-spacing:.04em;padding:8px 14px;border-radius:999px;
+    border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#D4D4D8;
+  }
+  .tag.accent{border-color:rgba(139,92,246,.35);background:rgba(139,92,246,.12);color:#C4B5FD}
+  .tag.cyan{border-color:rgba(34,211,238,.28);background:rgba(34,211,238,.08);color:#67E8F9}
+  .footer{
+    display:flex;align-items:center;gap:18px;font-size:13px;color:#71717A;letter-spacing:.02em;
+  }
+  .footer span.dot{width:4px;height:4px;border-radius:50%;background:#52525B}
+  .footer .url{color:#A78BFA;font-weight:600}
+  .deco{
+    position:absolute;right:56px;top:50%;transform:translateY(-50%);
+    display:flex;flex-direction:column;gap:14px;opacity:.55;
+  }
+  .deco-line{width:120px;height:1px;background:linear-gradient(90deg,transparent,#8B5CF6)}
+  .deco-dots{display:grid;grid-template-columns:repeat(4,6px);gap:8px}
+  .deco-dots i{display:block;width:6px;height:6px;border-radius:50%;background:#3F3F46}
+  .deco-dots i.on{background:#8B5CF6}
+</style>
+</head>
+<body>
+  <div class="banner">
+    <div class="grid"></div>
+    <div class="glow-left"></div>
+    <div class="glow-right"></div>
+    <div class="accent-line"></div>
+    <div class="content">
+      <div class="eyebrow">Mumbai, India · Remote available</div>
+      <div class="name">Faizan Idrishi</div>
+      <div class="role">Shopify &amp; WordPress Developer</div>
+      <p class="desc">I build and ship ecommerce stores and WordPress sites for D2C brands, clinics, and B2B businesses — from theme architecture and checkout to CRO and Core Web Vitals.</p>
+      <div class="tags">
+        <span class="tag accent">Shopify &amp; Liquid</span>
+        <span class="tag accent">WordPress &amp; Elementor</span>
+        <span class="tag">WooCommerce</span>
+        <span class="tag cyan">CRO &amp; Performance</span>
+        <span class="tag">Core Web Vitals</span>
+        <span class="tag">Ecommerce Launch</span>
+      </div>
+      <div class="footer">
+        <span>Brilliant Madness</span>
+        <span class="dot"></span>
+        <span>Available for freelance &amp; remote work</span>
+        <span class="dot"></span>
+        <span class="url">faizanidrishi.vercel.app</span>
+      </div>
+    </div>
+    <div class="deco" aria-hidden="true">
+      <div class="deco-line"></div>
+      <div class="deco-dots">
+        <i class="on"></i><i></i><i></i><i></i>
+        <i></i><i class="on"></i><i></i><i></i>
+        <i></i><i></i><i class="on"></i><i></i>
+      </div>
+      <div class="deco-line"></div>
+    </div>
+  </div>
+</body>
+</html>
