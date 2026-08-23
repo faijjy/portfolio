@@ -305,6 +305,10 @@
   .contact-wrap{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
   @media(max-width:700px){.contact-wrap{grid-template-columns:1fr}}
   .contact-form{display:flex;flex-direction:column;gap:14px}
+  .contact-status{font-family:var(--mono);font-size:12px;min-height:18px;margin-top:4px}
+  .contact-status.ok{color:var(--green)}
+  .contact-status.err{color:#f87171}
+  .contact-form .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0;overflow:hidden}
   .field input,.field textarea{
     width:100%;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;
     color:var(--text);font-family:var(--font);font-size:14px;outline:none;transition:border-color .2s;
@@ -576,11 +580,16 @@
     <h2 class="s-title reveal-child">Let's build something together</h2>
     <p class="s-desc reveal-child">Got a store or site that needs building? Drop me a message — available for remote and freelance work.</p>
     <div class="contact-wrap reveal-stagger">
-      <form class="contact-form reveal-child slide-right" action="mailto:faijjy@gmail.com" method="post" enctype="text/plain">
+      <form class="contact-form reveal-child slide-right" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="16ef54d6-1478-4fc1-997f-0732e687f445">
+        <input type="hidden" name="subject" value="New portfolio enquiry — Faizan Idrishi">
+        <input type="hidden" name="from_name" value="Portfolio Contact">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
         <div class="field"><input type="text" name="name" placeholder="Your name *" required></div>
         <div class="field"><input type="email" name="email" placeholder="Email address *" required></div>
-        <div class="field"><textarea name="message" placeholder="Project description"></textarea></div>
-        <button type="submit" class="btn-talk" style="width:fit-content">Send message →</button>
+        <div class="field"><textarea name="message" placeholder="Project description" required></textarea></div>
+        <button type="submit" class="btn-talk" style="width:fit-content" id="contactSubmit">Send message →</button>
+        <p class="contact-status" id="contactStatus" aria-live="polite"></p>
       </form>
       <div class="contact-info reveal-child slide-left">
         <a href="mailto:faijjy@gmail.com" class="contact-link">faijjy@gmail.com</a>
@@ -925,6 +934,41 @@ window.addEventListener('scroll',()=>{
   else sections.forEach(s=>{if(s.id&&window.scrollY>=s.offsetTop-140)cur=s.id});
   navIcons.forEach(n=>n.classList.toggle('active',n.dataset.section===cur));
 });
+
+/* Contact form — Web3Forms */
+const contactForm=document.getElementById('contactForm');
+if(contactForm){
+  contactForm.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const btn=document.getElementById('contactSubmit');
+    const status=document.getElementById('contactStatus');
+    btn.disabled=true;
+    btn.textContent='Sending…';
+    status.className='contact-status';
+    status.textContent='';
+    try{
+      const res=await fetch(contactForm.action,{
+        method:'POST',
+        body:new FormData(contactForm),
+        headers:{Accept:'application/json'}
+      });
+      const data=await res.json();
+      if(data.success){
+        status.className='contact-status ok';
+        status.textContent='Message sent — I\'ll get back to you soon.';
+        contactForm.reset();
+      }else{
+        throw new Error(data.message||'Send failed');
+      }
+    }catch(err){
+      status.className='contact-status err';
+      status.textContent='Could not send. Email me at faijjy@gmail.com instead.';
+    }finally{
+      btn.disabled=false;
+      btn.textContent='Send message →';
+    }
+  });
+}
 
 /* Mobile menu */
 const mobBtn=document.getElementById('mobMenuBtn'),mobDrawer=document.getElementById('mobDrawer');
