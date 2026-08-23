@@ -316,10 +316,11 @@
   .tab-secondary::-webkit-scrollbar{display:none}
   .tab-s{font-family:var(--mono);font-size:11px;padding:7px 16px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-56);cursor:pointer;white-space:nowrap;transition:all .2s}
   .tab-s.active{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
-  .portfolio-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
-  .portfolio-toolbar-meta{display:flex;align-items:center;gap:14px;flex-shrink:0}
-  .portfolio-count{font-family:var(--mono);font-size:11px;color:var(--text-56);white-space:nowrap}
-  .portfolio-filter-label{font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;margin-bottom:16px;display:block}
+  .portfolio-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+  .portfolio-toolbar-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap;flex:1;min-width:0}
+  .portfolio-toolbar-meta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+  .portfolio-count{font-family:var(--mono);font-size:11px;color:var(--text-56);white-space:nowrap;padding:7px 12px;border-radius:999px;border:1px solid var(--border);background:var(--bg-2)}
+  .portfolio-filter-label{font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;margin-bottom:14px;display:block}
   .slider-nav-inline{display:flex;align-items:center;gap:6px}
   .portfolio-slider{position:relative;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none}
   .portfolio-slider.is-dragging{cursor:grabbing}
@@ -342,7 +343,8 @@
   .proj-card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s;animation:cardIn .4s ease backwards;cursor:pointer}
   @keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   .proj-card:hover{border-color:rgba(139,92,246,.35);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
-  .proj-num{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--mono);font-size:9px;padding:4px 8px;background:rgba(9,9,11,.85);border:1px solid var(--border);border-radius:4px;letter-spacing:.05em}
+  .proj-card-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);background:rgba(9,9,11,.55)}
+  .proj-num{font-family:var(--mono);font-size:9px;padding:4px 8px;background:var(--bg);border:1px solid var(--border);border-radius:4px;letter-spacing:.05em;color:var(--text-56)}
   .proj-shot{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:var(--bg)}
   .proj-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s;display:block}
   .proj-shot img.is-hidden{display:none}
@@ -462,7 +464,7 @@
     .counter-row{grid-template-columns:1fr 1fr;gap:12px;padding:16px}
     .counter-item{padding:16px 14px}
     .portfolio-toolbar{flex-direction:column;align-items:stretch}
-    .portfolio-toolbar-meta{justify-content:space-between;width:100%}
+    .portfolio-toolbar-left,.portfolio-toolbar-meta{justify-content:space-between;width:100%}
   }
 </style>
 </head>
@@ -619,12 +621,14 @@
       </div>
       <div class="portfolio-panel">
         <div class="portfolio-toolbar">
-          <div class="tab-secondary" role="tablist">
-            <button class="tab-s active" data-platform="Shopify">Shopify</button>
-            <button class="tab-s" data-platform="WordPress">WordPress</button>
+          <div class="portfolio-toolbar-left">
+            <div class="tab-secondary" role="tablist">
+              <button class="tab-s active" data-platform="Shopify">Shopify</button>
+              <button class="tab-s" data-platform="WordPress">WordPress</button>
+            </div>
+            <span class="portfolio-count">0 projects</span>
           </div>
           <div class="portfolio-toolbar-meta">
-            <span class="portfolio-count">0 projects</span>
             <div class="slider-nav-inline">
               <button class="slider-btn slider-prev" type="button" aria-label="Previous solo build">←</button>
               <div class="slider-counter">1 / 1</div>
@@ -650,12 +654,14 @@
       </div>
       <div class="portfolio-panel">
         <div class="portfolio-toolbar">
-          <div class="tab-secondary" role="tablist">
-            <button class="tab-s active" data-platform="Shopify">Shopify</button>
-            <button class="tab-s" data-platform="WordPress">WordPress</button>
+          <div class="portfolio-toolbar-left">
+            <div class="tab-secondary" role="tablist">
+              <button class="tab-s active" data-platform="Shopify">Shopify</button>
+              <button class="tab-s" data-platform="WordPress">WordPress</button>
+            </div>
+            <span class="portfolio-count">0 projects</span>
           </div>
           <div class="portfolio-toolbar-meta">
-            <span class="portfolio-count">0 projects</span>
             <div class="slider-nav-inline">
               <button class="slider-btn slider-prev" type="button" aria-label="Previous assisted site">←</button>
               <div class="slider-counter">1 / 1</div>
@@ -809,7 +815,7 @@ function buildProjCard(p,i){
   const tierBadge=p.tier==='scratch'?'Solo Build':'Assisted';
   const tierClass=p.tier==='scratch'?'badge-tier-scratch':'badge-tier-assist';
   const tech=getProjectTech(p).map(t=>'<span>'+escHtml(t)+'</span>').join('');
-  return '<article class="proj-card" data-idx="'+idx+'" tabindex="0" role="button" aria-label="Open case study for '+escHtml(p.name)+'" style="animation-delay:'+(i*.05)+'s;position:relative"><div class="proj-num">PROJECT_'+num+'</div>'+shotImg(p)+'<div class="proj-body"><div class="proj-meta-row"><span class="badge '+badgeClass(p.platform)+'">'+escHtml(p.platform)+'</span><span class="badge '+tierClass+'">'+tierBadge+'</span></div><h3 class="proj-name">'+escHtml(p.name)+'</h3><p class="proj-type">'+escHtml(p.category).toUpperCase()+'</p><p class="proj-desc">'+escHtml(p.blurb)+'</p><div class="proj-tech">'+tech+'</div><p class="proj-role">ROLE: '+getProjectRole(p)+'</p><div class="proj-actions"><a class="proj-btn proj-btn-ghost" href="'+escHtml(p.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">View ↗</a><button class="proj-btn proj-btn-accent" type="button" onclick="event.stopPropagation();openDetail('+idx+')">Case Study</button></div></div></article>';
+  return '<article class="proj-card" data-idx="'+idx+'" tabindex="0" role="button" aria-label="Open case study for '+escHtml(p.name)+'" style="animation-delay:'+(i*.05)+'s"><div class="proj-card-head"><span class="proj-num">PROJECT_'+num+'</span></div>'+shotImg(p)+'<div class="proj-body"><div class="proj-meta-row"><span class="badge '+badgeClass(p.platform)+'">'+escHtml(p.platform)+'</span><span class="badge '+tierClass+'">'+tierBadge+'</span></div><h3 class="proj-name">'+escHtml(p.name)+'</h3><p class="proj-type">'+escHtml(p.category).toUpperCase()+'</p><p class="proj-desc">'+escHtml(p.blurb)+'</p><div class="proj-tech">'+tech+'</div><p class="proj-role">ROLE: '+getProjectRole(p)+'</p><div class="proj-actions"><a class="proj-btn proj-btn-ghost" href="'+escHtml(p.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">View ↗</a><button class="proj-btn proj-btn-accent" type="button" onclick="event.stopPropagation();openDetail('+idx+')">Case Study</button></div></div></article>';
 }
 
 function initPortfolioPanel(block){
