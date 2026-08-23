@@ -209,8 +209,8 @@
   .tech-item .tech-pct{opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}
   .tech-item.visible .tech-pct{opacity:1;transform:none}
 
-  .tab-p,.tab-s{transition:transform .2s ease,all .2s}
-  .tab-p:active,.tab-s:active{transform:scale(.97)}
+  .tab-s{transition:transform .2s ease,all .2s}
+  .tab-s:active{transform:scale(.97)}
 
   .field input,.field textarea{transition:border-color .2s,box-shadow .2s,transform .2s}
   .field input:focus,.field textarea:focus{transform:translateY(-1px);box-shadow:0 8px 24px rgba(139,92,246,.12)}
@@ -295,16 +295,23 @@
   .svc-title{font-size:18px;font-weight:600;margin-bottom:10px;letter-spacing:-.02em}
   .svc-desc{font-size:14px;color:var(--text-56);line-height:1.65}
 
-  /* PORTFOLIO TABS */
+  /* PORTFOLIO SECTIONS */
+  .portfolio-tier-block{margin-top:48px}
+  .portfolio-tier-block:first-of-type{margin-top:36px}
+  .portfolio-tier-head{margin-bottom:20px}
+  .portfolio-tier-title{font-size:clamp(22px,3vw,28px);font-weight:600;letter-spacing:-.03em;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+  .portfolio-tier-title::before{content:'';width:4px;height:22px;border-radius:2px;flex-shrink:0}
+  .portfolio-tier-block[data-tier="scratch"] .portfolio-tier-title::before{background:var(--accent)}
+  .portfolio-tier-block[data-tier="assist"] .portfolio-tier-title::before{background:var(--cyan)}
+  .portfolio-tier-desc{font-size:14px;color:var(--text-56);line-height:1.6;max-width:56ch}
   .portfolio-panel{
-    margin-top:36px;background:var(--surface);border:1px solid var(--border);border-radius:20px;
+    background:var(--surface);border:1px solid var(--border);border-radius:20px;
     padding:24px;overflow:hidden;opacity:0;transform:translateY(28px);
     transition:opacity .7s ease,transform .7s ease;
   }
+  .portfolio-tier-block[data-tier="scratch"] .portfolio-panel{border-color:rgba(139,92,246,.18)}
+  .portfolio-tier-block[data-tier="assist"] .portfolio-panel{border-color:rgba(34,211,238,.18)}
   .portfolio-panel.visible{opacity:1;transform:none}
-  .tab-primary{display:flex;gap:4px;padding:4px;background:var(--bg-2);border:1px solid var(--border);border-radius:12px;margin-bottom:14px}
-  .tab-p{flex:1;padding:11px 16px;border:none;border-radius:9px;background:transparent;color:var(--text-56);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font)}
-  .tab-p.active{color:var(--text);background:var(--accent-dim);box-shadow:inset 0 0 0 1px rgba(139,92,246,.2)}
   .tab-secondary{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;flex:1;min-width:0}
   .tab-secondary::-webkit-scrollbar{display:none}
   .tab-s{font-family:var(--mono);font-size:11px;padding:7px 16px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-56);cursor:pointer;white-space:nowrap;transition:all .2s}
@@ -603,34 +610,68 @@
   <section id="work" class="reveal">
     <div class="sect-tag reveal-child">Portfolio</div>
     <h2 class="s-title reveal-child reveal-blur">Featured projects</h2>
-    <p class="s-desc reveal-child">Filter by build type and platform. 28 live sites across Shopify and WordPress.</p>
-    <div class="portfolio-panel">
-      <div class="tab-primary" role="tablist">
-        <button class="tab-p active" data-tier="scratch" role="tab">Built From Scratch</button>
-        <button class="tab-p" data-tier="assist" role="tab">Assisted Projects</button>
+    <p class="s-desc reveal-child">28 live sites across Shopify and WordPress, split by how I worked on each project.</p>
+
+    <div class="portfolio-tier-block reveal-child" data-tier="scratch">
+      <div class="portfolio-tier-head">
+        <h3 class="portfolio-tier-title">Solo Builds</h3>
+        <p class="portfolio-tier-desc">Full store and site development from scratch. architecture, theme, checkout, launch, and handover.</p>
       </div>
-      <div class="portfolio-toolbar">
-        <div class="tab-secondary" role="tablist">
-          <button class="tab-s active" data-platform="Shopify">Shopify</button>
-          <button class="tab-s" data-platform="WordPress">WordPress</button>
-        </div>
-        <div class="portfolio-toolbar-meta">
-          <span class="portfolio-count" id="projectCount">0 projects</span>
-          <div class="slider-nav-inline">
-            <button class="slider-btn" id="sliderPrev" type="button" aria-label="Previous project">←</button>
-            <div class="slider-counter" id="sliderCounter">1 / 1</div>
-            <button class="slider-btn" id="sliderNext" type="button" aria-label="Next project">→</button>
+      <div class="portfolio-panel">
+        <div class="portfolio-toolbar">
+          <div class="tab-secondary" role="tablist">
+            <button class="tab-s active" data-platform="Shopify">Shopify</button>
+            <button class="tab-s" data-platform="WordPress">WordPress</button>
+          </div>
+          <div class="portfolio-toolbar-meta">
+            <span class="portfolio-count">0 projects</span>
+            <div class="slider-nav-inline">
+              <button class="slider-btn slider-prev" type="button" aria-label="Previous solo build">←</button>
+              <div class="slider-counter">1 / 1</div>
+              <button class="slider-btn slider-next" type="button" aria-label="Next solo build">→</button>
+            </div>
           </div>
         </div>
-      </div>
-      <span class="portfolio-filter-label" id="filterLabel">SHOPIFY / BUILT FROM SCRATCH</span>
-      <div class="portfolio-slider" id="portfolioSlider">
-        <div class="portfolio-track" id="portfolioTrack"></div>
-        <div class="slider-controls">
-          <div class="slider-dots" id="sliderDots"></div>
+        <span class="portfolio-filter-label">SHOPIFY / SOLO BUILD</span>
+        <div class="portfolio-slider">
+          <div class="portfolio-track"></div>
+          <div class="slider-controls">
+            <div class="slider-dots"></div>
+          </div>
         </div>
+        <div class="portfolio-empty" hidden>No solo builds in this platform.</div>
       </div>
-      <div class="portfolio-empty" id="portfolioEmpty" hidden>No projects in this category.</div>
+    </div>
+
+    <div class="portfolio-tier-block reveal-child" data-tier="assist">
+      <div class="portfolio-tier-head">
+        <h3 class="portfolio-tier-title">Assisted Sites</h3>
+        <p class="portfolio-tier-desc">Theme customization, feature builds, and CRO work on existing stores and WordPress sites.</p>
+      </div>
+      <div class="portfolio-panel">
+        <div class="portfolio-toolbar">
+          <div class="tab-secondary" role="tablist">
+            <button class="tab-s active" data-platform="Shopify">Shopify</button>
+            <button class="tab-s" data-platform="WordPress">WordPress</button>
+          </div>
+          <div class="portfolio-toolbar-meta">
+            <span class="portfolio-count">0 projects</span>
+            <div class="slider-nav-inline">
+              <button class="slider-btn slider-prev" type="button" aria-label="Previous assisted site">←</button>
+              <div class="slider-counter">1 / 1</div>
+              <button class="slider-btn slider-next" type="button" aria-label="Next assisted site">→</button>
+            </div>
+          </div>
+        </div>
+        <span class="portfolio-filter-label">SHOPIFY / ASSISTED</span>
+        <div class="portfolio-slider">
+          <div class="portfolio-track"></div>
+          <div class="slider-controls">
+            <div class="slider-dots"></div>
+          </div>
+        </div>
+        <div class="portfolio-empty" hidden>No assisted sites in this platform.</div>
+      </div>
     </div>
   </section>
 
@@ -751,7 +792,6 @@ const projects=[
 ];
 
 const projectBySlug=Object.fromEntries(projects.map((p,i)=>[p.slug,i]));
-let filterTier='scratch',filterPlatform='Shopify',slideIndex=0,filteredProjects=[];
 
 function badgeClass(p){return p==='Shopify'?'badge-shopify':'badge-wp'}
 function getProjectTech(p){if(p.platform==='Shopify')return p.tier==='scratch'?['Liquid','JavaScript','Shopify APIs','Checkout']:['Liquid','Theme sections','CRO','Apps'];return p.tier==='scratch'?['WordPress','Elementor','PHP','Forms']:['WordPress','Elementor','PHP','WooCommerce']}
@@ -766,142 +806,146 @@ function shotTag(p){return shotImg(p)}
 
 function buildProjCard(p,i){
   const idx=projects.indexOf(p),num=String(i+1).padStart(2,'0');
-  const tierBadge=filterTier==='scratch'?'Built From Scratch':'Assisted';
-  const tierClass=filterTier==='scratch'?'badge-tier-scratch':'badge-tier-assist';
+  const tierBadge=p.tier==='scratch'?'Solo Build':'Assisted';
+  const tierClass=p.tier==='scratch'?'badge-tier-scratch':'badge-tier-assist';
   const tech=getProjectTech(p).map(t=>'<span>'+escHtml(t)+'</span>').join('');
   return '<article class="proj-card" data-idx="'+idx+'" tabindex="0" role="button" aria-label="Open case study for '+escHtml(p.name)+'" style="animation-delay:'+(i*.05)+'s;position:relative"><div class="proj-num">PROJECT_'+num+'</div>'+shotImg(p)+'<div class="proj-body"><div class="proj-meta-row"><span class="badge '+badgeClass(p.platform)+'">'+escHtml(p.platform)+'</span><span class="badge '+tierClass+'">'+tierBadge+'</span></div><h3 class="proj-name">'+escHtml(p.name)+'</h3><p class="proj-type">'+escHtml(p.category).toUpperCase()+'</p><p class="proj-desc">'+escHtml(p.blurb)+'</p><div class="proj-tech">'+tech+'</div><p class="proj-role">ROLE: '+getProjectRole(p)+'</p><div class="proj-actions"><a class="proj-btn proj-btn-ghost" href="'+escHtml(p.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">View ↗</a><button class="proj-btn proj-btn-accent" type="button" onclick="event.stopPropagation();openDetail('+idx+')">Case Study</button></div></div></article>';
 }
 
-function updateSlider(){
-  const track=document.getElementById('portfolioTrack');
-  const dots=document.getElementById('sliderDots');
-  const counter=document.getElementById('sliderCounter');
-  const prev=document.getElementById('sliderPrev');
-  const next=document.getElementById('sliderNext');
-  const total=filteredProjects.length;
-  if(!total){
-    track.style.transform='translateX(0)';
-    counter.textContent='0 / 0';
-    prev.disabled=true;next.disabled=true;
-    return;
-  }
-  if(slideIndex>=total)slideIndex=total-1;
-  if(slideIndex<0)slideIndex=0;
-  track.style.transform='translateX(-'+(slideIndex*100)+'%)';
-  counter.textContent=(slideIndex+1)+' / '+total;
-  prev.disabled=slideIndex===0;
-  next.disabled=slideIndex===total-1;
-  dots.querySelectorAll('.slider-dot').forEach((dot,i)=>dot.classList.toggle('active',i===slideIndex));
-  track.querySelectorAll('.proj-card').forEach((card,i)=>{
-    card.classList.toggle('is-active',i===slideIndex);
-  });
-}
+function initPortfolioPanel(block){
+  const tier=block.dataset.tier;
+  const panel=block.querySelector('.portfolio-panel');
+  const track=panel.querySelector('.portfolio-track');
+  const slider=panel.querySelector('.portfolio-slider');
+  const empty=panel.querySelector('.portfolio-empty');
+  const dots=panel.querySelector('.slider-dots');
+  const counter=panel.querySelector('.slider-counter');
+  const prev=panel.querySelector('.slider-prev');
+  const next=panel.querySelector('.slider-next');
+  const countEl=panel.querySelector('.portfolio-count');
+  const filterLabel=panel.querySelector('.portfolio-filter-label');
+  const platformBtns=panel.querySelectorAll('.tab-s');
+  let platform='Shopify',slideIndex=0,filteredProjects=[];
+  let dragStartX=0,dragCurrentX=0,sliderDragging=false,sliderSuppressClick=false;
 
-function renderPortfolio(){
-  const track=document.getElementById('portfolioTrack');
-  const slider=document.getElementById('portfolioSlider');
-  const empty=document.getElementById('portfolioEmpty');
-  filteredProjects=projects.filter(p=>p.tier===filterTier&&p.platform===filterPlatform);
-  slideIndex=0;
-  const tierLabel=filterTier==='scratch'?'BUILT FROM SCRATCH':'ASSISTED';
-  document.getElementById('projectCount').textContent=filteredProjects.length+' project'+(filteredProjects.length!==1?'s':'');
-  document.getElementById('filterLabel').textContent=filterPlatform.toUpperCase()+' / '+tierLabel;
-  if(!filteredProjects.length){
-    track.innerHTML='';
-    document.getElementById('sliderDots').innerHTML='';
-    slider.hidden=true;
-    empty.hidden=false;
+  function updateSlider(){
+    const total=filteredProjects.length;
+    if(!total){
+      track.style.transform='translateX(0)';
+      counter.textContent='0 / 0';
+      prev.disabled=true;next.disabled=true;
+      return;
+    }
+    if(slideIndex>=total)slideIndex=total-1;
+    if(slideIndex<0)slideIndex=0;
+    track.style.transform='translateX(-'+(slideIndex*100)+'%)';
+    counter.textContent=(slideIndex+1)+' / '+total;
+    prev.disabled=slideIndex===0;
+    next.disabled=slideIndex===total-1;
+    dots.querySelectorAll('.slider-dot').forEach((dot,i)=>dot.classList.toggle('active',i===slideIndex));
+    track.querySelectorAll('.proj-card').forEach((card,i)=>card.classList.toggle('is-active',i===slideIndex));
+  }
+
+  function render(){
+    filteredProjects=projects.filter(p=>p.tier===tier&&p.platform===platform);
+    slideIndex=0;
+    const tierLabel=tier==='scratch'?'SOLO BUILD':'ASSISTED';
+    countEl.textContent=filteredProjects.length+' project'+(filteredProjects.length!==1?'s':'');
+    filterLabel.textContent=platform.toUpperCase()+' / '+tierLabel;
+    if(!filteredProjects.length){
+      track.innerHTML='';
+      dots.innerHTML='';
+      slider.hidden=true;
+      empty.hidden=false;
+      updateSlider();
+      return;
+    }
+    slider.hidden=false;
+    empty.hidden=true;
+    track.innerHTML=filteredProjects.map((p,i)=>buildProjCard(p,i)).join('');
+    dots.innerHTML=filteredProjects.map((_,i)=>'<button class="slider-dot'+(i===0?' active':'')+'" type="button" aria-label="Go to project '+(i+1)+'" data-index="'+i+'"></button>').join('');
+    dots.querySelectorAll('.slider-dot').forEach(dot=>{
+      dot.addEventListener('click',()=>{slideIndex=Number(dot.dataset.index);updateSlider();});
+    });
     updateSlider();
-    return;
   }
-  slider.hidden=false;
-  empty.hidden=true;
-  track.innerHTML=filteredProjects.map((p,i)=>buildProjCard(p,i)).join('');
-  document.getElementById('sliderDots').innerHTML=filteredProjects.map((_,i)=>'<button class="slider-dot'+(i===0?' active':'')+'" type="button" aria-label="Go to project '+(i+1)+'" data-index="'+i+'"></button>').join('');
-  document.getElementById('sliderDots').querySelectorAll('.slider-dot').forEach(dot=>{
-    dot.addEventListener('click',()=>{slideIndex=Number(dot.dataset.index);updateSlider();});
+
+  function goSlide(dir){
+    if(dir<0&&slideIndex>0){slideIndex--;updateSlider();}
+    if(dir>0&&slideIndex<filteredProjects.length-1){slideIndex++;updateSlider();}
+  }
+
+  prev.addEventListener('click',()=>goSlide(-1));
+  next.addEventListener('click',()=>goSlide(1));
+
+  slider.addEventListener('pointerdown',e=>{
+    if(e.pointerType==='mouse'&&e.button!==0)return;
+    sliderDragging=true;
+    sliderSuppressClick=false;
+    dragStartX=e.clientX;
+    dragCurrentX=e.clientX;
+    slider.classList.add('is-dragging');
+    track.style.transition='none';
+    try{slider.setPointerCapture(e.pointerId);}catch(err){}
   });
-  updateSlider();
+
+  slider.addEventListener('pointermove',e=>{
+    if(!sliderDragging)return;
+    dragCurrentX=e.clientX;
+    const dx=dragCurrentX-dragStartX;
+    if(Math.abs(dx)>6)sliderSuppressClick=true;
+    const offset=-(slideIndex*100)+(dx/slider.offsetWidth*100);
+    track.style.transform='translateX('+offset+'%)';
+  });
+
+  function endSliderDrag(e){
+    if(!sliderDragging)return;
+    sliderDragging=false;
+    slider.classList.remove('is-dragging');
+    track.style.transition='';
+    try{slider.releasePointerCapture(e.pointerId);}catch(err){}
+    const dx=dragCurrentX-dragStartX;
+    if(Math.abs(dx)>50)goSlide(dx<0?1:-1);
+    else updateSlider();
+  }
+
+  slider.addEventListener('pointerup',endSliderDrag);
+  slider.addEventListener('pointercancel',endSliderDrag);
+
+  track.addEventListener('click',e=>{
+    if(sliderSuppressClick){sliderSuppressClick=false;return;}
+    const card=e.target.closest('.proj-card');
+    if(!card||e.target.closest('a,button'))return;
+    openDetail(Number(card.dataset.idx));
+  });
+
+  track.addEventListener('keydown',e=>{
+    if(e.key!=='Enter'&&e.key!==' ')return;
+    const card=e.target.closest('.proj-card');
+    if(!card)return;
+    e.preventDefault();
+    openDetail(Number(card.dataset.idx));
+  });
+
+  platformBtns.forEach(btn=>btn.addEventListener('click',()=>{
+    platform=btn.dataset.platform;
+    platformBtns.forEach(b=>b.classList.toggle('active',b===btn));
+    render();
+  }));
+
+  block._portfolio={goSlide,render};
+  render();
 }
 
-document.getElementById('sliderPrev').addEventListener('click',()=>{if(slideIndex>0){slideIndex--;updateSlider();}});
-document.getElementById('sliderNext').addEventListener('click',()=>{if(slideIndex<filteredProjects.length-1){slideIndex++;updateSlider();}});
-
-const portfolioSlider=document.getElementById('portfolioSlider');
-const portfolioTrack=document.getElementById('portfolioTrack');
-let dragStartX=0,dragCurrentX=0,sliderDragging=false,sliderSuppressClick=false;
-
-function goSlide(dir){
-  if(dir<0&&slideIndex>0){slideIndex--;updateSlider();}
-  if(dir>0&&slideIndex<filteredProjects.length-1){slideIndex++;updateSlider();}
-}
-
-portfolioSlider.addEventListener('pointerdown',e=>{
-  if(e.pointerType==='mouse'&&e.button!==0)return;
-  sliderDragging=true;
-  sliderSuppressClick=false;
-  dragStartX=e.clientX;
-  dragCurrentX=e.clientX;
-  portfolioSlider.classList.add('is-dragging');
-  portfolioTrack.style.transition='none';
-  try{portfolioSlider.setPointerCapture(e.pointerId);}catch(err){}
-});
-
-portfolioSlider.addEventListener('pointermove',e=>{
-  if(!sliderDragging)return;
-  dragCurrentX=e.clientX;
-  const dx=dragCurrentX-dragStartX;
-  if(Math.abs(dx)>6)sliderSuppressClick=true;
-  const offset=-(slideIndex*100)+(dx/portfolioSlider.offsetWidth*100);
-  portfolioTrack.style.transform='translateX('+offset+'%)';
-});
-
-function endSliderDrag(e){
-  if(!sliderDragging)return;
-  sliderDragging=false;
-  portfolioSlider.classList.remove('is-dragging');
-  portfolioTrack.style.transition='';
-  try{portfolioSlider.releasePointerCapture(e.pointerId);}catch(err){}
-  const dx=dragCurrentX-dragStartX;
-  if(Math.abs(dx)>50)goSlide(dx<0?1:-1);
-  else updateSlider();
-}
-
-portfolioSlider.addEventListener('pointerup',endSliderDrag);
-portfolioSlider.addEventListener('pointercancel',endSliderDrag);
-
-portfolioTrack.addEventListener('click',e=>{
-  if(sliderSuppressClick){sliderSuppressClick=false;return;}
-  const card=e.target.closest('.proj-card');
-  if(!card||e.target.closest('a,button'))return;
-  openDetail(Number(card.dataset.idx));
-});
-
-portfolioTrack.addEventListener('keydown',e=>{
-  if(e.key!=='Enter'&&e.key!==' ')return;
-  const card=e.target.closest('.proj-card');
-  if(!card)return;
-  e.preventDefault();
-  openDetail(Number(card.dataset.idx));
-});
+document.querySelectorAll('.portfolio-tier-block').forEach(initPortfolioPanel);
 
 document.addEventListener('keydown',e=>{
-  if(!document.getElementById('portfolioSlider')||document.getElementById('detail').classList.contains('show'))return;
-  if(e.key==='ArrowLeft'){e.preventDefault();if(slideIndex>0){slideIndex--;updateSlider();}}
-  if(e.key==='ArrowRight'){e.preventDefault();if(slideIndex<filteredProjects.length-1){slideIndex++;updateSlider();}}
+  if(document.getElementById('detail').classList.contains('show'))return;
+  const block=document.querySelector('.portfolio-tier-block:hover')||document.querySelector('.portfolio-tier-block');
+  if(!block||!block._portfolio)return;
+  if(e.key==='ArrowLeft'){e.preventDefault();block._portfolio.goSlide(-1);}
+  if(e.key==='ArrowRight'){e.preventDefault();block._portfolio.goSlide(1);}
 });
-
-document.querySelectorAll('.tab-p').forEach(btn=>btn.addEventListener('click',()=>{
-  filterTier=btn.dataset.tier;
-  document.querySelectorAll('.tab-p').forEach(b=>b.classList.toggle('active',b===btn));
-  renderPortfolio();
-}));
-document.querySelectorAll('.tab-s').forEach(btn=>btn.addEventListener('click',()=>{
-  filterPlatform=btn.dataset.platform;
-  document.querySelectorAll('.tab-s').forEach(b=>b.classList.toggle('active',b===btn));
-  renderPortfolio();
-}));
-renderPortfolio();
 
 function openDetail(idx,pushState=true){
   const p=projects[idx];
@@ -910,7 +954,7 @@ function openDetail(idx,pushState=true){
   document.getElementById('dBlurb').textContent=p.blurb;
   document.getElementById('dBand').style.background=p.tier==='scratch'?'var(--accent)':'var(--cyan)';
   document.getElementById('dShot').innerHTML=shotTag(p);
-  const roleLabel=p.tier==='scratch'?'Built from scratch':'Assisted / contributed';
+  const roleLabel=p.tier==='scratch'?'Solo build':'Assisted site';
   document.getElementById('dBadges').innerHTML='<span class="badge '+badgeClass(p.platform)+'">'+p.platform+'</span><span class="badge" style="background:'+(p.tier==='scratch'?'var(--accent-dim)':'var(--cyan-dim)')+';color:'+(p.tier==='scratch'?'var(--accent)':'var(--cyan)')+'">'+roleLabel+'</span>';
   document.getElementById('dList').innerHTML=(p.tier==='scratch'?scratchBullets:assistBullets).map(b=>'<li>'+b+'</li>').join('');
   document.getElementById('sPlatform').textContent=p.platform;
