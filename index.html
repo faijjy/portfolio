@@ -316,11 +316,10 @@
   .tab-secondary::-webkit-scrollbar{display:none}
   .tab-s{font-family:var(--mono);font-size:11px;padding:7px 16px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-56);cursor:pointer;white-space:nowrap;transition:all .2s}
   .tab-s.active{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
-  .portfolio-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-  .portfolio-toolbar-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap;flex:1;min-width:0}
-  .portfolio-toolbar-meta{display:flex;align-items:center;gap:10px;flex-shrink:0}
-  .portfolio-count{font-family:var(--mono);font-size:11px;color:var(--text-56);white-space:nowrap;padding:7px 12px;border-radius:999px;border:1px solid var(--border);background:var(--bg-2)}
-  .portfolio-filter-label{font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;margin-bottom:14px;display:block}
+  .portfolio-toolbar{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+  .portfolio-controls-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .portfolio-filter-label{font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;display:block;margin:0}
+  .portfolio-filter-label .count{color:var(--text-56)}
   .slider-nav-inline{display:flex;align-items:center;gap:6px}
   .portfolio-slider{position:relative;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none}
   .portfolio-slider.is-dragging{cursor:grabbing}
@@ -340,19 +339,25 @@
   .portfolio-grid{display:none}
   .portfolio-empty{padding:48px;text-align:center;color:var(--text-40);font-family:var(--mono);font-size:13px}
 
-  .proj-card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s;animation:cardIn .4s ease backwards;cursor:pointer}
+  .proj-card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s;animation:cardIn .4s ease backwards}
   @keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   .proj-card:hover{border-color:rgba(139,92,246,.35);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
-  .proj-card-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);background:rgba(9,9,11,.55)}
-  .proj-num{font-family:var(--mono);font-size:9px;padding:4px 8px;background:var(--bg);border:1px solid var(--border);border-radius:4px;letter-spacing:.05em;color:var(--text-56)}
-  .proj-shot{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:var(--bg)}
+  .proj-shot-link{display:block;color:inherit;text-decoration:none;position:relative}
+  .proj-shot-link::after{
+    content:'Visit site ↗';position:absolute;right:14px;bottom:14px;z-index:2;
+    font-family:var(--mono);font-size:10px;padding:6px 10px;border-radius:8px;
+    background:rgba(9,9,11,.82);border:1px solid var(--border);color:var(--text);
+    opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s;pointer-events:none;
+  }
+  .proj-shot-link:hover::after{opacity:1;transform:none}
+  .proj-shot{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:var(--bg);cursor:pointer}
   .proj-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s;display:block}
   .proj-shot img.is-hidden{display:none}
   .proj-card:hover .proj-shot img{transform:scale(1.04)}
   .shot-fallback{width:100%;height:100%;display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;color:var(--text-40);background:linear-gradient(135deg,var(--bg-2),var(--surface))}
   .shot-fallback.is-visible{display:flex}
   .shot-fallback .shot-domain{font-family:var(--mono);font-size:10px;opacity:.7;font-weight:400}
-  .proj-body{padding:18px 20px 20px;position:relative}
+  .proj-body{padding:18px 20px 20px;position:relative;cursor:pointer}
   .proj-meta-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
   .badge{font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
   .badge-shopify{background:var(--accent-dim);color:var(--accent)}
@@ -409,6 +414,7 @@
   .back-btn:hover{color:var(--accent)}
   .detail-band{height:4px;border-radius:4px;margin-bottom:24px;background:var(--accent)}
   .detail-shot{border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-bottom:24px;max-height:400px}
+  .detail-shot .proj-shot-link{display:block}
   .detail-shot img,.detail-shot .proj-shot img{width:100%;max-height:400px;object-fit:cover;object-position:top center}
   .detail-shot .proj-shot{aspect-ratio:auto;max-height:400px}
   .detail-title{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.03em;margin-bottom:12px}
@@ -463,8 +469,8 @@
     .hero{min-height:auto;justify-content:center;padding:clamp(48px,10vh,96px) 0}
     .counter-row{grid-template-columns:1fr 1fr;gap:12px;padding:16px}
     .counter-item{padding:16px 14px}
-    .portfolio-toolbar{flex-direction:column;align-items:stretch}
-    .portfolio-toolbar-left,.portfolio-toolbar-meta{justify-content:space-between;width:100%}
+    .portfolio-controls-row{flex-direction:column;align-items:stretch}
+    .portfolio-controls-row .slider-nav-inline{justify-content:space-between;width:100%}
   }
 </style>
 </head>
@@ -621,22 +627,19 @@
       </div>
       <div class="portfolio-panel">
         <div class="portfolio-toolbar">
-          <div class="portfolio-toolbar-left">
-            <div class="tab-secondary" role="tablist">
-              <button class="tab-s active" data-platform="Shopify">Shopify</button>
-              <button class="tab-s" data-platform="WordPress">WordPress</button>
-            </div>
-            <span class="portfolio-count">0 projects</span>
-          </div>
-          <div class="portfolio-toolbar-meta">
-            <div class="slider-nav-inline">
-              <button class="slider-btn slider-prev" type="button" aria-label="Previous solo build">←</button>
-              <div class="slider-counter">1 / 1</div>
-              <button class="slider-btn slider-next" type="button" aria-label="Next solo build">→</button>
-            </div>
+          <div class="tab-secondary" role="tablist">
+            <button class="tab-s active" data-platform="Shopify">Shopify</button>
+            <button class="tab-s" data-platform="WordPress">WordPress</button>
           </div>
         </div>
-        <span class="portfolio-filter-label">SHOPIFY / SOLO BUILD</span>
+        <div class="portfolio-controls-row">
+          <span class="portfolio-filter-label">SHOPIFY / SOLO BUILD</span>
+          <div class="slider-nav-inline">
+            <button class="slider-btn slider-prev" type="button" aria-label="Previous solo build">←</button>
+            <div class="slider-counter">1 / 1</div>
+            <button class="slider-btn slider-next" type="button" aria-label="Next solo build">→</button>
+          </div>
+        </div>
         <div class="portfolio-slider">
           <div class="portfolio-track"></div>
           <div class="slider-controls">
@@ -654,22 +657,19 @@
       </div>
       <div class="portfolio-panel">
         <div class="portfolio-toolbar">
-          <div class="portfolio-toolbar-left">
-            <div class="tab-secondary" role="tablist">
-              <button class="tab-s active" data-platform="Shopify">Shopify</button>
-              <button class="tab-s" data-platform="WordPress">WordPress</button>
-            </div>
-            <span class="portfolio-count">0 projects</span>
-          </div>
-          <div class="portfolio-toolbar-meta">
-            <div class="slider-nav-inline">
-              <button class="slider-btn slider-prev" type="button" aria-label="Previous assisted site">←</button>
-              <div class="slider-counter">1 / 1</div>
-              <button class="slider-btn slider-next" type="button" aria-label="Next assisted site">→</button>
-            </div>
+          <div class="tab-secondary" role="tablist">
+            <button class="tab-s active" data-platform="Shopify">Shopify</button>
+            <button class="tab-s" data-platform="WordPress">WordPress</button>
           </div>
         </div>
-        <span class="portfolio-filter-label">SHOPIFY / ASSISTED</span>
+        <div class="portfolio-controls-row">
+          <span class="portfolio-filter-label">SHOPIFY / ASSISTED</span>
+          <div class="slider-nav-inline">
+            <button class="slider-btn slider-prev" type="button" aria-label="Previous assisted site">←</button>
+            <div class="slider-counter">1 / 1</div>
+            <button class="slider-btn slider-next" type="button" aria-label="Next assisted site">→</button>
+          </div>
+        </div>
         <div class="portfolio-slider">
           <div class="portfolio-track"></div>
           <div class="slider-controls">
@@ -804,18 +804,20 @@ function getProjectTech(p){if(p.platform==='Shopify')return p.tier==='scratch'?[
 function getProjectRole(p){return p.tier==='scratch'?'FULL DEVELOPMENT':'DEV & CUSTOMIZATION'}
 function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
-function shotImg(p){
+function shotImg(p,linkable){
   const domain=escHtml(p.url.replace('https://','').replace(/\/$/,''));
-  return '<div class="proj-shot"><img loading="lazy" src="screenshots/'+escHtml(p.slug)+'.png?v=2" alt="'+escHtml(p.name)+'" onerror="this.classList.add(\'is-hidden\');this.nextElementSibling.classList.add(\'is-visible\')"><div class="shot-fallback"><span>'+escHtml(p.name)+'</span><span class="shot-domain">'+domain+'</span></div></div>';
+  const inner='<div class="proj-shot"><img loading="lazy" src="screenshots/'+escHtml(p.slug)+'.png?v=3" alt="'+escHtml(p.name)+'" onerror="this.classList.add(\'is-hidden\');this.nextElementSibling.classList.add(\'is-visible\')"><div class="shot-fallback"><span>'+escHtml(p.name)+'</span><span class="shot-domain">'+domain+'</span></div></div>';
+  if(linkable)return '<a class="proj-shot-link" href="'+escHtml(p.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Visit '+escHtml(p.name)+' live site">'+inner+'</a>';
+  return inner;
 }
-function shotTag(p){return shotImg(p)}
+function shotTag(p){return shotImg(p,false)}
 
 function buildProjCard(p,i){
-  const idx=projects.indexOf(p),num=String(i+1).padStart(2,'0');
+  const idx=projects.indexOf(p);
   const tierBadge=p.tier==='scratch'?'Solo Build':'Assisted';
   const tierClass=p.tier==='scratch'?'badge-tier-scratch':'badge-tier-assist';
   const tech=getProjectTech(p).map(t=>'<span>'+escHtml(t)+'</span>').join('');
-  return '<article class="proj-card" data-idx="'+idx+'" tabindex="0" role="button" aria-label="Open case study for '+escHtml(p.name)+'" style="animation-delay:'+(i*.05)+'s"><div class="proj-card-head"><span class="proj-num">PROJECT_'+num+'</span></div>'+shotImg(p)+'<div class="proj-body"><div class="proj-meta-row"><span class="badge '+badgeClass(p.platform)+'">'+escHtml(p.platform)+'</span><span class="badge '+tierClass+'">'+tierBadge+'</span></div><h3 class="proj-name">'+escHtml(p.name)+'</h3><p class="proj-type">'+escHtml(p.category).toUpperCase()+'</p><p class="proj-desc">'+escHtml(p.blurb)+'</p><div class="proj-tech">'+tech+'</div><p class="proj-role">ROLE: '+getProjectRole(p)+'</p><div class="proj-actions"><a class="proj-btn proj-btn-ghost" href="'+escHtml(p.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">View ↗</a><button class="proj-btn proj-btn-accent" type="button" onclick="event.stopPropagation();openDetail('+idx+')">Case Study</button></div></div></article>';
+  return '<article class="proj-card" data-idx="'+idx+'"><div class="proj-body-click" data-idx="'+idx+'" tabindex="0" role="button" aria-label="Open case study for '+escHtml(p.name)+'" style="animation-delay:'+(i*.05)+'s">'+shotImg(p,true)+'<div class="proj-body"><div class="proj-meta-row"><span class="badge '+badgeClass(p.platform)+'">'+escHtml(p.platform)+'</span><span class="badge '+tierClass+'">'+tierBadge+'</span></div><h3 class="proj-name">'+escHtml(p.name)+'</h3><p class="proj-type">'+escHtml(p.category).toUpperCase()+'</p><p class="proj-desc">'+escHtml(p.blurb)+'</p><div class="proj-tech">'+tech+'</div><p class="proj-role">ROLE: '+getProjectRole(p)+'</p><div class="proj-actions"><a class="proj-btn proj-btn-ghost" href="'+escHtml(p.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">View ↗</a><button class="proj-btn proj-btn-accent" type="button" onclick="event.stopPropagation();openDetail('+idx+')">Case Study</button></div></div></div></article>';
 }
 
 function initPortfolioPanel(block){
@@ -828,7 +830,6 @@ function initPortfolioPanel(block){
   const counter=panel.querySelector('.slider-counter');
   const prev=panel.querySelector('.slider-prev');
   const next=panel.querySelector('.slider-next');
-  const countEl=panel.querySelector('.portfolio-count');
   const filterLabel=panel.querySelector('.portfolio-filter-label');
   const platformBtns=panel.querySelectorAll('.tab-s');
   let platform='Shopify',slideIndex=0,filteredProjects=[];
@@ -856,8 +857,8 @@ function initPortfolioPanel(block){
     filteredProjects=projects.filter(p=>p.tier===tier&&p.platform===platform);
     slideIndex=0;
     const tierLabel=tier==='scratch'?'SOLO BUILD':'ASSISTED';
-    countEl.textContent=filteredProjects.length+' project'+(filteredProjects.length!==1?'s':'');
-    filterLabel.textContent=platform.toUpperCase()+' / '+tierLabel;
+    const count=filteredProjects.length;
+    filterLabel.innerHTML=platform.toUpperCase()+' / '+tierLabel+' <span class="count">· '+count+' project'+(count!==1?'s':'')+'</span>';
     if(!filteredProjects.length){
       track.innerHTML='';
       dots.innerHTML='';
@@ -885,6 +886,7 @@ function initPortfolioPanel(block){
   next.addEventListener('click',()=>goSlide(1));
 
   slider.addEventListener('pointerdown',e=>{
+    if(e.target.closest('.proj-shot-link,a,button'))return;
     if(e.pointerType==='mouse'&&e.button!==0)return;
     sliderDragging=true;
     sliderSuppressClick=false;
@@ -920,17 +922,18 @@ function initPortfolioPanel(block){
 
   track.addEventListener('click',e=>{
     if(sliderSuppressClick){sliderSuppressClick=false;return;}
-    const card=e.target.closest('.proj-card');
-    if(!card||e.target.closest('a,button'))return;
-    openDetail(Number(card.dataset.idx));
+    if(e.target.closest('.proj-shot-link,a,button'))return;
+    const body=e.target.closest('.proj-body-click');
+    if(!body)return;
+    openDetail(Number(body.dataset.idx));
   });
 
   track.addEventListener('keydown',e=>{
     if(e.key!=='Enter'&&e.key!==' ')return;
-    const card=e.target.closest('.proj-card');
-    if(!card)return;
+    const body=e.target.closest('.proj-body-click');
+    if(!body||e.target.closest('a,button'))return;
     e.preventDefault();
-    openDetail(Number(card.dataset.idx));
+    openDetail(Number(body.dataset.idx));
   });
 
   platformBtns.forEach(btn=>btn.addEventListener('click',()=>{
@@ -959,7 +962,7 @@ function openDetail(idx,pushState=true){
   document.getElementById('dCat').textContent=p.category;
   document.getElementById('dBlurb').textContent=p.blurb;
   document.getElementById('dBand').style.background=p.tier==='scratch'?'var(--accent)':'var(--cyan)';
-  document.getElementById('dShot').innerHTML=shotTag(p);
+  document.getElementById('dShot').innerHTML=shotImg(p,true);
   const roleLabel=p.tier==='scratch'?'Solo build':'Assisted site';
   document.getElementById('dBadges').innerHTML='<span class="badge '+badgeClass(p.platform)+'">'+p.platform+'</span><span class="badge" style="background:'+(p.tier==='scratch'?'var(--accent-dim)':'var(--cyan-dim)')+';color:'+(p.tier==='scratch'?'var(--accent)':'var(--cyan)')+'">'+roleLabel+'</span>';
   document.getElementById('dList').innerHTML=(p.tier==='scratch'?scratchBullets:assistBullets).map(b=>'<li>'+b+'</li>').join('');
