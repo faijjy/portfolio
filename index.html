@@ -75,8 +75,9 @@
   .avatar{
     width:120px;height:120px;border-radius:20px;background:linear-gradient(135deg,var(--accent-dim),var(--cyan-dim));
     border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;
-    font-size:36px;font-weight:700;color:var(--accent);letter-spacing:-.02em;
+    font-size:36px;font-weight:700;color:var(--accent);letter-spacing:-.02em;overflow:hidden;position:relative;
   }
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
   .avaiable{
     display:flex;align-items:center;gap:8px;margin-top:16px;
     font-family:var(--mono);font-size:11px;color:var(--text-56);text-transform:uppercase;letter-spacing:.06em;
@@ -110,9 +111,9 @@
     flex:1;min-width:0;padding:0 clamp(24px,4vw,64px) 80px;
   }
   .main-inner{width:100%;max-width:none}
-  section{padding:80px 0;scroll-margin-top:100px}
-  section.hero{padding:0}
-  .hero + section{padding-top:56px}
+  section{padding:72px 0;scroll-margin-top:100px}
+  section.hero{padding:0;min-height:100vh}
+  .hero + section{padding-top:72px}
   .sect-tag{
     display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;
     color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;
@@ -182,22 +183,13 @@
   .sect-tag.visible::before{animation:dotPop .5s cubic-bezier(.22,1,.36,1) both}
   @keyframes dotPop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
 
-  .s-title.visible{animation:titleIn .85s cubic-bezier(.22,1,.36,1) both}
-  @keyframes titleIn{from{opacity:0;transform:translateY(16px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+  .s-title{transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1),filter .85s ease}
+  .s-title.reveal-child:not(.visible){filter:blur(8px)}
 
-  .timeline.in-view::before{animation:lineDraw 1.1s cubic-bezier(.22,1,.36,1) forwards}
-  @keyframes lineDraw{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-  .timeline::before{transform-origin:top}
+  .timeline::before{transform-origin:top;transform:scaleY(0);transition:transform 1.1s cubic-bezier(.22,1,.36,1)}
+  .timeline.in-view::before{transform:scaleY(1)}
   .tl-item.visible .tl-dot{animation:dotPulse 2s ease-in-out infinite}
   @keyframes dotPulse{0%,100%{box-shadow:0 0 12px var(--accent-glow)}50%{box-shadow:0 0 22px rgba(139,92,246,.55)}}
-
-  .info-list.in-view li{opacity:0;transform:translateX(16px);animation:listIn .55s cubic-bezier(.22,1,.36,1) forwards}
-  .info-list.in-view li:nth-child(1){animation-delay:.05s}
-  .info-list.in-view li:nth-child(2){animation-delay:.12s}
-  .info-list.in-view li:nth-child(3){animation-delay:.19s}
-  .info-list.in-view li:nth-child(4){animation-delay:.26s}
-  .info-list.in-view li:nth-child(5){animation-delay:.33s}
-  @keyframes listIn{to{opacity:1;transform:none}}
 
   .svc-card.visible::after{
     content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.06) 50%,transparent 60%);
@@ -214,8 +206,8 @@
   @keyframes cardSlideIn{from{opacity:.6;transform:translateX(24px) scale(.98)}to{opacity:1;transform:none}}
 
   .tech-item.visible .tech-fill{box-shadow:0 0 14px var(--accent-glow)}
-  .tech-item.visible .tech-pct{animation:countPop .5s ease both}
-  @keyframes countPop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .tech-item .tech-pct{opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}
+  .tech-item.visible .tech-pct{opacity:1;transform:none}
 
   .tab-p,.tab-s{transition:transform .2s ease,all .2s}
   .tab-p:active,.tab-s:active{transform:scale(.97)}
@@ -224,7 +216,7 @@
   .field input:focus,.field textarea:focus{transform:translateY(-1px);box-shadow:0 8px 24px rgba(139,92,246,.12)}
 
   @media (prefers-reduced-motion:reduce){
-    .hero-glow,.tl-item.visible .tl-dot,.info-list.in-view li,.s-title.visible{animation:none}
+    .hero-glow,.tl-item.visible .tl-dot,.s-title.visible{animation:none}
     .portfolio-track .proj-card.is-active{animation:none}
   }
 
@@ -269,7 +261,14 @@
   @media(max-width:900px){.about-grid{grid-template-columns:1fr}}
   .about-text p{color:var(--text-56);font-size:15px;margin-bottom:16px;line-height:1.75}
   .info-list{list-style:none}
-  .info-list li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);font-size:14px}
+  .info-list li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);font-size:14px;opacity:0;transform:translateX(18px);transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1)}
+  .info-list.in-view li{opacity:1;transform:none}
+  .info-list.in-view li:nth-child(1){transition-delay:.05s}
+  .info-list.in-view li:nth-child(2){transition-delay:.12s}
+  .info-list.in-view li:nth-child(3){transition-delay:.19s}
+  .info-list.in-view li:nth-child(4){transition-delay:.26s}
+  .info-list.in-view li:nth-child(5){transition-delay:.33s}
+  .info-list:not(.in-view) li{transition-delay:0s}
   .info-list li span:first-child{font-family:var(--mono);font-size:11px;color:var(--text-40);letter-spacing:.04em}
 
   /* TIMELINE | Isak style */
@@ -451,6 +450,7 @@
     .mobile-bottom-nav{display:flex}
     .main,#detail{margin-left:0;padding:72px 20px 90px}
     section{padding:56px 0}
+    .hero + section{padding-top:56px}
     .hero{min-height:auto;justify-content:center;padding:clamp(48px,10vh,96px) 0}
     .counter-row{grid-template-columns:1fr 1fr;gap:12px;padding:16px}
     .counter-item{padding:16px 14px}
@@ -494,7 +494,7 @@
 
 <aside class="sidebar-profile">
   <div class="avatar-wrap">
-    <div class="avatar">FI</div>
+    <div class="avatar"><img src="assets/avatar.jpg" alt="Faizan Idrishi" width="120" height="120"></div>
     <div class="avaiable"><span class="dot"></span> Available for work</div>
   </div>
   <div class="profile-name">Faizan Idrishi</div>
@@ -946,36 +946,44 @@ window.addEventListener('popstate',()=>{
 });
 (function(){const slug=new URLSearchParams(location.search).get('project');if(slug&&projectBySlug[slug]!==undefined)openDetail(projectBySlug[slug],false)})();
 
-/* Scroll reveal animations */
+/* Scroll reveal animations (work both directions) */
 const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function setRevealState(el,show){
+  if(el.classList.contains('reveal-stagger')){
+    el.classList.toggle('visible',show);
+    el.querySelectorAll('.reveal-child').forEach((child,i)=>{
+      child.style.transitionDelay=show?(i*0.08)+'s':'0s';
+      child.classList.toggle('visible',show);
+    });
+  }else if(el.classList.contains('reveal')){
+    el.classList.toggle('visible',show);
+    el.querySelectorAll(':scope > .reveal-child, :scope .about-text > .reveal-child').forEach((child,i)=>{
+      child.style.transitionDelay=show?(i*0.08)+'s':'0s';
+      child.classList.toggle('visible',show);
+    });
+  }else{
+    el.classList.toggle('visible',show);
+  }
+}
 function revealOnScroll(){
   if(prefersReducedMotion){
     document.querySelectorAll('.reveal,.reveal-child,.portfolio-panel').forEach(el=>el.classList.add('visible'));
+    document.querySelectorAll('.timeline,.info-list').forEach(el=>el.classList.add('in-view'));
     return;
   }
   const revealObs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
-      if(!e.isIntersecting)return;
-      const el=e.target;
-      if(el.classList.contains('reveal-stagger')){
-        el.classList.add('visible');
-        el.querySelectorAll('.reveal-child').forEach((child,i)=>{
-          child.style.transitionDelay=(i*0.1)+'s';
-          child.classList.add('visible');
-        });
-      }else if(el.classList.contains('reveal')){
-        el.classList.add('visible');
-        el.querySelectorAll(':scope > .reveal-child').forEach((child,i)=>{
-          child.style.transitionDelay=(i*0.08)+'s';
-          child.classList.add('visible');
-        });
-      }else{
-        el.classList.add('visible');
-      }
-      revealObs.unobserve(el);
+      setRevealState(e.target,e.isIntersecting);
     });
-  },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+  },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal,.reveal-stagger,.portfolio-panel').forEach(el=>revealObs.observe(el));
+
+  const lineObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      e.target.classList.toggle('in-view',e.isIntersecting);
+    });
+  },{threshold:0.15});
+  document.querySelectorAll('.timeline,.info-list').forEach(el=>lineObs.observe(el));
 }
 revealOnScroll();
 
@@ -999,16 +1007,6 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 onScrollFx();
 
-/* Timeline + info list draw */
-const lineObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(!e.isIntersecting)return;
-    e.target.classList.add('in-view');
-    lineObs.unobserve(e.target);
-  });
-},{threshold:0.15});
-document.querySelectorAll('.timeline,.info-list').forEach(el=>lineObs.observe(el));
-
 document.body.classList.add('page-ready');
 
 /* Animated counters */
@@ -1029,18 +1027,22 @@ if(counterRow){
   }
 }
 
-/* Tech bar animation */
+/* Tech bar animation (bidirectional) */
 const techObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    if(!e.isIntersecting)return;
+    const show=e.isIntersecting;
     e.target.querySelectorAll('.tech-item').forEach((item,i)=>{
       const fill=item.querySelector('.tech-fill');
-      setTimeout(()=>{
-        item.classList.add('visible');
-        fill.style.width=item.dataset.pct+'%';
-      },i*120);
+      if(show){
+        setTimeout(()=>{
+          item.classList.add('visible');
+          fill.style.width=item.dataset.pct+'%';
+        },i*90);
+      }else{
+        item.classList.remove('visible');
+        fill.style.width='0';
+      }
     });
-    techObs.unobserve(e.target);
   });
 },{threshold:.2});
 document.getElementById('techList')&&techObs.observe(document.getElementById('techList'));
